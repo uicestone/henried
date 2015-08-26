@@ -1,5 +1,3 @@
-<?php get_header(); ?>
-
 <?php get_header('learning'); ?>
 
 <section id="learning-section" class="learning-section learn-section">
@@ -16,7 +14,7 @@
 		</div>
 		<div class="abc">
 		<div class="video embed-responsive embed-responsive-16by9">
-			<iframe src="//player.vimeo.com/video/104961644" class="embed-responsive-item">
+			<iframe src="<?=qiniu_get_real_download_url('变形金刚第一部预告片.mp4')?>" class="embed-responsive-item">
 			</iframe>
 		</div>
 		</div>
