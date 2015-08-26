@@ -19,7 +19,7 @@
 <section class="page-control">
 	<div class="container">
 		<div class="page-info">
-			<a href="index.html"><i class="icon md-arrow-left"></i>Back to home</a>
+			<a href="<?=site_url()?>"><i class="icon md-arrow-left"></i>返回首页</a>
 		</div>
 		<div class="page-view">
 			View
@@ -45,245 +45,45 @@
 				<div class="content grid">
 					<div class="row">
 						<!-- ITEM -->
+						<?php foreach(get_posts('post_type=course') as $course){ ?>
 						<div class="col-sm-6 col-md-4">
 							<div class="mc-item mc-item-2">
 								<div class="image-heading">
-									<img src="<?=get_stylesheet_directory_uri()?>/images/feature/img-1.jpg" alt="">
+									<?=get_the_post_thumbnail($course->ID, 'course-list')?>
 								</div>
-								<div class="meta-categories"><a href="#">Web design</a></div>
+								<div class="meta-categories"><a href="#"><?=get_the_category($course->ID)[0]->name?></a></div>
 								<div class="content-item">
 									<div class="image-author">
-										<img src="<?=get_stylesheet_directory_uri()?>/images/avatar-1.jpg" alt="">
+										<?=$course->post_author?>
 									</div>
-									<h4><a href="course-intro.html">The Complete Digital Photography Course Amazon Top Seller</a></h4>
+									<h4><a href="<?=site_url()?>/course/<?=$course->slug?>"><?=get_the_title($course->ID)?></a></h4>
 									<div class="name-author">
-										By <a href="#">Name of Mr or Mrs</a>
+										主讲：<a href="#"><?=get_userdata($course->post_author)->display_name?></a>
 									</div>
 								</div>
 								<div class="ft-item">
 									<div class="rating">
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#"></a>
-										<a href="#"></a>
+										<?php for($i = 0; $i < 5; $i ++){ ?>
+										<a href="#"<?php if($course->stars > $i) { ?> class="active"<?php } ?>></a>
+										<?php } ?>
 									</div>
 									<div class="view-info">
 										<i class="icon md-users"></i>
-										2568
+										<?=$course->sells?>
 									</div>
 									<div class="comment-info">
 										<i class="icon md-comment"></i>
-										25
+										<?=$course->comments?>
 									</div>
 									<div class="price">
-										$190
-										<span class="price-old">$145</span>
+										¥<?=$course->price?>
+										<span class="price-old">¥<?=$course->price_origin?></span>
 									</div>
 								</div>
 							</div>
 						</div>
+						<?php } ?>
 						<!-- END / ITEM -->
-						<!-- ITEM -->
-						<div class="col-sm-6 col-md-4">
-							<div class="mc-item mc-item-2">
-								<div class="image-heading">
-									<img src="<?=get_stylesheet_directory_uri()?>/images/feature/img-1.jpg" alt="">
-								</div>
-								<div class="meta-categories"><a href="#">Web design</a></div>
-								<div class="content-item">
-									<div class="image-author">
-										<img src="<?=get_stylesheet_directory_uri()?>/images/avatar-1.jpg" alt="">
-									</div>
-									<h4><a href="course-intro.html">The Complete Digital Photography Course Amazon Top Seller</a></h4>
-									<div class="name-author">
-										<span>By <a href="#">Name of Mr or Mrs</a></span>
-									</div>
-								</div>
-								<div class="ft-item">
-									<div class="rating">
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#"></a>
-										<a href="#"></a>
-									</div>
-									<div class="view-info">
-										<i class="icon md-users"></i>
-										2568
-									</div>
-									<div class="comment-info">
-										<i class="icon md-comment"></i>
-										25
-									</div>
-									<div class="price">
-										Free
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- ITEM -->
-
-						<!-- END / ITEM -->
-						<div class="col-sm-6 col-md-4">
-							<div class="mc-item mc-item-2">
-								<div class="image-heading">
-									<img src="<?=get_stylesheet_directory_uri()?>/images/feature/img-1.jpg" alt="">
-								</div>
-								<div class="meta-categories"><a href="#">Web design</a></div>
-								<div class="content-item">
-									<div class="image-author">
-										<img src="<?=get_stylesheet_directory_uri()?>/images/avatar-1.jpg" alt="">
-									</div>
-									<h4><a href="course-intro.html">The Complete Digital Photography Course Amazon Top Seller</a></h4>
-									<div class="name-author">
-										<span>By <a href="#">Name of Mr or Mrs</a></span>
-									</div>
-								</div>
-								<div class="ft-item">
-									<div class="rating">
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#"></a>
-										<a href="#"></a>
-									</div>
-									<div class="view-info">
-										<i class="icon md-users"></i>
-										2568
-									</div>
-									<div class="comment-info">
-										<i class="icon md-comment"></i>
-										25
-									</div>
-									<div class="price">
-										$123
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- END / ITEM -->
-
-						<!-- ITEM -->
-						<div class="col-sm-6 col-md-4">
-							<div class="mc-item mc-item-2">
-								<div class="image-heading">
-									<img src="<?=get_stylesheet_directory_uri()?>/images/feature/img-1.jpg" alt="">
-								</div>
-								<div class="meta-categories"><a href="#">Web design</a></div>
-								<div class="content-item">
-									<div class="image-author">
-										<img src="<?=get_stylesheet_directory_uri()?>/images/avatar-1.jpg" alt="">
-									</div>
-									<h4><a href="course-intro.html">The Complete Digital Photography Course Amazon Top Seller</a></h4>
-									<div class="name-author">
-										By <a href="#">Name of Mr or Mrs</a>
-									</div>
-								</div>
-								<div class="ft-item">
-									<div class="rating">
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#"></a>
-										<a href="#"></a>
-									</div>
-									<div class="view-info">
-										<i class="icon md-users"></i>
-										2568
-									</div>
-									<div class="comment-info">
-										<i class="icon md-comment"></i>
-										25
-									</div>
-									<div class="price">
-										$190
-										<span class="price-old">$145</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- END / ITEM -->
-						<!-- ITEM -->
-						<div class="col-sm-6 col-md-4">
-							<div class="mc-item mc-item-2">
-								<div class="image-heading">
-									<img src="<?=get_stylesheet_directory_uri()?>/images/feature/img-1.jpg" alt="">
-								</div>
-								<div class="meta-categories"><a href="#">Web design</a></div>
-								<div class="content-item">
-									<div class="image-author">
-										<img src="<?=get_stylesheet_directory_uri()?>/images/avatar-1.jpg" alt="">
-									</div>
-									<h4><a href="course-intro.html">The Complete Digital Photography Course Amazon Top Seller</a></h4>
-									<div class="name-author">
-										<span>By <a href="#">Name of Mr or Mrs</a></span>
-									</div>
-								</div>
-								<div class="ft-item">
-									<div class="rating">
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#"></a>
-										<a href="#"></a>
-									</div>
-									<div class="view-info">
-										<i class="icon md-users"></i>
-										2568
-									</div>
-									<div class="comment-info">
-										<i class="icon md-comment"></i>
-										25
-									</div>
-									<div class="price">
-										Free
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- ITEM -->
-
-						<!-- END / ITEM -->
-						<div class="col-sm-6 col-md-4">
-							<div class="mc-item mc-item-2">
-								<div class="image-heading">
-									<img src="<?=get_stylesheet_directory_uri()?>/images/feature/img-1.jpg" alt="">
-								</div>
-								<div class="meta-categories"><a href="#">Web design</a></div>
-								<div class="content-item">
-									<div class="image-author">
-										<img src="<?=get_stylesheet_directory_uri()?>/images/avatar-1.jpg" alt="">
-									</div>
-									<h4><a href="course-intro.html">The Complete Digital Photography Course Amazon Top Seller</a></h4>
-									<div class="name-author">
-										<span>By <a href="#">Name of Mr or Mrs</a></span>
-									</div>
-								</div>
-								<div class="ft-item">
-									<div class="rating">
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#" class="active"></a>
-										<a href="#"></a>
-										<a href="#"></a>
-									</div>
-									<div class="view-info">
-										<i class="icon md-users"></i>
-										2568
-									</div>
-									<div class="comment-info">
-										<i class="icon md-comment"></i>
-										25
-									</div>
-									<div class="price">
-										$123
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- END / ITEM -->
-						
 					</div>
 				</div>
 			</div>

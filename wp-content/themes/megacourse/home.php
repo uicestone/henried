@@ -5,45 +5,24 @@
 	<div class="container">
 		<div class="slide-cn" id="slide-home">
 			<!-- SLIDE ITEM -->
+			<?php foreach(get_posts('tag=首页推荐') as $post){ ?>
 			<div class="slide-item">
 				<div class="item-inner">
 					<div class="text">
-						<h2>Learn more - Earn more</h2>
-						<p>this is not only an elegant theme but also<br> a course management system<br> for wordpress and drupal
-						</p>
+						<h2><?=$post->post_title?></h2>
+						<?=wpautop($post->post_excerpt)?>
 						<div class="group">
-							<a href="#" class="mc-btn btn-style-1">See full features</a>
+							<a href="<?=get_the_permalink($post->ID)?>" class="mc-btn btn-style-1">查看</a>
 						</div>
 					</div>
 
 					<div class="img">
-						<img src="<?=get_stylesheet_directory_uri()?>/images/homeslider/img-thumb.png" alt="">
+						<?=get_the_post_thumbnail($post->ID, 'home-banner')?>
 					</div>
 				</div>
-
 			</div>  
+			<?php } ?>
 			<!-- SLIDE ITEM -->     
-
-			<!-- SLIDE ITEM -->
-			<div class="slide-item">
-				<div class="item-inner">
-					<div class="text">
-						<h2>Learn more - Earn more</h2>
-						<p>this is not only an elegant theme but also<br> a course management system<br> for wordpress and drupal
-						</p>
-						<div class="group">
-							<a href="#" class="mc-btn btn-style-1">See full features</a>
-						</div>
-					</div>
-
-					<div class="img">
-						<img src="<?=get_stylesheet_directory_uri()?>/images/homeslider/img-thumb.png" alt="">
-					</div>
-
-				</div>  
-			</div>  
-			<!-- SLIDE ITEM -->  
-
 		</div>
 	</div>
 </section>
@@ -58,19 +37,18 @@
 
 		<div class="after-slider-content tb">
 			<div class="inner tb-cell">
-				<h4>Find your course</h4>
+				<h4>课程搜索</h4>
 				<div class="course-keyword">
-					<input type="text" placeholder="Course keyword">
+					<input type="text" placeholder="输入课程名称">
 				</div>
 				<div class="mc-select-wrap">
 					<div class="mc-select">
 						<select class="select" name="" id="all-categories">
-							<option value="" selected>All categories</option>
-							<option value="">2</option>
+							<option value="" selected>所有分类</option>
 						</select>
 					</div>
 				</div>
-				<div class="mc-select-wrap">
+				<!--<div class="mc-select-wrap">
 					<div class="mc-select">
 						<select class="select" name="" id="beginner-level">
 							<option value="" selected>Beginner level</option>
@@ -78,11 +56,11 @@
 							<option value="">Beginner level 3</option>
 						</select>
 					</div>
-				</div>
+				</div>-->
 			</div>
 			<div class="tb-cell text-right">
 				<div class="form-actions">
-					<input type="submit" value="Find Course" class="mc-btn btn-style-1">
+					<input type="submit" value="搜索课程" class="mc-btn btn-style-1">
 				</div>
 			</div>
 		</div>
@@ -98,9 +76,9 @@
 
 			<div class="col-md-5">
 				<div class="mc-section-1-content-1"> 
-					<h2 class="big">Online And Offline Training Course Management</h2>
-					<p class="mc-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-					<a href="#" class="mc-btn btn-style-1">About us</a>
+					<h2 class="big">线上线下课程管理</h2>
+					<p class="mc-text">我们有网络平台，更有线下教室。</p>
+					<a href="<?=site_url()?>/about-us/" class="mc-btn btn-style-1">关于我们</a>
 				</div>
 			</div>
 
@@ -109,32 +87,32 @@
 					<div class="col-sm-6">
 						<div class="featured-item">
 							<i class="icon icon-featured-1"></i>
-							<h4 class="title-box text-uppercase">CLEAN AND EASY</h4>
-							<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam  tincidunt ut laoreet</p>
+							<h4 class="title-box text-uppercase">易于掌握</h4>
+							<p>特点描述特点描述，特点描述特点描述，特点描述特点描述特点描述，特点描述特点描述。</p>
 						</div>
 					</div>
 
 					<div class="col-sm-6">
 						<div class="featured-item">
 							<i class="icon icon-featured-2"></i>
-							<h4 class="title-box text-uppercase">TEACH AS YOU CAN</h4>
-							<p> Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit</p>
+							<h4 class="title-box text-uppercase">参与教学</h4>
+							<p>特点描述特点描述，特点描述特点描述，特点描述特点描述特点描述，特点描述特点描述。</p>
 						</div>
 					</div>
 
 					<div class="col-sm-6">
 						<div class="featured-item">
 							<i class="icon icon-featured-3"></i>
-							<h4 class="title-box text-uppercase">COMMUNITY SUPPORT</h4>
-							<p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat</p>
+							<h4 class="title-box text-uppercase">社区支持</h4>
+							<p>特点描述特点描述，特点描述特点描述，特点描述特点描述特点描述，特点描述特点描述。</p>
 						</div>
 					</div>
 
 					<div class="col-sm-6">
 						<div class="featured-item">
 							<i class="icon icon-featured-4"></i>
-							<h4 class="title-box text-uppercase">TRACKING PERFORMANCE</h4>
-							<p> Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit</p>
+							<h4 class="title-box text-uppercase">效果跟踪</h4>
+							<p>特点描述特点描述，特点描述特点描述，特点描述特点描述特点描述，特点描述特点描述。</p>
 						</div>
 					</div>
 				</div>
@@ -157,9 +135,10 @@
 
 				<div class="col-md-5">
 					<div class="ct">
-						<h2 class="big">Learning online is easier than ever before</h2>
-						<p class="mc-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-						<a href="#" class="mc-btn btn-style-3">See how it work</a>
+						<h2 class="big">在线学习从未如此简单</h2>
+						<p class="mc-text">特点描述特点描述，特点描述特点描述，特点描述特点描述特点描述，特点描述特点描述。</p>
+
+						<a href="<?=site_url()?>/tutorial/" class="mc-btn btn-style-3">学习如何使用</a>
 					</div>
 				</div>
 
@@ -181,8 +160,8 @@
 	<div class="container">
 		<!-- FEATURE -->
 		<div class="feature-course">
-			<h4 class="title-box text-uppercase">FEATURE COURSE</h4>
-			<a href="categories.html" class="all-course mc-btn btn-style-1">View all</a>
+			<h4 class="title-box text-uppercase">热门课程</h4>
+			<a href="categories.html" class="all-course mc-btn btn-style-1">查看全部</a>
 			<div class="row">
 				<div class="feature-slider">
 					<div class="mc-item mc-item-1">
@@ -381,27 +360,27 @@
 
 			<div class="col-lg-8">
 				<div class="mc-count-item">
-					 <h4>Courses</h4>
-					 <p><span class="countup">2536,556</span></p>
+					 <h4>总课程</h4>
+					 <p><span class="countup">0</span></p>
+				 </div>
+				<div class="mc-count-item">
+					 <h4>课程总学习数</h4>
+					 <p><span class="countup">0</span></p>
 				 </div>
 				 <div class="mc-count-item">
-					 <h4>Teachers</h4>
-					 <p><span class="countup">10,389</span></p>
+					 <h4>学员总数</h4>
+					 <p><span class="countup">0</span></p>
 				 </div>
 				 <div class="mc-count-item">
-					 <h4>Students</h4>
-					 <p><span class="countup">34,177</span></p>
-				 </div>
-				 <div class="mc-count-item">
-					 <h4>Tuition Paid</h4>
-					 <p>$ <span class="countup">793,361,890</span></p>
+					 <h4>已支付学费</h4>
+					 <p>¥ <span class="countup">0</span></p>
 				 </div>
 			</div>
 
 			<div class="col-lg-4">
 				<div class="before-footer-link">
-					<a href="#" class="mc-btn btn-style-2">Become a member</a>
-					<a href="#" class="mc-btn btn-style-1">Become a teacher</a>
+					<a href="<?=site_url()?>/login/" class="mc-btn btn-style-2">马上注册</a>
+					<!--<a href="#" class="mc-btn btn-style-1">Become a teacher</a>-->
 				</div>
 			</div>
 		</div>

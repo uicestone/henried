@@ -56,3 +56,26 @@ add_action('after_switch_theme', function(){
 	}
 	closedir($handle);
 });
+
+register_nav_menu('main', '主导航');
+
+add_image_size('home-banner', 436, 507, true);
+add_image_size('course-list', 270, 161, true);
+add_image_size('course-intro', 450, 258, true);
+
+add_theme_support('post-thumbnails');
+
+add_action('init', function(){
+	register_post_type('course', array(
+		'label'=>'课程',
+		'labels'=>array(
+			'all_items'=>'所有课程',
+			'add_new'=>'添加课程',
+			'add_new_item'=>'新课程',
+		),
+		'public'=>true,
+		'supports'=>array('title', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments'),
+		'taxonomies'=>array('category', 'post_tag'),
+		'menu_icon'=>'dashicons-book-alt'
+	));
+});

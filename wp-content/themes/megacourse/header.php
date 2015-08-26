@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
-		<title>Mega Course - Learning and Courses HTML5 Template</title>
+		<title><?php bloginfo('sitename'); ?></title>
 		<!-- Google font -->
 		<link href="http://fonts.useso.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
 		<link href="http://fonts.useso.com/css?family=Raleway:300,400,700,900" rel="stylesheet" type="text/css">
@@ -36,7 +36,7 @@
 				<div class="container">
 
 					<!-- LOGO -->
-					<div class="logo"><a href="<?=site_url()?>/index/"><img src="<?=get_stylesheet_directory_uri()?>/images/logo.png" alt=""></a></div>
+					<div class="logo"><a href="<?=site_url()?>"><img src="<?=get_stylesheet_directory_uri()?>/images/logo.png" alt=""></a></div>
 					<!-- END / LOGO -->
 
 					<!-- NAVIGATION -->
@@ -49,82 +49,8 @@
 						</div>
 
 						<!-- MENU -->
-						<ul class="menu">
-							<li><a href="<?=site_url()?>">Home</a></li>
-							<li class="menu-item-has-children current-menu-item megamenu col-4">
-								<a href="#">Pages</a>
-								<ul class="sub-menu">
-									<li class="menu-item-has-children">
-										<a href="#">Account 1</a>
-										<ul class="sub-menu">
-											<li><a href="<?=site_url()?>/account-assignment/">Account Assignment</a></li>
-											<li class="current-menu-item"><a href="<?=site_url()?>/account-inbox/">Account Inbox</a></li>
-											<li><a href="<?=site_url()?>/account-learning/">Account Learning</a></li>
-											<li><a href="<?=site_url()?>/account-profile-owner-view/">Account Profile Owner</a></li>
-											<li><a href="<?=site_url()?>/account-profile-guest-view/">Account Profile Guest</a></li>
-											<li><a href="<?=site_url()?>/account-teaching/">Account Teaching</a></li>
-											<li><a href="<?=site_url()?>/setting/">Setting</a></li>
-										</ul>
-									</li>
-
-									<li class="menu-item-has-children">
-										<a href="#">Asignment 2</a>
-										<ul class="sub-menu">
-											<li><a href="<?=site_url()?>/asignment-after-submit/">Asignment After Submit</a></li>
-											<li><a href="<?=site_url()?>/asignment-list/">Asignment List</a></li>
-											<li><a href="<?=site_url()?>/asignment-marking/">Asignment Marking</a></li>
-											<li><a href="<?=site_url()?>/asignment-received/">Asignment Received</a></li>
-											<li><a href="<?=site_url()?>/asignment-submit/">Asignment Submit</a></li>
-											<li><a href="<?=site_url()?>/become-teacher/">Become Teacher</a></li>
-											<li><a href="<?=site_url()?>/categories/">Categories</a></li>
-										</ul>
-									</li>
-									<li class="menu-item-has-children">
-										<a href="#">Course 3</a>
-										<ul class="sub-menu">
-											<li><a href="<?=site_url()?>/course-intro/">Course Intro</a></li>
-											<li><a href="<?=site_url()?>/course-learn/">Course Learn</a></li>
-											<li><a href="<?=site_url()?>/create-basic-information/">Create Basic Information</a></li>
-											<li><a href="<?=site_url()?>/create-design-course/">Create Design Course</a></li>
-											<li><a href="<?=site_url()?>/create-publish-course/">Create Publish Course</a></li>
-											<li><a href="<?=site_url()?>/request-teacher/">Request Teacher</a></li>
-											<li><a href="<?=site_url()?>/search-result-found/">Search Result Found</a></li>
-											<li><a href="<?=site_url()?>/search-result-not-found/">Search Result Found</a></li>
-										</ul>
-									</li>
-									<li class="menu-item-has-children">
-										<a href="#">Learn 3</a>
-										<ul class="sub-menu">
-											<li><a href="<?=site_url()?>/learning/">Learning</a></li>
-											<li><a href="<?=site_url()?>/quizz-1/">Quizz 1</a></li>
-											<li><a href="<?=site_url()?>/quizz-2/">Quizz 2</a></li>
-											<li><a href="<?=site_url()?>/quizz-3/">Quizz 3</a></li>
-											<li><a href="<?=site_url()?>/quizz-5/">Quizz 5</a></li>
-											<li><a href="<?=site_url()?>/quizz-20/">Quizz 20</a></li>
-											<li><a href="<?=site_url()?>/quizz-finish/">Quizz Finish</a></li>
-											<li><a href="<?=site_url()?>/quizz-intro/">Quizz Intro</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-							<li class="menu-item-has-children">
-								<a href="<?=site_url()?>/blog-list/">Blog</a>
-								<ul class="sub-menu">
-									<li><a href="<?=site_url()?>/blog-list/">Blog list</a></li>
-									<li><a href="<?=site_url()?>/blog-single/">Blog single</a></li>
-								</ul>
-							</li>
-							<li class="menu-item-has-children">
-								<a href="#">Login</a>
-								<ul class="sub-menu">
-									<li><a href="<?=site_url()?>/login/">Login</a></li>
-									<li><a href="<?=site_url()?>/register/">Register</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="<?=site_url()?>/categories/">Course</a>
-							</li>
-						</ul>
+						<?=wp_nav_menu(array('theme_location'=>'main', 'container'=>null))?>
+						
 						<!-- END / MENU -->
 
 						<!-- SEARCH BOX -->
