@@ -36,7 +36,7 @@
 				<div class="container">
 
 					<!-- LOGO -->
-					<div class="logo"><a href="index.html"><img src="<?=get_stylesheet_directory_uri()?>/images/logo.png" alt=""></a></div>
+					<div class="logo"><a href="<?=site_url()?>/index/"><img src="<?=get_stylesheet_directory_uri()?>/images/logo.png" alt=""></a></div>
 					<!-- END / LOGO -->
 
 					<!-- NAVIGATION -->
@@ -50,79 +50,79 @@
 
 						<!-- MENU -->
 						<ul class="menu">
-							<li><a href="index.html">Home</a></li>
+							<li><a href="<?=site_url()?>">Home</a></li>
 							<li class="menu-item-has-children current-menu-item megamenu col-4">
 								<a href="#">Pages</a>
 								<ul class="sub-menu">
 									<li class="menu-item-has-children">
 										<a href="#">Account 1</a>
 										<ul class="sub-menu">
-											<li><a href="account-assignment.html">Account Assignment</a></li>
-											<li class="current-menu-item"><a href="account-inbox.html">Account Inbox</a></li>
-											<li><a href="account-learning.html">Account Learning</a></li>
-											<li><a href="account-profile-owner-view.html">Account Profile Owner</a></li>
-											<li><a href="account-profile-guest-view.html">Account Profile Guest</a></li>
-											<li><a href="account-teaching.html">Account Teaching</a></li>
-											<li><a href="setting.html">Setting</a></li>
+											<li><a href="<?=site_url()?>/account-assignment/">Account Assignment</a></li>
+											<li class="current-menu-item"><a href="<?=site_url()?>/account-inbox/">Account Inbox</a></li>
+											<li><a href="<?=site_url()?>/account-learning/">Account Learning</a></li>
+											<li><a href="<?=site_url()?>/account-profile-owner-view/">Account Profile Owner</a></li>
+											<li><a href="<?=site_url()?>/account-profile-guest-view/">Account Profile Guest</a></li>
+											<li><a href="<?=site_url()?>/account-teaching/">Account Teaching</a></li>
+											<li><a href="<?=site_url()?>/setting/">Setting</a></li>
 										</ul>
 									</li>
 
 									<li class="menu-item-has-children">
 										<a href="#">Asignment 2</a>
 										<ul class="sub-menu">
-											<li><a href="asignment-after-submit.html">Asignment After Submit</a></li>
-											<li><a href="asignment-list.html">Asignment List</a></li>
-											<li><a href="asignment-marking.html">Asignment Marking</a></li>
-											<li><a href="asignment-received.html">Asignment Received</a></li>
-											<li><a href="asignment-submit.html">Asignment Submit</a></li>
-											<li><a href="become-teacher.html">Become Teacher</a></li>
-											<li><a href="categories.html">Categories</a></li>
+											<li><a href="<?=site_url()?>/asignment-after-submit/">Asignment After Submit</a></li>
+											<li><a href="<?=site_url()?>/asignment-list/">Asignment List</a></li>
+											<li><a href="<?=site_url()?>/asignment-marking/">Asignment Marking</a></li>
+											<li><a href="<?=site_url()?>/asignment-received/">Asignment Received</a></li>
+											<li><a href="<?=site_url()?>/asignment-submit/">Asignment Submit</a></li>
+											<li><a href="<?=site_url()?>/become-teacher/">Become Teacher</a></li>
+											<li><a href="<?=site_url()?>/categories/">Categories</a></li>
 										</ul>
 									</li>
 									<li class="menu-item-has-children">
 										<a href="#">Course 3</a>
 										<ul class="sub-menu">
-											<li><a href="course-intro.html">Course Intro</a></li>
-											<li><a href="course-learn.html">Course Learn</a></li>
-											<li><a href="create-basic-information.html">Create Basic Information</a></li>
-											<li><a href="create-design-course.html">Create Design Course</a></li>
-											<li><a href="create-publish-course.html">Create Publish Course</a></li>
-											<li><a href="request-teacher.html">Request Teacher</a></li>
-											<li><a href="search-result-found.html">Search Result Found</a></li>
-											<li><a href="search-result-not-found.html">Search Result Found</a></li>
+											<li><a href="<?=site_url()?>/course-intro/">Course Intro</a></li>
+											<li><a href="<?=site_url()?>/course-learn/">Course Learn</a></li>
+											<li><a href="<?=site_url()?>/create-basic-information/">Create Basic Information</a></li>
+											<li><a href="<?=site_url()?>/create-design-course/">Create Design Course</a></li>
+											<li><a href="<?=site_url()?>/create-publish-course/">Create Publish Course</a></li>
+											<li><a href="<?=site_url()?>/request-teacher/">Request Teacher</a></li>
+											<li><a href="<?=site_url()?>/search-result-found/">Search Result Found</a></li>
+											<li><a href="<?=site_url()?>/search-result-not-found/">Search Result Found</a></li>
 										</ul>
 									</li>
 									<li class="menu-item-has-children">
 										<a href="#">Learn 3</a>
 										<ul class="sub-menu">
-											<li><a href="learning.html">Learning</a></li>
-											<li><a href="quizz-1.html">Quizz 1</a></li>
-											<li><a href="quizz-2.html">Quizz 2</a></li>
-											<li><a href="quizz-3.html">Quizz 3</a></li>
-											<li><a href="quizz-5.html">Quizz 5</a></li>
-											<li><a href="quizz-20.html">Quizz 20</a></li>
-											<li><a href="quizz-finish.html">Quizz Finish</a></li>
-											<li><a href="quizz-intro.html">Quizz Intro</a></li>
+											<li><a href="<?=site_url()?>/learning/">Learning</a></li>
+											<li><a href="<?=site_url()?>/quizz-1/">Quizz 1</a></li>
+											<li><a href="<?=site_url()?>/quizz-2/">Quizz 2</a></li>
+											<li><a href="<?=site_url()?>/quizz-3/">Quizz 3</a></li>
+											<li><a href="<?=site_url()?>/quizz-5/">Quizz 5</a></li>
+											<li><a href="<?=site_url()?>/quizz-20/">Quizz 20</a></li>
+											<li><a href="<?=site_url()?>/quizz-finish/">Quizz Finish</a></li>
+											<li><a href="<?=site_url()?>/quizz-intro/">Quizz Intro</a></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
 							<li class="menu-item-has-children">
-								<a href="blog-list.html">Blog</a>
+								<a href="<?=site_url()?>/blog-list/">Blog</a>
 								<ul class="sub-menu">
-									<li><a href="blog-list.html">Blog list</a></li>
-									<li><a href="blog-single.html">Blog single</a></li>
+									<li><a href="<?=site_url()?>/blog-list/">Blog list</a></li>
+									<li><a href="<?=site_url()?>/blog-single/">Blog single</a></li>
 								</ul>
 							</li>
 							<li class="menu-item-has-children">
 								<a href="#">Login</a>
 								<ul class="sub-menu">
-									<li><a href="login.html">Login</a></li>
-									<li><a href="register.html">Register</a></li>
+									<li><a href="<?=site_url()?>/login/">Login</a></li>
+									<li><a href="<?=site_url()?>/register/">Register</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="categories.html">Course</a>
+								<a href="<?=site_url()?>/categories/">Course</a>
 							</li>
 						</ul>
 						<!-- END / MENU -->
@@ -433,8 +433,8 @@
 								</div>
 								<div class="toggle-account toggle-list">
 									<ul class="list-account">
-										<li><a href="setting.html"><i class="icon md-config"></i>Setting</a></li>
-										<li><a href="login.html"><i class="icon md-arrow-right"></i>Sign Out</a></li>
+										<li><a href="<?=site_url()?>/setting/"><i class="icon md-config"></i>Setting</a></li>
+										<li><a href="<?=site_url()?>/login/"><i class="icon md-arrow-right"></i>Sign Out</a></li>
 									</ul>
 								</div>
 							</li>

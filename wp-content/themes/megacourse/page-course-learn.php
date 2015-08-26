@@ -36,8 +36,7 @@
 
 					<div class="video-course-intro">
 						<div class="video embed-responsive embed-responsive-16by9">
-							<iframe src="//player.vimeo.com/video/100872038" class="embed-responsive-item">
-							</iframe>
+							<iframe src="<?=qiniu_get_real_download_url('变形金刚第一部预告片.mp4')?>" class="embed-responsive-item"></iframe>
 						</div>
 					</div>
 					<div class="new-course">

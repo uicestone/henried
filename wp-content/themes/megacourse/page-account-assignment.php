@@ -1,3 +1,4 @@
+<?php get_header(); ?>
 <!-- PROFILE FEATURE -->
 <section class="profile-feature">
 	<div class="awe-parallax bg-profile-feature"></div>
@@ -510,3 +511,5 @@
 	</div>
 </section>
 <!-- END / COURSE CONCERN -->
+
+<?php get_footer(); ?>

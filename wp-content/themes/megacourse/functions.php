@@ -28,3 +28,31 @@ add_action('wp_enqueue_scripts', function(){
 	wp_enqueue_script('scripts');
 });
 
+add_action('after_switch_theme', function(){
+	
+	if (!$handle = opendir(get_template_directory())){
+		return;
+	}
+	
+	while (false !== ($entry = readdir($handle))) {
+		preg_match('/^page-(.*).php/', $entry, $matches);
+		
+		if(!$matches){
+			continue;
+		}
+		
+		$page_name = ucwords(str_replace('-', ' ', $matches[1]));
+		$results = get_posts(array('name'=>sanitize_title($page_name), 'post_type'=>'page'));
+		
+		if($results){
+			continue;
+		}
+		
+		wp_insert_post(array(
+			'post_title'=>$page_name,
+			'post_type'=>'page',
+			'post_status'=>'publish'
+		));
+	}
+	closedir($handle);
+});
