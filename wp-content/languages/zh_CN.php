@@ -104,26 +104,6 @@ wp_embed_register_handler( 'youku',
 
 
 /**
- * Chinese character count - register script
- *
- * This patch serves as a work-around to fix the built-in word-count.js.
- *
- * The sum of Chinese characters and English words will show up in "word count"
- * field once enabled.
- *
- * @since 3.3.0
- */
-function zh_cn_l10n_patch_character_count_register_script() {
-	wp_deregister_script( 'word-count' );
-	wp_register_script( 'word-count',
-		content_url( ( WP_DEBUG ? '/languages/zh_CN-word-count.dev.js' : '/languages/zh_CN-word-count.js' ) ),
-		array( 'jquery' ),
-		'20120605' );
-}
-add_action( 'admin_footer',
-	'zh_cn_l10n_patch_character_count_register_script' );
-
-/**
  * ICP license number
  *
  * For compliance with the Telecommunications Regulations. Can be turned off
@@ -165,4 +145,6 @@ add_action( 'twentyten_credits', 'zh_cn_l10n_icp_num' );
 add_action( 'twentyeleven_credits', 'zh_cn_l10n_icp_num' );
 add_action( 'twentytwelve_credits', 'zh_cn_l10n_icp_num' );
 add_action( 'twentythirteen_credits', 'zh_cn_l10n_icp_num' );
+add_action( 'twentyfourteen_credits', 'zh_cn_l10n_icp_num' );
+add_action( 'twentyfifteen_credits', 'zh_cn_l10n_icp_num' );
 ?>
