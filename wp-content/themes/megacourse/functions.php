@@ -59,7 +59,7 @@ add_action('after_switch_theme', function(){
 
 register_nav_menu('main', '主导航');
 
-add_image_size('home-banner', 436, 507, true);
+add_image_size('home-banner', 500, 500, true);
 add_image_size('course-list', 270, 161, true);
 add_image_size('course-intro', 450, 258, true);
 

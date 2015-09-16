@@ -1410,13 +1410,14 @@ table.mc-table tbody .new .submissions a:before {
 #header {
   position: relative;
   z-index: 999;
-  background-color: #012340;
+  background-color: #012391;
 }
 #header .logo {
   position: absolute;
   left: 15px;
   top: 50%;
   z-index: 100;
+  width: 60px;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -2055,6 +2056,9 @@ table.mc-table tbody .new .submissions a:before {
   -webkit-transform: translate(0, -50%);
   -ms-transform: translate(0, -50%);
   transform: translate(0, -50%);
+  padding: 20px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 10px;
 }
 
 .slide .slide-item .text.text-r {
@@ -2063,7 +2067,7 @@ table.mc-table tbody .new .submissions a:before {
 
 .slide .slide-item .text h2 {
   margin: 0;
-  color: #012440;
+  color: #012391;
   font-size: 48px;
   line-height: 66px;
   font-weight: bold;
@@ -2127,6 +2131,8 @@ table.mc-table tbody .new .submissions a:before {
   opacity: 0;
   -webkit-transition: all 1s ease 0.2s;
   transition: all 1s ease 0.2s;
+  width: 400px;
+  margin-bottom: 10px;
 }
 
 .slide .slide-item .img.img-l {
@@ -8065,7 +8071,7 @@ footer#footer.footer-style-2 {
     position: absolute;
     width: 260px;
     top: 60px; right: -15px;
-    background: #012340;
+    background: #012391;
     text-align: left;
     display: none;
     padding-top: 70px;
