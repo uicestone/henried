@@ -22,15 +22,15 @@
 			<a href="<?=site_url()?>"><i class="icon md-arrow-left"></i>返回首页</a>
 		</div>
 		<div class="page-view">
-			View
-			<span class="page-view-info view-grid active" title="View grid"><i class="icon md-ico-2"></i></span>
-			<span class="page-view-info view-list" title="View list"><i class="icon md-ico-1"></i></span>
-			<div class="mc-select">
+			查看方式
+			<span class="page-view-info view-grid active" title="平铺"><i class="icon md-ico-2"></i></span>
+			<span class="page-view-info view-list" title="列表"><i class="icon md-ico-1"></i></span>
+			<!--<div class="mc-select">
 				<select class="select" name="" id="all-categories">
 					<option value="">All level</option>
 					<option value="">2</option>
 				</select>
-			</div>
+			</div>-->
 		</div>
 	</div>
 </section>
@@ -49,14 +49,14 @@
 						<div class="col-sm-6 col-md-4">
 							<div class="mc-item mc-item-2">
 								<div class="image-heading">
-									<?=get_the_post_thumbnail($course->ID, 'course-list')?>
+									<a href="<?=get_the_permalink($course->ID)?>"><?=get_the_post_thumbnail($course->ID, 'course-list')?></a>
 								</div>
 								<div class="meta-categories"><a href="#"><?=get_the_category($course->ID)[0]->name?></a></div>
 								<div class="content-item">
 									<div class="image-author">
 										<?=$course->post_author?>
 									</div>
-									<h4><a href="<?=site_url()?>/course/<?=$course->slug?>"><?=get_the_title($course->ID)?></a></h4>
+									<h4><a href="<?=get_the_permalink($course->ID)?>"><?=get_the_title($course->ID)?></a></h4>
 									<div class="name-author">
 										主讲：<a href="#"><?=get_userdata($course->post_author)->display_name?></a>
 									</div>
@@ -96,10 +96,9 @@
 						<!-- WIDGET TOP -->
 						<div class="widget">
 							<ul class="list-style-block">
-								<li class="current"><a href="#">Featured</a></li>
-								<li><a href="#">Staff pick</a></li>
-								<li><a href="#">Free</a></li>
-								<li><a href="#">Top paid</a></li>
+								<li class="current"><a href="#">推荐</a></li>
+								<li><a href="#">免费</a></li>
+								<li><a href="#">热销</a></li>
 							</ul>
 						</div>
 						<!-- END / WIDGET TOP -->
@@ -107,34 +106,12 @@
 						<!-- WIDGET CATEGORIES -->
 						<div class="widget widget_categories">
 							<ul class="list-style-block">
-								<li><a href="#">Technology</a></li>
-								<li><a href="#">Business</a></li>
-								<li><a href="#">Design</a></li>
-								<li><a href="#">Art and Photography</a></li>
-								<li><a href="#">Health and Fitness</a></li>
-								<li><a href="#">Lifestyle</a></li>
-								<li><a href="#">Math and Science</a></li>
-								<li><a href="#">Education</a></li>
-								<li><a href="#">Social Science</a></li>
-								<li><a href="#">Game</a></li>
-								<li><a href="#">Crafts and Hobbies</a></li>
-								<li><a href="#">Music</a></li>
-								<li><a href="#">Sports</a></li>
+								<li><a href="?course_category=acca">ACCA</a></li>
+								<li><a href="?course_category=cma">CMA</a></li>
 							</ul>
 						</div>
 						<!-- END / WIDGET CATEGORIES -->
 
-						<!-- BANNER ADS -->
-						<div class="mc-banner">
-							<a href="#"><img src="<?=get_stylesheet_directory_uri()?>/images/banner-ads-1.jpg" alt=""></a>
-						</div>
-						<!-- END / BANNER ADS -->
-
-						<!-- BANNER ADS -->
-						<div class="mc-banner">
-							<a href="#"><img src="<?=get_stylesheet_directory_uri()?>/images/banner-ads-2.jpg" alt=""></a>
-						</div>
-						<!-- END / BANNER ADS -->
 					</div>
 				</aside>
 			</div>

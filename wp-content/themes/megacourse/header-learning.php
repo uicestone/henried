@@ -26,7 +26,7 @@
 
 		<div class="top-nav">
 
-			<h4 class="sm black bold">Title of the course gose here Duis vel ullamcorper mauris</h4>
+			<h4 class="sm black bold">F2 - Management Accounting</h4>
 
 			<ul class="top-nav-list">
 				<li class="prev-course"><a href="#"><i class="icon md-angle-left"></i><span class="tooltip">Prev</span></a></li>
@@ -230,7 +230,7 @@
 					</div>
 				</li>
 				<li class="backpage">
-					<a href="index.html"><i class="icon md-close-1"></i></a>
+					<a href="index.html"><i class="icon md-back"></i></a>
 				</li>
 			</ul>
 

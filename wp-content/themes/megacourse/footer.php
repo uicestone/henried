@@ -32,7 +32,7 @@
 
 						<div class="col-md-4">
 							<div class="widget quick_link">
-								<h3 class="sm">Quick Links</h3>
+								<h3 class="sm">链接</h3>
 								<ul class="list-style-block">
 									<li><a href="#">关于我们</a></li>
 									<li><a href="#">使用协议</a></li>

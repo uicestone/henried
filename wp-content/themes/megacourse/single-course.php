@@ -36,7 +36,7 @@
 
 					<div class="video-course-intro">
 						<div class="video embed-responsive embed-responsive-16by9">
-							<iframe src="<?=qiniu_get_real_download_url('变形金刚第一部预告片.mp4')?>" class="embed-responsive-item"></iframe>
+							<iframe src="<?=qiniu_get_real_download_url('00147.mp4')?>" class="embed-responsive-item"></iframe>
 						</div>
 					</div>
 					<div class="new-course">
@@ -128,28 +128,40 @@
 			<div class="col-md-7">
 				<div class="tabs-page">
 					<ul class="nav-tabs" role="tablist">
-						<li class="active"><a href="#outline" role="tab" data-toggle="tab">Outline</a></li>
-						<li class="itemnew"><a href="#announcement" role="tab" data-toggle="tab">Announcement</a></li>
-						<li class="itemnew"><a href="#discussion" role="tab" data-toggle="tab">Discussion</a></li>
-						<li><a href="#review" role="tab" data-toggle="tab">Review</a></li>
-						<li><a href="#student" role="tab" data-toggle="tab">Student</a></li>
-						<li><a href="#updatelog" role="tab" data-toggle="tab">Update Log</a></li>
+						<li class="active"><a href="#introduction" role="tab" data-toggle="tab">Introduction</a></li>
+						<li><a href="#outline" role="tab" data-toggle="tab">Outline</a></li>
+						<li><a href="#announcement" role="tab" data-toggle="tab">Announcement</a></li>
+						<li><a href="#discussion" role="tab" data-toggle="tab">Discussion</a></li>
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
+						
+						<!-- INTRODUCTION -->
+						<div class="tab-pane fade in active" id="introduction">
+							<h4 class="sm black bold">Introduction</h4>
+							<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+							<h4 class="sm black bold">Goal of Course</h4>
+							<ul class="list-disc">
+								<li><p>sed diam nonummy nibh euismod tincidunt ut laoreet</p></li>
+								<li><p>sed diam nonummy nibh euismod tincidunt utrlaoreet</p></li>
+							</ul>
+							
+							<h4 class="sm black bold">About Judgement</h4>
+							<p>Nunc quis vulputate metus, ac dapibus ligula. Etiam interdum ornare rutrum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam elementum felis diam, non pellentesque est iaculis ac. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed ultricies hendrerit diam, eget molestie ipsum gravida vel. Mauris aliquam ante scelerisque odio tincidunt porttitor. Nulla vitae tellus dictum, vehicula elit eu, elementum arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam sodales lacinia ligula sed egestas. Suspendisse purus metus, pharetra non convallis eget, aliquet ut nisi. Etiam malesuada porta posuere. Integer eget erat enim. Maecenas rhoncus tincidunt dui id tincidunt. Pellentesque quis dapibus erat.<br><br>Etiam dignissim tellus quis nulla accumsan, eget elementum ipsum blandit. Morbi sodales tellus id nisl porta cursus. Nam nisl mauris, convallis non accumsan ac, auctor sed lacus. Maecenas laoreet, nibh a facilisis sagittis, sem ante facilisis lectus, non porta mi odio sit amet ligula. Phasellus ac dolor nec odio dictum tristique. Donec convallis libero eros, nec imperdiet sem vulputate non. Vestibulum in lacus id nisi pulvinar elementum. Fusce lorem libero, tempus id elit vitae, ultrices tincidunt sapien. Nunc vestibulum libero vel ligula gravida, a convallis massa ultricies. Donec tristique ligula ut turpis auctor, ut ornare elit porta. Morbi sit amet velit laoreet, feugiat purus non, lobortis tellus. Maecenas eu eros sit amet erat condimentum auctor eu at diam. Phasellus id sem nis</p>
+						</div>
+						<!-- END / INTRODUCTION -->
 
 						<!-- OUTLINE -->
-						<div class="tab-pane fade in active" id="outline">
+						<div class="tab-pane fade in" id="outline">
 
-							<!-- SECTION OUTLINE -->
 							<div class="section-outline">
-								<h4 class="tit-section xsm">Section 1: Introduction</h4>
+								<h4 class="tit-section xsm">F2: Introduction</h4>
 								<ul class="section-list">
 									<li class="o-view">
 										<div class="count"><span>1</span></div>
 										<div class="list-body">
 											<i class="icon md-camera"></i>
-											<p><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elita</a></p>
+											<p><a href="<?=site_url()?>/learn/">Costing</a></p>
 											<div class="data-lessons">
 												<span>36:56</span>
 											</div>
@@ -169,7 +181,7 @@
 										<div class="count"><span>2</span></div>
 										<div class="list-body">
 											<i class="icon md-gallery-1"></i>
-											<p><a href="#">Lorem ipsum dolor sit ameUt wisi enim ad minim veniam, quis nostrud Lorem ipsum dolor sit ame tation ullamcorper suscipit loborti</a></p>
+											<p><a href="#">Budgeting</a></p>
 											<div class="data-lessons">
 												<span>15 images</span>
 											</div>
@@ -188,64 +200,10 @@
 										<div class="count"><span>3</span></div>
 										<div class="list-body">
 											<i class="icon md-volume-down"></i>
-											<p><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elita</a></p>
+											<p><a href="#">Performance Management</a></p>
 											<div class="data-lessons">
 												<span>36:56</span>
 											</div>
-											<div class="download">
-												<a href="#"><i class="icon md-download-1"></i></a>
-												<div class="download-ct">
-													<span>Reference 12 mb</span>
-												</div>
-											</div>
-											<div class="div-x"><i class="icon md-check-2"></i></div>
-											<div class="line"></div>
-										</div>
-									</li>
-
-									<li>
-										<div class="count"><span>4</span></div>
-										<div class="list-body">
-											<i class="icon md-gallery-2"></i>
-											<p><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elita</a></p>
-											<div class="data-lessons">
-												<span>45 slides</span>
-											</div>
-											<div class="download">
-												<a href="#"><i class="icon md-download-1"></i></a>
-												<div class="download-ct">
-													<span>Reference 12 mb</span>
-												</div>
-											</div>
-											<div class="div-x"><i class="icon md-check-2"></i></div>
-											<div class="line"></div>
-										</div>
-									</li>
-
-									<li class="o-view">
-										<div class="count"><span><i class="icon md-search"></i></span></div>
-										<div class="list-body">
-											<i class="icon md-files"></i>
-											<p><a href="#"><span>Quizz 1 :</span> Lorem ipsum dolor sit ameUt wisi enim ad minim veniam</a></p>
-											<div class="data-lessons">
-												<span>10 questions</span>
-											</div>
-											<div class="download">
-												<a href="#"><i class="icon md-download-1"></i></a>
-												<div class="download-ct">
-													<span>Reference 12 mb</span>
-												</div>
-											</div>
-											<div class="div-x"><i class="icon md-check-2"></i></div>
-											<div class="line"></div>
-										</div>
-									</li>
-
-									<li>
-										<div class="count"><span>a</span></div>
-										<div class="list-body">
-											<i class="icon md-files"></i>
-											<p><a href="#"><span>Assignment :</span> Lorem ipsum dolor sit ameUt wisi enim ad minim veniam</a></p>
 											<div class="download">
 												<a href="#"><i class="icon md-download-1"></i></a>
 												<div class="download-ct">
@@ -258,126 +216,7 @@
 									</li>
 								</ul>
 							</div>
-							<!-- END / SECTION OUTLINE -->
 
-							<!-- SECTION OUTLINE -->
-							<div class="section-outline">
-								<h4 class="tit-section xsm">Section 2 : Lorem ipsum dolor sit ame  wisi enim ad minim veniam, quis nostrud exerc</h4>
-								<ul class="section-list">
-									<li>
-										<div class="count"><span>5</span></div>
-										<div class="list-body">
-											<i class="icon md-camera"></i>
-											<p><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elita</a></p>
-											<div class="data-lessons">
-												<span>36:56</span>
-											</div>
-											<div class="download">
-												<a href="#"><i class="icon md-download-1"></i></a>
-												<div class="download-ct">
-													<span>Reference 12 mb</span>
-												</div>
-											</div>
-											<div class="div-x"><i class="icon md-check-2"></i></div>
-											<div class="line"></div>
-										</div>
-									</li>
-
-									<li>
-										<div class="count"><span>6</span></div>
-										<div class="list-body">
-											<i class="icon md-gallery-1"></i>
-											<p><a href="#">Lorem ipsum dolor sit ameUt wisi enim ad minim veniam, quis nostrud Lorem ipsum dolor sit ame tation ullamcorper suscipit loborti</a></p>
-											<div class="data-lessons">
-												<span>15 images</span>
-											</div>
-											<div class="download">
-												<a href="#"><i class="icon md-download-1"></i></a>
-												<div class="download-ct">
-													<span>Reference 12 mb</span>
-												</div>
-											</div>
-											<div class="div-x"><i class="icon md-check-2"></i></div>
-											<div class="line"></div>
-										</div>
-									</li>
-
-									<li>
-										<div class="count"><span>7</span></div>
-										<div class="list-body">
-											<i class="icon md-volume-down"></i>
-											<p><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elita</a></p>
-											<div class="data-lessons">
-												<span>36:56</span>
-											</div>
-											<div class="download">
-												<a href="#"><i class="icon md-download-1"></i></a>
-												<div class="download-ct">
-													<span>Reference 12 mb</span>
-												</div>
-											</div>
-											<div class="div-x"><i class="icon md-check-2"></i></div>
-											<div class="line"></div>
-										</div>
-									</li>
-
-									<li>
-										<div class="count"><span>8</span></div>
-										<div class="list-body">
-											<i class="icon md-gallery-2"></i>
-											<p><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elita</a></p>
-											<div class="data-lessons">
-												<span>45 slides</span>
-											</div>
-											<div class="download">
-												<a href="#"><i class="icon md-download-1"></i></a>
-												<div class="download-ct">
-													<span>Reference 12 mb</span>
-												</div>
-											</div>
-											<div class="div-x"><i class="icon md-check-2"></i></div>
-											<div class="line"></div>
-										</div>
-									</li>
-
-									<li>
-										<div class="count"><span><i class="icon md-search"></i></span></div>
-										<div class="list-body">
-											<i class="icon md-files"></i>
-											<p><a href="#"><span>Quizz 1 :</span> Lorem ipsum dolor sit ameUt wisi enim ad minim veniam</a></p>
-											<div class="data-lessons">
-												<span>10 questions</span>
-											</div>
-											<div class="download">
-												<a href="#"><i class="icon md-download-1"></i></a>
-												<div class="download-ct">
-													<span>Reference 12 mb</span>
-												</div>
-											</div>
-											<div class="div-x"><i class="icon md-check-2"></i></div>
-											<div class="line"></div>
-										</div>
-									</li>
-
-									<li>
-										<div class="count"><span>a</span></div>
-										<div class="list-body">
-											<i class="icon md-files"></i>
-											<p><a href="#"><span>Assignment :</span> Lorem ipsum dolor sit ameUt wisi enim ad minim veniam</a></p>
-
-											<div class="download">
-												<a href="#"><i class="icon md-download-1"></i></a>
-												<div class="download-ct">
-													<span>Reference 12 mb</span>
-												</div>
-											</div>
-											<div class="div-x"><i class="icon md-check-2"></i></div>
-											<div class="line"></div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<!-- END / SECTION OUTLINE -->
 						</div>
 						<!-- END / OUTLINE -->
 

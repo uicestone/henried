@@ -44,19 +44,12 @@
 				<div class="mc-select-wrap">
 					<div class="mc-select">
 						<select class="select" name="" id="all-categories">
-							<option value="" selected>所有分类</option>
+							<option value="" selected>证书分类</option>
+							<option value="">ACCA</option>
+							<option value="">CMA</option>
 						</select>
 					</div>
 				</div>
-				<!--<div class="mc-select-wrap">
-					<div class="mc-select">
-						<select class="select" name="" id="beginner-level">
-							<option value="" selected>Beginner level</option>
-							<option value="">Beginner level 2</option>
-							<option value="">Beginner level 3</option>
-						</select>
-					</div>
-				</div>-->
 			</div>
 			<div class="tb-cell text-right">
 				<div class="form-actions">
@@ -167,14 +160,12 @@
 					<?php foreach(get_posts('post_type=course&tag=featured') as $course){ ?>
 					<div class="mc-item mc-item-1">
 						<div class="image-heading">
-							<?=get_the_post_thumbnail($course->ID, 'course-list')?>
+							<a href="<?=get_the_permalink($course->ID)?>"><?=get_the_post_thumbnail($course->ID, 'course-list')?></a>
 						</div>
 						<div class="meta-categories"><a href="#"><?=get_the_category($course->ID)[0]->name?></a></div>
 						<div class="content-item">
-							<div class="image-author">
-								
-							</div>
-							<h4><a href="<?=site_url()?>/course/<?=$course->slug?>"><?=get_the_title($course->ID)?></a></h4>
+							<div class="image-author"></div>
+							<h4><a href="<?=get_the_permalink($course->ID)?>"><?=get_the_title($course->ID)?></a></h4>
 							<div class="name-author">
 								主讲：<a href="#"><?=get_userdata($course->post_author)->display_name;?></a>
 							</div>

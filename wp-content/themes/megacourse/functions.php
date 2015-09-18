@@ -76,6 +76,7 @@ add_action('init', function(){
 		'public'=>true,
 		'supports'=>array('title', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments'),
 		'taxonomies'=>array('category', 'post_tag'),
-		'menu_icon'=>'dashicons-book-alt'
+		'menu_icon'=>'dashicons-book-alt',
+		'has_archive'=>true
 	));
 });
