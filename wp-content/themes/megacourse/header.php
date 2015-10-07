@@ -53,29 +53,25 @@
 						
 						<!-- END / MENU -->
 
-						<!-- SEARCH BOX -->
-						<div class="search-box">
-							<i class="icon md-search"></i>
-							<div class="search-inner">
-								<form>
-									<input type="text" placeholder="课程名称">
-								</form>
-							</div>
-						</div>
-						<!-- END / SEARCH BOX -->
-
 						<!-- LIST ACCOUNT INFO -->
 						<ul class="list-account-info">
 
 							<li class="list-item account">
 								<div class="account-info item-click">
-									<img src="<?=get_stylesheet_directory_uri()?>/images/avatar-1.jpg" alt="">
+									<?php if(is_user_logged_in()){ ?>
+									<a><?=wp_get_current_user()->display_name?></a>
+									<?php }else{ ?>
+									<a href="<?=site_url()?>/register/" style="border-right:1px #7C86D2 solid; padding-right:5px">注册</a>
+									<a href="<?=site_url()?>/login/">登录</a>
+									<?php } ?>
 								</div>
+								<?php if(is_user_logged_in()){ ?>
 								<div class="toggle-account toggle-list">
 									<ul class="list-account">
-										<li><a href="<?=site_url()?>/login/"><i class="icon md-arrow-right"></i>退出登录</a></li>
+										<li><a href="<?=site_url()?>/login/?logout=true"><i class="icon md-arrow-right"></i>退出登录</a></li>
 									</ul>
 								</div>
+								<?php } ?>
 							</li>
 
 						</ul>

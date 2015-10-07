@@ -1,4 +1,28 @@
-<?php get_header(); ?>
+<?php
+
+if(isset($_POST['submit'])){
+	$user_id = wp_insert_user(array(
+		'user_pass'=>$_POST['password'],
+		'user_login'=>$_POST['username'],
+		'user_email'=>$_POST['email'],
+		'last_name'=>$_POST['last_name'],
+		'first_name'=>$_POST['first_name'],
+		'display_name'=>$_POST['last_name'] . ' ' . $_POST['first_name'],
+		'user_registered'=>date('Y-m-d H:i:s'),
+		'show_admin_bar_front'=>false
+	));
+	
+	if(is_a($user_id, 'WP_Error')){
+		exit(array_values($user_id->errors)[0][0]);
+	}
+	update_user_meta($user_id, 'mobile', $_POST['mobile']);
+	wp_set_auth_cookie($user_id, true);
+	wp_set_current_user($user_id);
+	header('Location: ' . site_url());
+	exit;
+}
+
+get_header(); ?>
 
 <!-- LOGIN -->
 <section id="login-content" class="login-content">
@@ -7,33 +31,33 @@
 	<div class="container">
 		<div class="row">
 
-
-			
 			<!-- FORM -->
 			<div class="col-lg-4 pull-right">
 				<div class="form-login">
-					<form>
-						<h2 class="text-uppercase">sign up</h2>
-						<div class="form-fullname">
-							<input class ="first-name"type="text" placeholder="First name">
-							<input class="last-name" type="text" placeholder="Last name">
-						</div>
-						<div class="form-datebirth">
-							<input type="text" placeholder="Date of Birth">
-						</div>
-						<div class="form-email">
-							<input type="text" placeholder="Email">
+					<form method="post">
+						<h2 class="text-uppercase">注册</h2>
+						<div class="form-item">
+							<input type="text" placeholder="用户名" name="username">
 						</div>
 						<div class="form-password">
-							<input type="password" placeholder="Password">
+							<input type="password" placeholder="密码" name="password">
 						</div>
-						
+						<div class="form-fullname">
+							<input class ="first-name"type="text" placeholder="First name" name="first_name">
+							<input class="last-name" type="text" placeholder="Last name" name="last_name">
+						</div>
+						<div class="form-email">
+							<input type="email" placeholder="Email" name="email">
+						</div>
+						<div class="form-email">
+							<input type="number" placeholder="手机" name="mobile">
+						</div>
 						<div class="form-submit-1">
-							<input type="submit" value="Become a member" class="mc-btn btn-style-1">
+							<input type="submit" name="submit" value="加入Henried" class="mc-btn btn-style-1">
 						</div>
 						<div class="link">
-							<a href="login.html">
-								<i class="icon md-arrow-right"></i>Already have account ? Log in
+							<a href="<?=site_url()?>/login/">
+								<i class="icon md-arrow-right"></i>已有账号？登录
 							</a>
 						</div>
 					</form>

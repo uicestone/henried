@@ -1444,7 +1444,7 @@ table.mc-table tbody .new .submissions a:before {
 .navigation .menu {
   font-size: 0;
   display: inline-block;
-  margin-right: 12px;
+  /*margin-right: 12px;*/
   margin-bottom: 0;
   list-style: none;
   padding: 0;
@@ -1456,12 +1456,12 @@ table.mc-table tbody .new .submissions a:before {
 .navigation .menu li a {
   position: relative;
   display: inline-block;
-  font-family: 'Lato', sans-serif;
-  font-size: 16px;
+  font-family: Optima, 'Microsoft Yahei UI', 'Helvetica Neue', STHeiti, 'Microsoft Yahei', sans-serif;
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
   line-height: 65px;
-  padding: 0 17px;
+  padding: 0 15px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -ms-transition: all 0.3s ease 0s;
@@ -2791,10 +2791,12 @@ footer#footer.footer-style-2 {
   text-align: left;
   top: 8px;
   margin-bottom: 0;
-  margin-left: 16px;
-  border-left: 1px solid #012391;
+  /*margin-left: 16px;*/
+  /*border-left: 1px solid #7C86D2;*/
   padding: 0;
   list-style: none;
+  font-family: Optima, 'Microsoft Yahei UI', 'Helvetica Neue', STHeiti, 'Microsoft Yahei', sans-serif;
+  font-size: 13px;
 }
 .list-account-info:after {
   content: '';
@@ -2804,7 +2806,7 @@ footer#footer.footer-style-2 {
 .list-account-info .list-item {
   display: inline-block;
   float: left;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 .list-account-info .list-item .item-click.active-ac .icon {
   color: #37abf2;
@@ -3203,8 +3205,8 @@ footer#footer.footer-style-2 {
   position: relative;
   display: inline-block;
   top: 3px;
-  width: 24px;
-  height: 24px;
+  /*width: 24px;*/
+  /*height: 24px;*/
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -3221,6 +3223,9 @@ footer#footer.footer-style-2 {
 }
 .list-account-info .account-info img {
   width: 100%;
+}
+.list-account-info .account-info>a:hover {
+  color: #FFF;
 }
 .list-account-info .toggle-account {
   position: absolute;
