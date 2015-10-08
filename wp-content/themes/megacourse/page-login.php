@@ -35,7 +35,7 @@ get_header(); ?>
 							<input type="text" name="username" placeholder="用户名或Email">
 						</div>
 						<div class="form-password">
-							<input type="password" name="password" placeholder="Password">
+							<input type="password" name="password" placeholder="密码">
 						</div>
 						<div class="form-check">
 							<input type="checkbox" name="remember" id="check">
@@ -58,7 +58,7 @@ get_header(); ?>
 			<!-- END / FORM -->
 
 			<div class="image">
-				<img src="<?=get_stylesheet_directory_uri()?>/images/homeslider/img-thumb.png" alt="">
+				<!--<img src="<?=get_stylesheet_directory_uri()?>/images/homeslider/img-thumb.png" alt="">-->
 			</div>
 
 		</div>

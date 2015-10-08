@@ -37,20 +37,20 @@ get_header(); ?>
 					<form method="post">
 						<h2 class="text-uppercase">注册</h2>
 						<div class="form-item">
-							<input type="text" placeholder="用户名" name="username">
+							<input type="text" name="username" placeholder="用户名">
 						</div>
 						<div class="form-password">
-							<input type="password" placeholder="密码" name="password">
+							<input type="password" name="password" placeholder="密码">
 						</div>
 						<div class="form-fullname">
-							<input class ="first-name"type="text" placeholder="First name" name="first_name">
-							<input class="last-name" type="text" placeholder="Last name" name="last_name">
+							<input class="last-name" type="text" name="last_name" placeholder="姓">
+							<input class ="first-name" type="text" name="first_name" placeholder="名">
 						</div>
 						<div class="form-email">
-							<input type="email" placeholder="Email" name="email">
+							<input type="email" name="email" placeholder="Email">
 						</div>
 						<div class="form-email">
-							<input type="number" placeholder="手机" name="mobile">
+							<input type="number" name="mobile" placeholder="手机">
 						</div>
 						<div class="form-submit-1">
 							<input type="submit" name="submit" value="加入Henried" class="mc-btn btn-style-1">
@@ -66,7 +66,7 @@ get_header(); ?>
 			<!-- END / FORM -->
 
 			<div class="image">
-				<img src="<?=get_stylesheet_directory_uri()?>/images/homeslider/img-thumb.png" alt="">
+				<!--<img src="<?=get_stylesheet_directory_uri()?>/images/homeslider/img-thumb.png" alt="">-->
 			</div>
 
 		</div>
