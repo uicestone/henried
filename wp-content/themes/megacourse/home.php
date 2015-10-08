@@ -34,30 +34,31 @@
 	<div class="awe-color bg-color-1"></div>
 	<div class="after-slider-bg-2"></div>
 	<div class="container">
-
-		<div class="after-slider-content tb">
-			<div class="inner tb-cell">
-				<h4>课程搜索</h4>
-				<div class="course-keyword">
-					<input type="text" placeholder="输入课程名称">
+		<form action="<?=site_url()?>/categories/">
+			<div class="after-slider-content tb">
+				<div class="inner tb-cell">
+					<h4>课程搜索</h4>
+					<div class="course-keyword">
+							<input type="text" name="course_name" placeholder="输入课程名称">
+					</div>
+					<div class="mc-select-wrap">
+						<div class="mc-select">
+							<select class="select" name="tag" id="all-categories">
+								<option value="" selected>证书分类</option>
+								<option value="cima">CIMA</option>
+								<option value="acca">ACCA</option>
+								<option value="cma">CMA</option>
+							</select>
+						</div>
+					</div>
 				</div>
-				<div class="mc-select-wrap">
-					<div class="mc-select">
-						<select class="select" name="" id="all-categories">
-							<option value="" selected>证书分类</option>
-							<option value="">ACCA</option>
-							<option value="">CMA</option>
-						</select>
+				<div class="tb-cell text-right">
+					<div class="form-actions">
+						<input type="submit" value="搜索课程" class="mc-btn btn-style-1">
 					</div>
 				</div>
 			</div>
-			<div class="tb-cell text-right">
-				<div class="form-actions">
-					<input type="submit" value="搜索课程" class="mc-btn btn-style-1">
-				</div>
-			</div>
-		</div>
-
+		</form>
 	</div>
 </section>
 <!-- END / AFTER SLIDER -->
@@ -154,7 +155,7 @@
 		<!-- FEATURE -->
 		<div class="feature-course">
 			<h4 class="title-box text-uppercase">热门课程</h4>
-			<a href="categories.html" class="all-course mc-btn btn-style-1">查看全部</a>
+			<a href="<?=site_url()?>/categories/" class="all-course mc-btn btn-style-1">查看全部</a>
 			<div class="row">
 				<div class="feature-slider">
 					<?php foreach(get_posts('post_type=course&tag=featured') as $course){ ?>
@@ -227,8 +228,7 @@
 
 			<div class="col-lg-4">
 				<div class="before-footer-link">
-					<a href="<?=site_url()?>/login/" class="mc-btn btn-style-2">马上注册</a>
-					<!--<a href="#" class="mc-btn btn-style-1">Become a teacher</a>-->
+					<a href="<?=site_url()?>/register/" class="mc-btn btn-style-2">马上注册</a>
 				</div>
 			</div>
 		</div>
