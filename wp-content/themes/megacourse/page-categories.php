@@ -1,19 +1,20 @@
 <?php get_header(); ?>
 
+<?php @$banner = get_posts('post_type=course&category_name=课程中心推荐')[0]; if($banner){ ?>
 <!-- SUB BANNER -->
 <section class="sub-banner section">
 	<div class="awe-parallax bg-profile-feature"></div>
 	<div class="awe-overlay overlay-color-3"></div>
 	<div class="container">
 		<div class="sub-banner-content">
-			<h2 class="big">This is banner for promoted course</h2>
-			<p>this is not only an elegant theme but also a course management system for wordpress and drupal</p>
-			<a href="#" class="mc-btn btn-style-3">See course</a>
+			<h2 class="big"><?=$banner->post_title?></h2>
+			<p><?=$banner->post_excerpt?></p>
+			<a href="<?=get_permalink($banner-ID)?>" class="mc-btn btn-style-3">查看课程</a>
 		</div>
 	</div>
 </section>
 <!-- END / SUB BANNER -->
-
+<?php } ?>
 
 <!-- PAGE CONTROL -->
 <section class="page-control">
@@ -45,7 +46,15 @@
 				<div class="content grid">
 					<div class="row">
 						<!-- ITEM -->
-						<?php foreach(get_posts('post_type=course') as $course){ ?>
+						<?php
+						$course_args = array('post_type'=>'course');
+						if(isset($_GET['tag'])){
+							$course_args['tag'] = $_GET['tag'];
+						}
+						if(isset($_GET['course_name'])){
+							$course_args['s'] = $_GET['course_name'];
+						}
+						foreach(get_posts($course_args) as $course){ ?>
 						<div class="col-sm-6 col-md-4">
 							<div class="mc-item mc-item-2">
 								<div class="image-heading">
@@ -96,9 +105,9 @@
 						<!-- WIDGET TOP -->
 						<div class="widget">
 							<ul class="list-style-block">
-								<li class="current"><a href="#">推荐</a></li>
-								<li><a href="#">免费</a></li>
-								<li><a href="#">热销</a></li>
+								<?php foreach(array('推荐', '免费', '热销') as $tag){ ?>
+								<li<?php if(isset($_GET['tag']) && $_GET['tag'] === $tag){ ?> class="current"<?php } ?>><a href="<?=site_url()?>/categories/?tag=<?=$tag?>"><?=$tag?></a></li>
+								<?php } ?>
 							</ul>
 						</div>
 						<!-- END / WIDGET TOP -->
@@ -106,8 +115,9 @@
 						<!-- WIDGET CATEGORIES -->
 						<div class="widget widget_categories">
 							<ul class="list-style-block">
-								<li><a href="?course_category=acca">ACCA</a></li>
-								<li><a href="?course_category=cma">CMA</a></li>
+								<?php foreach(array('CMA', 'ACCA') as $course_category){ ?>
+								<li<?php if(isset($_GET['course_category']) && $_GET['course_category'] === $course_category){ ?> class="current"<?php } ?>><a href="<?=site_url()?>/categories/?course_category=<?=$course_category?>"><?=$course_category?></a></li>
+								<?php } ?>
 							</ul>
 						</div>
 						<!-- END / WIDGET CATEGORIES -->
