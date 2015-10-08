@@ -5,7 +5,7 @@
 	<div class="awe-static bg-sub-banner-course"></div>
 	<div class="container">
 		<div class="sub-banner-content">
-			<h2 class="text-center">Home Fitness Training</h2>
+			<h2 class="text-center"><?php the_title(); ?></h2>
 		</div>
 	</div>
 </section>
@@ -20,16 +20,16 @@
 				<div class="sidebar-course-intro">
 					<!-- CURRENT PROGRESS -->
 					<div class="current-progress">
-						<h4 class="sm black">Current Progress</h4>
-						<div class="percent">Complete <span class="count">25%</span></div>
+						<h4 class="sm black">学习进度</h4>
+						<div class="percent">完成了 <span class="count">25%</span></div>
 						<div class="progressbar">
 							<div class="progress-run"></div>
 						</div>
 						<ul class="current-outline">
-							<li><span>4</span>section</li>
-							<li><span>1</span>quizzes</li>
+							<li><span>4</span>章节</li>
+							<!--<li><span>1</span>quizzes</li>
 							<li><span>30</span>units</li>
-							<li><span>5</span>assignments</li>
+							<li><span>5</span>assignments</li>-->
 						</ul>
 					</div>
 					<!-- END / CURRENT PROGRESS -->
@@ -42,84 +42,67 @@
 					<div class="new-course">
 						<div class="item course-code">
 							<i class="icon md-barcode"></i>
-							<h4><a href="#">Course Code</a></h4>
+							<h4><a href="#">课程编号</a></h4>
 							<p class="detail-course"># A 15273</p>
 						</div>
 						<div class="item course-code">
 							<i class="icon md-time"></i>
-							<h4><a href="#">Duration</a></h4>
-							<p class="detail-course">3 weeks</p>
+							<h4><a href="#">学习周期</a></h4>
+							<p class="detail-course">1周</p>
 						</div>
-						<div class="item course-code">
+<!--						<div class="item course-code">
 							<i class="icon md-img-check"></i>
-							<h4><a href="#">Open Date</a></h4>
+							<h4><a href="#">开放时间</a></h4>
 							<p class="detail-course">25 May 2014</p>
-						</div>
+						</div>-->
 					</div>
 					<hr class="line">
 					<div class="about-instructor">
-						<h4 class="xsm black bold">About Instructor</h4>
+						<h4 class="xsm black bold">讲师介绍</h4>
 						<ul>
 							<li>
 								<div class="image-instructor text-center">
 									<img src="<?=get_stylesheet_directory_uri()?>/images/team-13.jpg" alt="">
 								</div>
 								<div class="info-instructor">
-									<cite class="sm black"><a href="#">John Doe</a></cite>
+									<cite class="sm black"><a href="#">Henried Feng</a></cite>
 									<a href="#"><i class="fa fa-star"></i></a>
 									<a href="#"><i class="fa fa-envelope"></i></a>
 									<a href="#"><i class="fa fa-check-square"></i></a>
 									<p>Morbi nec nisi ante. Quisque lacus ligula, iaculis in elit et, interdum semper quam. Fusce in interdum tortor. Ut sollicitudin lectus dolor eget imperdiet libero</p>
 								</div>
 							</li>
-							<li>
-								<div class="image-instructor">
-									<img src="<?=get_stylesheet_directory_uri()?>/images/team-13.jpg" alt="">
-								</div>
-								<div class="info-instructor">
-									<cite class="sm black"><a href="#">John Doe</a></cite>
-									<a href="#"><i class="fa fa-envelope"></i></a>
-									<a href="#"><i class="icon md-user-plus"></i></a>
-									<p>Morbi nec nisi ante. Quisque lacus ligula, iaculis in elit et, interdum semper quam. Fusce in interdum tortor. Ut sollicitudin lectus dolor eget imperdiet libero</p>
-								</div>
-							</li>
 						</ul>
 					</div>
 					<hr class="line">
-					<div class="widget widget_equipment">
+					<!--<div class="widget widget_equipment">
 						<i class="icon md-config"></i>
 						<h4 class="xsm black bold">Equipment</h4>
 						<div class="equipment-body">
 							<a href="#">Photoshop CC</a>,
 							<a href="#">Illustrator CC</a>
 						</div>
-					</div>
+					</div>-->
 					<div class="widget widget_tags">
 						<i class="icon md-download-2"></i>
-						<h4 class="xsm black bold">Tag</h4>
+						<h4 class="xsm black bold">涉及知识点</h4>
 						<div class="tagCould">
-							<a href="#">Design</a>, 
+							<!--<a href="#">Design</a>, 
 							<a href="#">Photoshop</a>, 
 							<a href="#">Illustrator</a>, 
 							<a href="">Art</a>, 
-							<a href="">Graphic Design</a>
+							<a href="">Graphic Design</a>-->
 						</div>
 					</div>
 					<div class="widget widget_share">
 						<i class="icon md-forward"></i>
-						<h4 class="xsm black bold">Share course</h4>
+						<h4 class="xsm black bold">分享课程</h4>
 						<div class="share-body">
-							<a href="#" class="twitter" title="twitter">
+							<a href="#" class="twitter" title="微博">
 								<i class="icon md-twitter"></i>
 							</a>
-							<a href="#" class="pinterest" title="pinterest">
+							<a href="#" class="pinterest" title="微信">
 								<i class="icon md-pinterest-1"></i>
-							</a>
-							<a href="#" class="facebook" title="facebook">
-								<i class="icon md-facebook-1"></i>
-							</a>
-							<a href="#" class="google-plus" title="google plus">
-								<i class="icon md-google-plus"></i>
 							</a>
 						</div>
 					</div>
@@ -128,10 +111,10 @@
 			<div class="col-md-7">
 				<div class="tabs-page">
 					<ul class="nav-tabs" role="tablist">
-						<li class="active"><a href="#introduction" role="tab" data-toggle="tab">Introduction</a></li>
-						<li><a href="#outline" role="tab" data-toggle="tab">Outline</a></li>
-						<li><a href="#announcement" role="tab" data-toggle="tab">Announcement</a></li>
-						<li><a href="#discussion" role="tab" data-toggle="tab">Discussion</a></li>
+						<li class="active"><a href="#introduction" role="tab" data-toggle="tab">课程简介</a></li>
+						<li><a href="#outline" role="tab" data-toggle="tab">章节大纲</a></li>
+						<li><a href="#announcement" role="tab" data-toggle="tab">导师贴士</a></li>
+						<li><a href="#discussion" role="tab" data-toggle="tab">讨论留言</a></li>
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
