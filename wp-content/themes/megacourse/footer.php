@@ -6,9 +6,9 @@
 
 						<div class="col-md-4">
 							<div class="widget megacourse">
-								<h3 class="md">Henried Finance</h3>
-								<p>公司介绍公司介绍公司介绍公司介绍，公司介绍公司介绍，公司介绍公司介绍公司介绍公司介绍。</p>
-								<!--<a href="#" class="mc-btn btn-style-1">Get started</a>-->
+								<?php $about_us = get_posts('name=about-us')[0]; ?>
+								<h3 class="md"><?=$about_us->post_title?></h3>
+								<p><?=$about_us->post_excerpt?></p>
 							</div>
 						</div>
 

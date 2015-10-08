@@ -2631,7 +2631,7 @@ footer#footer.footer-style-2 {
   margin-top: 10px;
 }
 .megacourse p {
-  max-width: 235px;
+  /*max-width: 235px;*/
 }
 .first-footer .widget ul li,
 .first-footer .widget span {
