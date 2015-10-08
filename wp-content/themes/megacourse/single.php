@@ -24,12 +24,14 @@
 					<!-- POST -->
 					<div class="post post-single">
 						<div class="post-title">
-							<h1 class="big"><?php the_title(); ?></h1>
+							<h1 class="big"><?php the_post(); the_title(); ?></h1>
 						</div>
 						<div class="post-meta">
-							<?php echo the_author() ?> 发布于 <?php the_date() ?>
+							<?php the_author() ?> 发布于 <?php the_date() ?>
 						</div>
 
+						<hr>
+						
 						<div class="post-content">
 							<?php the_content(); ?>
 						</div>
@@ -48,9 +50,9 @@
 					<!-- WIDGET SEARCH -->
 					<div class="widget widget_search">
 						<h4 class="sm">搜索课程</h4>
-						<form>
+						<form action="<?=site_url()?>/categories/">
 							<div class="form-item">
-								<input type="text">
+								<input type="text" name="course_name">
 							</div>
 							<div class="form-actions">
 								<input type="submit">
@@ -60,7 +62,7 @@
 					<!-- END / WIDGET SEARCH -->
 
 					<!-- WIDGET CATEGORIES -->
-					<div class="widget widget_categories">
+					<!--<div class="widget widget_categories">
 						<h4 class="sm">分类</h4>
 						<ul>
 							<li><a href="#">All</a></li>
@@ -70,7 +72,7 @@
 							</li>
 							<li><a href="#">Uncategorized</a></li>
 						</ul>
-					</div>
+					</div>-->
 					<!-- END / WIDGET CATEGORIES -->
 
 					<!-- WIDGET RECENT POST -->
@@ -79,7 +81,7 @@
 						<ul>
 							<?php foreach(get_posts('category_name=news') as $post){ ?>
 							<li>
-								<a href="<?=get_the_permalink($post->ID)?>"><?=$post->title?></a>
+								<a href="<?=get_the_permalink($post->ID)?>"><?=$post->post_title?></a>
 							</li>
 							<?php } ?>
 						</ul>

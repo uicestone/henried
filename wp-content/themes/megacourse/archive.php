@@ -68,9 +68,9 @@
 					<!-- WIDGET SEARCH -->
 					<div class="widget widget_search">
 						<h4 class="sm">搜索课程</h4>
-						<form>
+						<form action="<?=site_url()?>/categories/">
 							<div class="form-item">
-								<input type="text">
+								<input type="text" name="course_name">
 							</div>
 							<div class="form-actions">
 								<input type="submit">
@@ -80,17 +80,16 @@
 					<!-- END / WIDGET SEARCH -->
 
 					<!-- WIDGET CATEGORIES -->
-					<div class="widget widget_categories">
+					<!--	<div class="widget widget_categories">
 						<h4 class="sm">课程分类</h4>
 						<ul>
 							<li><a href="#">All</a></li>
 							<li><a href="#">Uncategorized</a></li>
 							<li><a href="#">Popular</a></li>
-							<li><a href="#">New</a>
-							</li>
+							<li><a href="#">New</a></li>
 							<li><a href="#">Uncategorized</a></li>
 						</ul>
-					</div>
+					</div>-->
 					<!-- END / WIDGET CATEGORIES -->
 
 				</aside>
