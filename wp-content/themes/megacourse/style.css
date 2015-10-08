@@ -1891,7 +1891,7 @@ table.mc-table tbody .new .submissions a:before {
   font-size: 14px;
   border: 0;
 }
-.blog-list-content .pager li.pager-current {
+.blog-list-content .pager li .current {
   display: inline-block;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;

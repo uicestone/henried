@@ -54,15 +54,9 @@
 					</div>
 					<!-- END / POST -->
 					<?php endwhile; ?>
-
-					<ul class="pager">
-						<li class="pager-current">1</li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">next ›</a></li>
-						<li><a href="#">last »</a></li>
-					</ul>
+					<div class="pager">
+						<?=paginate_links(array('type'=>'list', 'prev_text'=>'<', 'next_text'=>'>'))?>
+					</div>
 				</div>
 			</div>
 			<!-- END / BLOG LIST -->
