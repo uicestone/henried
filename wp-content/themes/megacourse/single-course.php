@@ -2,12 +2,13 @@
 
 $sections = explode("\n", get_post_meta(get_the_ID(), 'sections', true));
 
-foreach($sections as &$section){
-	$data = preg_split('/\s*\|\s*/', $section);
-	$section = (object) array('title'=>$data[0], 'video'=>$data[1]);
+foreach($sections as &$s){
+	$data = preg_split('/\s*\|\s*/', $s);
+	$s = (object) array('title'=>$data[0], 'video'=>$data[1]);
 }
 
-get_header(); the_post(); ?>
+get_header(); the_post();
+?>
 
  <!-- SUB BANNER -->
 <section class="sub-banner sub-banner-course">
@@ -139,12 +140,12 @@ get_header(); the_post(); ?>
 							<div class="section-outline">
 								<h4 class="tit-section xsm"><?php the_title(); ?></h4>
 								<ul class="section-list">
-									<?php foreach($sections as $index => &$section){ ?>
+									<?php foreach($sections as $index => $section){ ?>
 									<li<?php if(current_user_has_learned(get_the_ID())){ ?> class="o-view"<?php } ?>>
 										<div class="count"><span><?=$index + 1?></span></div>
 										<div class="list-body">
 											<i class="icon md-camera"></i>
-											<p><a href="<?=site_url()?>/learn/?course_id=<?=get_the_ID()?>"><?=$section->title?></a></p>
+											<p><a href="<?=site_url()?>/learn/?course_id=<?=get_the_ID()?>&section_id=<?=$index?>"><?=$section->title?></a></p>
 											<div class="data-lessons">
 												<span><?=$section->duration?></span>
 											</div>

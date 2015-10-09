@@ -1,3 +1,6 @@
+<?php
+global $title;
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -17,7 +20,7 @@
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 		<![endif]-->
-		<title>Mega Course - Learning and Courses HTML5 Template</title>
+		<title><?=$title?> - Henried Finance</title>
 	</head>
 	<body id="page-top">
 
@@ -26,7 +29,7 @@
 
 		<div class="top-nav">
 
-			<h4 class="sm black bold">F2 - Management Accounting</h4>
+			<h4 class="sm black bold"><?=$title?></h4>
 
 			<ul class="top-nav-list">
 				<li class="prev-course"><a href="#"><i class="icon md-angle-left"></i><span class="tooltip">Prev</span></a></li>
