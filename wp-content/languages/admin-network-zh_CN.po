@@ -63,7 +63,7 @@ msgstr "站点URL"
 msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Updates_Screen\" target=\"_blank\">Documentation on Upgrade Network</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Updates_Screen\" target=\"_blank\">升级网络使用帮助</a>"
 
-#: wp-admin/network/user-new.php:29 wp-admin/network/users.php:279
+#: wp-admin/network/user-new.php:29 wp-admin/network/users.php:280
 msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Users_Screen\" target=\"_blank\">Documentation on Network Users</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Users_Screen\" target=\"_blank\">网络用户使用帮助</a>"
 
@@ -137,15 +137,15 @@ msgstr[0] "已启用%d个主题。"
 msgid "Yes, delete these themes"
 msgstr "是，删除这些主题"
 
-#: wp-admin/network/users.php:117
+#: wp-admin/network/users.php:118
 msgid "Once you hit &#8220;Confirm Deletion&#8221;, these users will be permanently removed."
 msgstr "在您点击“确认删除”之后，这些用户将被永久删除。"
 
-#: wp-admin/network/users.php:115
+#: wp-admin/network/users.php:116
 msgid "Once you hit &#8220;Confirm Deletion&#8221;, the user will be permanently removed."
 msgstr "在您点击“确认删除”之后，此用户将被永久删除。"
 
-#: wp-admin/network/users.php:101
+#: wp-admin/network/users.php:102
 msgid "User has no sites or content and will be deleted."
 msgstr "用户没有关联的站点或内容，将被删除。"
 
@@ -195,7 +195,7 @@ msgstr "如何处理%s的内容？"
 #: wp-admin/network/site-new.php:30 wp-admin/network/site-settings.php:33
 #: wp-admin/network/site-themes.php:33 wp-admin/network/site-users.php:36
 #: wp-admin/network/sites.php:46 wp-admin/network/user-new.php:30
-#: wp-admin/network/users.php:280
+#: wp-admin/network/users.php:281
 msgid "<a href=\"https://wordpress.org/support/forum/multisite/\" target=\"_blank\">Support Forums</a>"
 msgstr "<a href=\"http://cn.forums.wordpress.org\" target=\"_blank\">中文支持论坛</a>"
 
@@ -207,7 +207,7 @@ msgstr "确认您的操作"
 msgid "This email address will receive notifications. Registration and support emails will also come from this address."
 msgstr "此电子邮件地址会收到通知，注册和支持邮件也会从此地址发送。"
 
-#: wp-admin/network/users.php:270
+#: wp-admin/network/users.php:271
 msgid "Hover over any user on the list to make the edit links appear. The Edit link on the left will take you to their Edit User profile page; the Edit link on the right by any site name goes to an Edit Site screen for that site."
 msgstr "将鼠标移至用户的上方，将出现编辑链接。左侧的编辑链接是编辑用户信息的；而右侧的编辑链接用于编辑其所属站点的信息。"
 
@@ -788,7 +788,7 @@ msgstr "您的<code>wp-config.php</code>文件中缺少此唯一认证密钥。"
 msgid "You do not have sufficient permissions to edit this site."
 msgstr "您无权编辑此站点。"
 
-#: wp-admin/network/users.php:181
+#: wp-admin/network/users.php:182
 msgid "Warning! User cannot be modified. The user %s is a network administrator."
 msgstr "警告！无法修改%s，该用户是网络管理员。"
 
@@ -812,11 +812,11 @@ msgstr "站点ID是内部使用的，不会在站点前台显示给用户或访�
 msgid "Operational settings has fields for the network&#8217;s name and admin email."
 msgstr "运营设置包括网络的名称以及管理员邮件地址栏目。"
 
-#: wp-admin/network/users.php:271
+#: wp-admin/network/users.php:272
 msgid "You can also go to the user&#8217;s profile page by clicking on the individual username."
 msgstr "您也可以通过点击用户的名字，访问其资料页。"
 
-#: wp-admin/network/users.php:273
+#: wp-admin/network/users.php:274
 msgid "The bulk action will permanently delete selected users, or mark/unmark those selected as spam. Spam users will have posts removed and will be unable to sign up again with the same email addresses."
 msgstr "批量操作将永久删除选中的用户，或标记/取消标记选择的用户为垃圾用户。垃圾用户的发布的文章将被删除，并无法再使用原电子邮件地址注册。"
 
@@ -840,15 +840,15 @@ msgstr "本页面设置每个站点的“外观”菜单中，可供用户选择
 msgid "If the network admin disables a theme that is in use, it can still remain selected on that site. If another theme is chosen, the disabled theme will not appear in the site&#8217;s Appearance > Themes screen."
 msgstr "若网络管理员禁用了正在使用的主题，在该站点上，这个主题将依然可用。一旦这位用户选择了其它主题，那么用户就无法再选择回来了。"
 
-#: wp-admin/network/users.php:269
+#: wp-admin/network/users.php:270
 msgid "This table shows all users across the network and the sites to which they are assigned."
 msgstr "本表格列出网络中的所有用户，以及它们所在的站点。"
 
-#: wp-admin/network/users.php:272
+#: wp-admin/network/users.php:273
 msgid "You can sort the table by clicking on any of the bold headings and switch between list and excerpt views by using the icons in the upper right."
 msgstr "您可以通过点击加粗的表头来对项目进行排序。有上方的图标可在“列表视图”和“摘要视图”间切换。"
 
-#: wp-admin/network/users.php:274
+#: wp-admin/network/users.php:275
 msgid "You can make an existing user an additional super admin by going to the Edit User profile page and checking the box to grant that privilege."
 msgstr "您可将现有的用户设为超级管理员，方法是：在编辑用户资料的页面，点击选框以赋予该用户权限。"
 
@@ -916,7 +916,7 @@ msgstr "多个站点已被标记为垃圾站点。"
 msgid "Sites removed from spam."
 msgstr "多个站点已被从垃圾站点列表中移除。"
 
-#: wp-admin/network/users.php:297
+#: wp-admin/network/users.php:298
 msgid "Users removed from spam."
 msgstr "多个用户已被从垃圾用户列表中移除。"
 
@@ -924,11 +924,11 @@ msgstr "多个用户已被从垃圾用户列表中移除。"
 msgid "Site removed from spam."
 msgstr "站点已被从垃圾站点列表中移除。"
 
-#: wp-admin/network/users.php:294
+#: wp-admin/network/users.php:295
 msgid "Users marked as spam."
 msgstr "多个用户已被标记为垃圾用户。"
 
-#: wp-admin/network/users.php:300
+#: wp-admin/network/users.php:301
 msgid "Users deleted."
 msgstr "多个用户已被删除。"
 
@@ -1102,9 +1102,9 @@ msgstr "站点地址"
 #: wp-admin/network/site-themes.php:64 wp-admin/network/site-users.php:57
 #: wp-admin/network/sites.php:17 wp-admin/network/sites.php:124
 #: wp-admin/network/upgrade.php:39 wp-admin/network/user-new.php:37
-#: wp-admin/network/users.php:17 wp-admin/network/users.php:134
-#: wp-admin/network/users.php:155 wp-admin/network/users.php:168
-#: wp-admin/network/users.php:217
+#: wp-admin/network/users.php:17 wp-admin/network/users.php:135
+#: wp-admin/network/users.php:156 wp-admin/network/users.php:169
+#: wp-admin/network/users.php:218
 msgid "You do not have permission to access this page."
 msgstr "您无权查看此页面。"
 
