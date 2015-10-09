@@ -13,16 +13,13 @@
 						</div>
 
 						<div class="col-md-4">
-							<div class="widget widget_latest_new">
+							<div class="widget quick_link">
 								<h3 class="sm">最新动态</h3>
-								<ul>
+								<ul class="list-style-block">
 									<?php foreach(get_posts('category_name=news') as $post){ ?>
 									<li>
 										<a href="<?=get_the_permalink($post->ID)?>">
-											<div class="image-thumb">
-												<?=get_the_post_thumbnail($post->ID, 'thumbnail')?>
-											</div>
-											<span><?=$post->post_title?></span>
+											<?=$post->post_title?>
 										</a>
 									</li>
 									<?php } ?>

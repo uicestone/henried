@@ -48,8 +48,8 @@
 						<!-- ITEM -->
 						<?php
 						$course_args = array('post_type'=>'course');
-						if(isset($_GET['tag'])){
-							$course_args['tag'] = $_GET['tag'];
+						if(isset($_GET['course_category'])){
+							$course_args['category_name'] = $_GET['course_category'];
 						}
 						if(isset($_GET['course_name'])){
 							$course_args['s'] = $_GET['course_name'];
@@ -62,9 +62,6 @@
 								</div>
 								<div class="meta-categories"><a href="#"><?=get_the_category($course->ID)[0]->name?></a></div>
 								<div class="content-item">
-									<div class="image-author">
-										<?=$course->post_author?>
-									</div>
 									<h4><a href="<?=get_the_permalink($course->ID)?>"><?=get_the_title($course->ID)?></a></h4>
 									<div class="name-author">
 										主讲：<a href="#"><?=get_userdata($course->post_author)->display_name?></a>

@@ -43,7 +43,7 @@
 					</div>
 					<div class="mc-select-wrap">
 						<div class="mc-select">
-							<select class="select" name="tag" id="all-categories">
+							<select class="select" name="course_category" id="all-categories">
 								<option value="" selected>证书分类</option>
 								<option value="cima">CIMA</option>
 								<option value="acca">ACCA</option>

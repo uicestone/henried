@@ -10,6 +10,7 @@ add_action('init', function(){
 	wp_register_script('bootstrap', get_stylesheet_directory_uri() . '/js/library/bootstrap.min.js', array('jquery'), '3.2.0', true);
 	wp_register_script('jquery.owl.carousel', get_stylesheet_directory_uri() . '/js/library/jquery.owl.carousel.js', array('jquery'), '1.3.2', true);
 	wp_register_script('jquery.appear', get_stylesheet_directory_uri() . '/js/library/jquery.appear.min.js', array('jquery'), null, true);
+	wp_register_script('jquery.easing', get_stylesheet_directory_uri() . '/js/library/jquery.easing.min.js', array('jquery'), null, true);
 	wp_register_script('perfect-scrollbar', get_stylesheet_directory_uri() . '/js/library/perfect-scrollbar.min.js', array('jquery'), '0.5.6', true);
 	wp_register_script('scripts', get_stylesheet_directory_uri() . '/js/scripts.js', array('jquery'), null, true);
 });
@@ -24,6 +25,7 @@ add_action('wp_enqueue_scripts', function(){
 	wp_enqueue_script('bootstrap');
 	wp_enqueue_script('jquery.owl.carousel');
 	wp_enqueue_script('jquery.appear');
+	wp_enqueue_script('jquery.easing');
 	wp_enqueue_script('perfect-scrollbar');
 	wp_enqueue_script('scripts');
 });
@@ -80,3 +82,7 @@ add_action('init', function(){
 		'has_archive'=>true
 	));
 });
+
+function current_user_has_learned($course_id){
+	return false;
+}
