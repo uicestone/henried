@@ -1,5 +1,6 @@
 .DS_Store
 .htaccess
+/.idea
 /nbproject
 /wp-content/uploads
 /wp-content/backup

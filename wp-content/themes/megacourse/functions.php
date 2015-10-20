@@ -76,12 +76,43 @@ add_action('init', function(){
 			'add_new_item'=>'新课程',
 		),
 		'public'=>true,
-		'supports'=>array('title', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments'),
+		'supports'=>array('title', 'author', 'custom-fields', 'comments'),
 		'taxonomies'=>array('category', 'post_tag'),
 		'menu_icon'=>'dashicons-book-alt',
 		'has_archive'=>true
 	));
+
+	register_post_type('course_order', array(
+		'label'=>'订单',
+		'labels'=>array(
+			'all_items'=>'所有订单',
+			'add_new'=>'添加订单',
+			'add_new_item'=>'新订单',
+		),
+		'show_ui'=>true,
+		'show_in_menu'=>true,
+		'supports'=>array('title', 'author', 'excerpt', 'custom-fields', 'comments'),
+		'taxonomies'=>array('category', 'post_tag'),
+		'menu_icon'=>'dashicons-cart',
+
+		// 订单界面可以用名称搜索用户和课程，并保存为ID
+	));
 });
+
+// 定义后台课程列表展现方式
+
+// 保存课程后，检查是否有未转码合并的章节视频，处理
+add_action('save_post_course', function(){
+	exit('saving course');
+});
+
+// 定义后台订单列表展现方式
+
+// 保存订单后，将订单课程同步到用户已购买课程
+add_action('save_post_course_order', function(){
+	exit('saving course order');
+});
+
 
 function current_user_has_learned($course_id){
 	return false;

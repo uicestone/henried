@@ -4,7 +4,7 @@ $sections = explode("\n", get_post_meta(get_the_ID(), 'sections', true));
 
 foreach($sections as &$s){
 	$data = preg_split('/\s*\|\s*/', $s);
-	$s = (object) array('title'=>$data[0], 'video'=>$data[1]);
+	$s = (object) array('title'=>$data[0], 'videos'=>array_slice($data, 1));
 }
 
 get_header(); the_post();
@@ -46,7 +46,7 @@ get_header(); the_post();
 
 					<div class="video-course-intro">
 						<div class="video embed-responsive embed-responsive-16by9">
-							<iframe src="<?=qiniu_get_real_download_url($sections[0]->video)?>" class="embed-responsive-item"></iframe>
+							<iframe src="<?=qiniu_get_real_download_url($sections[0]->videos[0])?>" class="embed-responsive-item"></iframe>
 						</div>
 					</div>
 					<div class="new-course">

@@ -54,6 +54,9 @@
 						if(isset($_GET['course_name'])){
 							$course_args['s'] = $_GET['course_name'];
 						}
+						if(isset($_GET['tag'])){
+							$course_args['tag'] = $_GET['tag'];
+						}
 						foreach(get_posts($course_args) as $course){ ?>
 						<div class="col-sm-6 col-md-4">
 							<div class="mc-item mc-item-2">

@@ -13,7 +13,7 @@ $sections = preg_split('/\n+/', get_post_meta($_GET['course_id'], 'sections', tr
 
 foreach($sections as &$s){
 	$data = preg_split('/\s*\|\s*/', $s);
-	$s = (object) array('title'=>$data[0], 'video'=>$data[1]);
+	$s = (object) array('title'=>$data[0], 'videos'=>array_slice($data, 1));
 }
 
 $section = $sections[$_GET['section_id']];
@@ -35,7 +35,7 @@ get_header('learning');
 		</div>
 		<div class="abc">
 		<div class="video embed-responsive embed-responsive-16by9">
-			<iframe src="<?=qiniu_get_real_download_url($section->video)?>" class="embed-responsive-item"></iframe>
+			<iframe src="<?=qiniu_get_real_download_url($section->videos[0])?>" class="embed-responsive-item"></iframe>
 		</div>
 		</div>
 	</div>
