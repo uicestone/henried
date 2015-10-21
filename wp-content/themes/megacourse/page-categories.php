@@ -54,7 +54,7 @@
 						if(isset($_GET['course_name'])){
 							$course_args['s'] = $_GET['course_name'];
 						}
-						if(isset($_GET['tag'])){
+						if(isset($_GET['course_tag'])){
 							$course_args['tag'] = $_GET['tag'];
 						}
 						foreach(get_posts($course_args) as $course){ ?>
@@ -105,8 +105,8 @@
 						<!-- WIDGET TOP -->
 						<div class="widget">
 							<ul class="list-style-block">
-								<?php foreach(array('推荐', '免费', '热销') as $tag){ ?>
-								<li<?php if(isset($_GET['tag']) && $_GET['tag'] === $tag){ ?> class="current"<?php } ?>><a href="<?=site_url()?>/categories/?tag=<?=$tag?>"><?=$tag?></a></li>
+								<?php foreach(array('热门课程') as $tag){ ?>
+								<li<?php if(isset($_GET['course_tag']) && $_GET['course_tag'] === $tag){ ?> class="current"<?php } ?>><a href="<?=site_url()?>/categories/?course_tag=<?=$tag?>"><?=$tag?></a></li>
 								<?php } ?>
 							</ul>
 						</div>
