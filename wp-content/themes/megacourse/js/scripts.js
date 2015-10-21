@@ -178,6 +178,16 @@
 
 
         $('.question-sidebar ul, .list-message, .list-notification').wrap('<div class="list-wrap"></div>');
+
+        $('#markaslearned').on('change', function(){
+            var section = $(this).val();
+            if($(this).is(':checked')){
+                $.get('?mark-learned=' + section);
+            }else{
+                $.get('?mark-unlearned=' + section);
+            }
+        });
+
     }
     /*==============================
         Mobile check

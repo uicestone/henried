@@ -1,5 +1,15 @@
 <?php
 
+if(isset($_GET['mark-learned'])){
+	add_user_meta(get_current_user_id(), 'learned_section', $_GET['mark-learned']);
+	exit;
+}
+
+if(isset($_GET['mark-unlearned'])){
+	delete_user_meta(get_current_user_id(), 'learned_section', $_GET['mark-learned']);
+	exit;
+}
+
 $course = get_post($_GET['course_id']);
 
 if(!$course)
@@ -26,7 +36,7 @@ get_header('learning');
 		<div class="title-ct">
 			<h3><?=$section->title?></h3>
 			<div class="tt-right">
-				<input type="checkbox" id="markaslearned">
+				<input type="checkbox" id="markaslearned" value="<?=$course->ID?>-<?=$_GET['section_id']?>"<?php if(current_user_has_learned($course->ID . '-' . $_GET['section_id'])){ ?> checked="checked"<?php } ?>>
 				<label for="markaslearned">
 					标记为已学
 					<i class="icon md-check-2"></i>
