@@ -31,7 +31,7 @@ get_header(); the_post();
 					<!-- CURRENT PROGRESS -->
 					<div class="current-progress">
 						<h4 class="sm black">学习进度</h4>
-						<div class="percent">完成了 <span class="count">0%</span></div>
+						<div class="percent">完成了 <span class="count"><?=count(current_user_learned_sections(get_the_ID())) / count($sections) * 100?>%</span></div>
 						<div class="progressbar">
 							<div class="progress-run"></div>
 						</div>

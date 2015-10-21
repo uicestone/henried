@@ -127,6 +127,13 @@ function current_user_has_learned($course_section){
 	return in_array($course_section, $learned_sections);
 }
 
+function current_user_learned_sections($course_id){
+	$learned_sections = get_user_meta(get_current_user_id(), 'learned_section');
+	return array_filter($learned_sections, function($learned_section) use($course_id){
+		return strpos($learned_section, $course_id . '-') === 0;
+	});
+}
+
 function current_user_ordered($course_id){
 	$ordered_course_ids = get_user_meta(get_current_user_id(), 'ordered_course_id');
 	return in_array($course_id, $ordered_course_ids);

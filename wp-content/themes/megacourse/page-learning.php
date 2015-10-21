@@ -45,7 +45,11 @@ get_header('learning');
 		</div>
 		<div class="abc">
 		<div class="video embed-responsive embed-responsive-16by9">
+			<?php if(get_post_meta($course->ID, 'price', true) ==  0 || $_GET['section_id'] < 2 || current_user_ordered($course->ID)){ ?>
 			<iframe src="<?=qiniu_get_real_download_url($section->videos[0])?>" class="embed-responsive-item"></iframe>
+			<?php }else{ ?>
+			尚未购买该课程
+			<?php } ?>
 		</div>
 		</div>
 	</div>
