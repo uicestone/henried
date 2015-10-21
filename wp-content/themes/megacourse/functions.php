@@ -103,17 +103,57 @@ add_action('init', function(){
 
 // 保存课程后，检查是否有未转码合并的章节视频，处理
 add_action('save_post_course', function(){
-	exit('saving course');
+	
 });
 
 // 定义后台订单列表展现方式
 
 // 保存订单后，将订单课程同步到用户已购买课程
-add_action('save_post_course_order', function(){
-	exit('saving course order');
+add_action('save_post_course_order', function($post_id){
+	$user_id = get_post_meta($post_id, 'user_id', true);
+	$course_ids = get_post_meta($post_id, 'course_id');
+	$ordered_course_ids = get_user_meta($user_id, 'ordered_course_id');
+	foreach($course_ids as $course_id){
+		if(in_array($course_id, $ordered_course_ids)){
+			continue;
+		}
+ 		add_user_meta($user_id, 'ordered_course_id', $course_id);
+	}
 });
 
 
-function current_user_has_learned($course_id){
-	return false;
+function current_user_has_learned($course_section){
+	$learned_sections = get_user_meta(get_current_user_id(), 'learned_section');
+	return in_array($course_section, $learned_sections);
 }
+
+function current_user_ordered($course_id){
+	$ordered_course_ids = get_user_meta(get_current_user_id(), 'ordered_course_id');
+	return in_array($course_id, $ordered_course_ids);
+}
+
+/**
+ *
+ * Synchronize a set of user meta value.
+ * Will only add and remove the difference.
+ *
+ * @param int $user_id
+ * @param string $meta_key
+ * @param array $new_values
+ * @param array $old_values optional
+ */
+function sync_user_meta($user_id, $meta_key, array $new_values, $old_values = null){
+
+	if(is_null($old_values)){
+		$old_values = get_user_meta($user_id, $meta_key);
+	}
+	
+	foreach(array_diff($new_values, $old_values) as $value_to_add){
+		add_user_meta($user_id, $meta_key, $value_to_add);
+	}
+	foreach(array_diff($old_values, $new_values) as $value_to_delete){
+		delete_user_meta($user_id, $meta_key, $value_to_delete);
+	}
+
+}
+
