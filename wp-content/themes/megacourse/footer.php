@@ -69,15 +69,15 @@
 					<div class="contact">
 						<div class="email">
 							<i class="icon md-email"></i>
-							<a href="#">course@henried.com</a>
+							<a href="#"><?=get_option('henried_email')?></a>
 						</div>
 						<div class="phone">
 							<i class="fa fa-mobile"></i>
-							<span>021-60000000</span>
+							<span><?=get_option('henried_phone')?></span>
 						</div>
 						<div class="address">
 							<i class="fa fa-map-marker"></i>
-							<span>上海市黄浦区南京西路</span>
+							<span><?=get_option('henried_address')?></span>
 						</div>
 					</div>
 					<p class="copyright">Copyright © 2015 Henried Finance. All rights reserved.</p>
