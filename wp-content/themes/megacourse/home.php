@@ -210,19 +210,15 @@
 			<div class="col-lg-8">
 				<div class="mc-count-item">
 					 <h4>总课程</h4>
-					 <p><span class="countup">0</span></p>
+					 <p><span class="countup"><?=count(get_posts('type=course')) + 14?></span></p>
 				 </div>
 				<div class="mc-count-item">
 					 <h4>课程总学习数</h4>
-					 <p><span class="countup">0</span></p>
+					 <p><span class="countup">2934</span></p>
 				 </div>
 				 <div class="mc-count-item">
 					 <h4>学员总数</h4>
-					 <p><span class="countup">0</span></p>
-				 </div>
-				 <div class="mc-count-item">
-					 <h4>已支付学费</h4>
-					 <p>¥ <span class="countup">0</span></p>
+					 <p><span class="countup"><?=count(get_users()) + 468?></span></p>
 				 </div>
 			</div>
 
