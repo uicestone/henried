@@ -18,7 +18,7 @@ require __DIR__ . '/Http/Response.php';
 
 use Qiniu\Auth;
 
-function qiniu_get_real_download_url($path, $expires = 30){
+function qiniu_get_real_download_url($path, $expires = 60){
 	$auth = new Auth(get_option('qiniu_access_key'), get_option('qiniu_secret_key'));
 	return $auth->privateDownloadUrl(get_option('qiniu_host') . trim($path), $expires);
 }
@@ -31,7 +31,7 @@ function qiniu_concat_video($paths){
 
 	foreach(array_slice($paths, 1) as $path)
 	{
-		$arg .= '/' . \Qiniu\base64_urlSafeEncode(qiniu_get_real_download_url(trim($path)), 3600);
+		$arg .= '/' . \Qiniu\base64_urlSafeEncode(qiniu_get_real_download_url(trim($path)), 7200);
 	}
 
 	return $process->execute($paths[0], $arg);

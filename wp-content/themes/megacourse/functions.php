@@ -76,7 +76,7 @@ add_action('init', function(){
 			'add_new_item'=>'新课程',
 		),
 		'public'=>true,
-		'supports'=>array('title', 'author', 'custom-fields', 'comments'),
+		'supports'=>array('title', 'author', 'custom-fields', 'comments', 'thumbnail'),
 		'taxonomies'=>array('category', 'post_tag'),
 		'menu_icon'=>'dashicons-book-alt',
 		'has_archive'=>true
