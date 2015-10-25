@@ -43,12 +43,13 @@ get_header(); the_post();
 						</ul>
 					</div>
 					<!-- END / CURRENT PROGRESS -->
-
+					<?php if($sections[0]->videos[0]){ ?>
 					<div class="video-course-intro">
 						<div class="video embed-responsive embed-responsive-16by9">
 							<iframe src="<?=qiniu_get_real_download_url($sections[0]->videos[0])?>" class="embed-responsive-item"></iframe>
 						</div>
 					</div>
+					<?php } ?>
 					<div class="new-course">
 						<div class="item course-code">
 							<i class="icon md-barcode"></i>
