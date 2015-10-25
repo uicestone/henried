@@ -1,4 +1,5 @@
 course          课程
+    *post_excerpt 课程简介
     code        课程代码
     duration    学习周期
     sections    章节详情
