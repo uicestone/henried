@@ -31,7 +31,7 @@ function qiniu_concat_video($paths){
 
 	foreach(array_slice($paths, 1) as $path)
 	{
-		$arg .= '/' . \Qiniu\base64_urlSafeEncode(qiniu_get_real_download_url(trim($path)), 7200);
+		$arg .= '/' . \Qiniu\base64_urlSafeEncode(qiniu_get_real_download_url(trim($path), 7200));
 	}
 
 	return $process->execute($paths[0], $arg);
