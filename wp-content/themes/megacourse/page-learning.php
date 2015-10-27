@@ -1,11 +1,19 @@
 <?php
 
 if(isset($_GET['mark-learned'])){
+	if(!get_current_user_id()){
+		header('HTTP/1.1 401 Unauthorized');
+		exit;
+	}
 	add_user_meta(get_current_user_id(), 'learned_section', $_GET['mark-learned']);
 	exit;
 }
 
 if(isset($_GET['mark-unlearned'])){
+	if(!get_current_user_id()){
+		header('HTTP/1.1 401 Unauthorized');
+		exit;
+	}
 	delete_user_meta(get_current_user_id(), 'learned_section', $_GET['mark-learned']);
 	exit;
 }
@@ -48,9 +56,9 @@ get_header('learning');
 			<?php if(!$section->videos[0]){ ?>
 			You have no authority to access this video
 			<?php }elseif(get_post_meta($course->ID, 'price', true) ==  0 || $_GET['section_id'] < 2 || current_user_ordered($course->ID)){ ?>
-			<iframe src="<?=qiniu_get_real_download_url($section->videos[0])?>" class="embed-responsive-item"></iframe>
+			<iframe src="<?=qiniu_get_real_download_url($section->videos[0])?>" class="embed-responsive-item" style="max-width:960px;max-height:540px;margin:auto;right:0"></iframe>
 			<?php }else{ ?>
-			尚未购买该课程
+			<h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> 尚未购买该课程</h2>
 			<?php } ?>
 		</div>
 		</div>

@@ -182,7 +182,13 @@
         $('#markaslearned').on('change', function(){
             var section = $(this).val();
             if($(this).is(':checked')){
-                $.get('?mark-learned=' + section);
+                $.get('?mark-learned=' + section).then(function(){}, function(response){
+                    if(response.status === 401){
+                        if(confirm('请先注册或登录')){
+                            window.location.href = 'http://www.henried.com/register/';
+                        }
+                    }
+                });
             }else{
                 $.get('?mark-unlearned=' + section);
             }
