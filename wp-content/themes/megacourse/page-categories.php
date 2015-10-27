@@ -47,7 +47,7 @@
 					<div class="row">
 						<!-- ITEM -->
 						<?php
-						$course_args = array('post_type'=>'course');
+						$course_args = array('post_type'=>'course', 'posts_per_page'=>-1);
 						if(isset($_GET['course_category'])){
 							$course_args['category_name'] = $_GET['course_category'];
 						}
