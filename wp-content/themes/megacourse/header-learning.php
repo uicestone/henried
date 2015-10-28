@@ -34,6 +34,7 @@ global $title;
 			<ul class="top-nav-list">
 				<li class="prev-course"><a href="<?=site_url()?>/learning/?course_id=<?=$_GET['course_id']?>&section_id=<?=$_GET['section_id'] - 1?>"><i class="icon md-angle-left"></i><span class="tooltip">上一章</span></a></li>
 				<li class="next-course"><a href="<?=site_url()?>/learning/?course_id=<?=$_GET['course_id']?>&section_id=<?=$_GET['section_id'] + 1?>"><i class="icon md-angle-right"></i><span class="tooltip">下一章</span></a></li>
+				<li class="back"><a href="<?=get_the_permalink($_GET['course_id'])?>"><i class="icon md-back"></i><span class="tooltip">返回</span></a></li>
 				<!--<li class="outline-learn">
 					<a href="#"><i class="icon md-list"></i></a>
 					<div class="list-item-body outline-learn-body">

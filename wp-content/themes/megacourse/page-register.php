@@ -50,7 +50,7 @@ get_header(); ?>
 							<input type="email" name="email" placeholder="Email">
 						</div>
 						<div class="form-email">
-							<input type="number" name="mobile" placeholder="手机">
+							<input type="number" name="mobile" placeholder="手机" required> *必填
 						</div>
 						<div class="form-submit-1">
 							<input type="submit" name="submit" value="加入Henried" class="mc-btn btn-style-1">
