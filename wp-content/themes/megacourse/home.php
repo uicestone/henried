@@ -68,47 +68,26 @@
 	<div class="container">
 		<div class="row">
 
+			<?php $headline = get_posts('category_name=news&posts_per_page=1')[0]; ?>
 			<div class="col-md-5">
 				<div class="mc-section-1-content-1"> 
-					<h2 class="big">线上线下课程管理</h2>
-					<p class="mc-text">我们有网络平台，更有线下教室。</p>
-					<a href="<?=site_url()?>/about-us/" class="mc-btn btn-style-1">关于我们</a>
+					<h2 class="big"><?=$headline->post_title?></h2>
+					<p class="mc-text"><?=wp_trim_words(strip_tags($headline->post_content), 150)?></p>
+					<a href="<?=site_url()?>/news/" class="mc-btn btn-style-1">更多动态</a>
 				</div>
 			</div>
 
 			<div class="col-md-6 col-lg-offset-1">
 				<div class="row">
+					<?php foreach(get_posts('category_name=news&posts_per_page=4&offset=1') as $index => $news){ ?>
 					<div class="col-sm-6">
 						<div class="featured-item">
-							<i class="icon icon-featured-1"></i>
-							<h4 class="title-box text-uppercase">易于掌握</h4>
-							<p>特点描述特点描述，特点描述特点描述，特点描述特点描述特点描述，特点描述特点描述。</p>
+							<i class="icon icon-featured-<?=$index + 1?>"></i>
+							<h4 class="title-box text-uppercase"><?=$news->post_title?></h4>
+							<p><?=wp_trim_words(strip_tags($news->post_content), 55)?></p>
 						</div>
 					</div>
-
-					<div class="col-sm-6">
-						<div class="featured-item">
-							<i class="icon icon-featured-2"></i>
-							<h4 class="title-box text-uppercase">参与教学</h4>
-							<p>特点描述特点描述，特点描述特点描述，特点描述特点描述特点描述，特点描述特点描述。</p>
-						</div>
-					</div>
-
-					<div class="col-sm-6">
-						<div class="featured-item">
-							<i class="icon icon-featured-3"></i>
-							<h4 class="title-box text-uppercase">社区支持</h4>
-							<p>特点描述特点描述，特点描述特点描述，特点描述特点描述特点描述，特点描述特点描述。</p>
-						</div>
-					</div>
-
-					<div class="col-sm-6">
-						<div class="featured-item">
-							<i class="icon icon-featured-4"></i>
-							<h4 class="title-box text-uppercase">效果跟踪</h4>
-							<p>特点描述特点描述，特点描述特点描述，特点描述特点描述特点描述，特点描述特点描述。</p>
-						</div>
-					</div>
+					<?php } ?>
 				</div>
 			</div>
 
