@@ -73,7 +73,7 @@ get_header(); the_post();
 						<ul>
 							<li>
 								<div class="image-instructor text-center">
-									<img src="<?=get_stylesheet_directory_uri()?>/images/team-13.jpg" alt="">
+									<?=do_shortcode('[avatar user=' . get_the_author()->ID . ']')?>
 								</div>
 								<div class="info-instructor">
 									<cite class="sm black"><a href="#"><?php the_author(); ?></a></cite>
