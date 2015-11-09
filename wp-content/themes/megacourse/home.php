@@ -73,7 +73,7 @@
 				<div class="mc-section-1-content-1"> 
 					<h2 class="big"><?=$headline->post_title?></h2>
 					<p class="mc-text"><?=wp_trim_words(strip_tags($headline->post_content), 150)?></p>
-					<a href="<?=site_url()?>/news/" class="mc-btn btn-style-1">更多动态</a>
+					<a href="<?=site_url()?>/category/news/" class="mc-btn btn-style-1">更多动态</a>
 				</div>
 			</div>
 
