@@ -71,7 +71,7 @@
 			<?php $headline = get_posts('category_name=news&posts_per_page=1')[0]; ?>
 			<div class="col-md-5">
 				<div class="mc-section-1-content-1"> 
-					<h2 class="big"><?=$headline->post_title?></h2>
+					<h2 class="big"><a href="<?=get_the_permalink($headline->ID)?>"><?=$headline->post_title?></a></h2>
 					<p class="mc-text"><?=wp_trim_words(strip_tags($headline->post_content), 150)?></p>
 					<a href="<?=site_url()?>/category/news/" class="mc-btn btn-style-1">更多动态</a>
 				</div>
@@ -83,7 +83,7 @@
 					<div class="col-sm-6">
 						<div class="featured-item">
 							<i class="icon icon-featured-<?=$index + 1?>"></i>
-							<h4 class="title-box text-uppercase"><?=$news->post_title?></h4>
+							<h4 class="title-box text-uppercase"><a href="<?=get_the_permalink($headline->ID)?>"><?=$news->post_title?></a></h4>
 							<p><?=wp_trim_words(strip_tags($news->post_content), 55)?></p>
 						</div>
 					</div>
