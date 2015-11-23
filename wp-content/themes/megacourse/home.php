@@ -66,43 +66,6 @@
 <!-- SECTION 1 -->
 <section id="mc-section-1" class="mc-section-1 section">
 	<div class="container">
-		<div class="row">
-
-			<?php $headline = get_posts('category_name=news&posts_per_page=1')[0]; ?>
-			<div class="col-md-5">
-				<div class="mc-section-1-content-1"> 
-					<h2 class="big"><a href="<?=get_the_permalink($headline->ID)?>"><?=$headline->post_title?></a></h2>
-					<p class="mc-text"><?=wp_trim_words(strip_tags($headline->post_content), 150)?></p>
-					<a href="<?=site_url()?>/category/news/" class="mc-btn btn-style-1">更多动态</a>
-				</div>
-			</div>
-
-			<div class="col-md-6 col-lg-offset-1">
-				<div class="row">
-					<?php foreach(get_posts('category_name=news&posts_per_page=4&offset=1') as $index => $news){ ?>
-					<div class="col-sm-6">
-						<div class="featured-item">
-							<i class="icon icon-featured-<?=$index + 1?>"></i>
-							<h4 class="title-box text-uppercase"><a href="<?=get_the_permalink($headline->ID)?>"><?=$news->post_title?></a></h4>
-							<p><?=wp_trim_words(strip_tags($news->post_content), 55)?></p>
-						</div>
-					</div>
-					<?php } ?>
-				</div>
-			</div>
-
-		</div>
-	</div>
-</section>
-<!-- END / SECTION 1 -->
-
-
-
-<!-- SECTION 2 -->
-<section id="mc-section-2" class="mc-section-2 section">
-	<div class="awe-parallax bg-section1-demo"></div>
-	<div class="overlay-color-1"></div>
-	<div class="container">
 		<div class="section-2-content">
 			<div class="row">
 
@@ -117,11 +80,48 @@
 
 				<div class="col-md-7">
 					<div class="image">
-						<img src="<?=get_stylesheet_directory_uri()?>/images/image.png" alt="">
+						<img src="<?=get_stylesheet_directory_uri()?>/images/accounting-body.jpg" alt="">
 					</div>
 				</div>
 
 			</div>
+		</div>
+	</div>
+</section>
+<!-- END / SECTION 1 -->
+
+
+
+<!-- SECTION 2 -->
+<section id="mc-section-2" class="mc-section-2 section">
+	<div class="awe-parallax"></div>
+	<div class="overlay-color-1"></div>
+	<div class="container">
+		<div class="row">
+
+			<?php $headline = get_posts('category_name=news&posts_per_page=1')[0]; ?>
+			<div class="col-md-5">
+				<div class="mc-section-1-content-1">
+					<h2 class="big"><a href="<?=get_the_permalink($headline->ID)?>"><?=$headline->post_title?></a></h2>
+					<p class="mc-text"><?=wp_trim_words(strip_tags($headline->post_content), 150)?></p>
+					<a href="<?=site_url()?>/category/news/" class="mc-btn btn-style-1">更多动态</a>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-lg-offset-1">
+				<div class="row">
+					<?php foreach(get_posts('category_name=news&posts_per_page=4&offset=1') as $index => $news){ ?>
+						<div class="col-sm-6">
+							<div class="featured-item">
+								<i class="icon icon-featured-<?=$index + 1?>"></i>
+								<h4 class="title-box text-uppercase"><a href="<?=get_the_permalink($headline->ID)?>"><?=$news->post_title?></a></h4>
+								<p><?=wp_trim_words(strip_tags($news->post_content), 55)?></p>
+							</div>
+						</div>
+					<?php } ?>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </section>
@@ -130,6 +130,8 @@
 
 <!-- SECTION 3 -->
 <section id="mc-section-3" class="mc-section-3 section">
+	<!--<div class="awe-parallax"></div>-->
+	<!--<div class="overlay-color-1"></div>-->
 	<div class="container">
 		<!-- FEATURE -->
 		<div class="feature-course">

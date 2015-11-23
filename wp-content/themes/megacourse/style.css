@@ -892,6 +892,12 @@ h6,
 .awe-parallax ~ .container .featured-item p {
   color: #fff;
 }
+.awe-parallax ~ .container .big a {
+  color: #fff;
+}
+.awe-parallax ~ .container .title-box a {
+  color: #7AC1FF;
+}
 /* Placeholder style */
 input::-webkit-input-placeholder {
   color: #666;
