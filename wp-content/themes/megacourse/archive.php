@@ -38,7 +38,7 @@
 								<h3 class="md"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 							</div>
 							<div class="post-meta">
-								<?php the_author(); ?>, <?php the_date(); ?>
+								<?php the_date(); ?>
 							</div>
 							<div class="post-content">
 								<?php the_excerpt(); ?>

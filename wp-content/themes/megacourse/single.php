@@ -27,7 +27,7 @@
 							<h1 class="big"><?php the_post(); the_title(); ?></h1>
 						</div>
 						<div class="post-meta">
-							<?php the_author() ?> 发布于 <?php the_date() ?>
+							<?php the_date() ?>
 						</div>
 
 						<hr>
