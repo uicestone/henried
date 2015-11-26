@@ -71,10 +71,10 @@
 
 				<div class="col-md-5">
 					<div class="ct">
-						<h2 class="big">在线学习从未如此简单</h2>
-						<p class="mc-text">特点描述特点描述，特点描述特点描述，特点描述特点描述特点描述，特点描述特点描述。</p>
+						<h2 class="big">Henried 在线学习课堂</h2>
+						<p class="mc-text">Lecture tutor独立录制网课, Henried Library提供最全面的学习资料帮助学员体验最好的线上教室环境。全方位的为学员节省时间与精力，更高效的提升学员学习效率。</p>
 
-						<a href="<?=site_url()?>/tutorial/" class="mc-btn btn-style-3">学习如何使用</a>
+						<a href="<?=site_url()?>/category/professional-body/" class="mc-btn btn-style-3">Professional Body</a>
 					</div>
 				</div>
 
