@@ -111,14 +111,17 @@ add_action('save_post_course', function(){
 // 保存订单后，将订单课程同步到用户已购买课程
 add_action('save_post_course_order', function($post_id){
 	$user_id = get_post_meta($post_id, 'user_id', true);
-	$course_ids = get_post_meta($post_id, 'course_id');
-	$ordered_course_ids = get_user_meta($user_id, 'ordered_course_id');
-	foreach($course_ids as $course_id){
-		if(in_array($course_id, $ordered_course_ids)){
-			continue;
-		}
- 		add_user_meta($user_id, 'ordered_course_id', $course_id);
+
+	$other_orders = get_posts(array('meta_key'=>'user_id', 'meta_value'=>$user_id, 'post_type'=>'course_order'));
+
+	$ordered_course_ids = array();
+
+	foreach($other_orders as $order)
+	{
+		$ordered_course_ids = array_merge($ordered_course_ids, get_post_meta($order->ID, 'course_id'));
 	}
+	
+	sync_user_meta($user_id, 'ordered_course_id', $ordered_course_ids);
 });
 
 
