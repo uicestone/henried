@@ -1,6 +1,16 @@
 <?php
 
 add_action('init', function(){
+
+	// 禁止IE10以下版本访问
+	preg_match('/MSIE\s*(\S+?);/', $_SERVER['HTTP_USER_AGENT'], $match);
+
+	if($match && $match[1] < 10)
+	{
+		header('Location: http://windows.microsoft.com/zh-cn/internet-explorer/download-ie');
+		exit;
+	}
+
 	wp_register_style('bootstrap', get_stylesheet_directory_uri() . '/css/library/bootstrap.min.css', array(), '3.2.0');
 	wp_register_style('font-awesome', get_stylesheet_directory_uri() . '/css/library/font-awesome.min.css', array(), '4.2.0');
 	wp_register_style('owl.carousel', get_stylesheet_directory_uri() . '/css/library/owl.carousel.css', array(), '1.18');
@@ -120,7 +130,7 @@ add_action('save_post_course_order', function($post_id){
 	{
 		$ordered_course_ids = array_merge($ordered_course_ids, get_post_meta($order->ID, 'course_id'));
 	}
-	
+
 	sync_user_meta($user_id, 'ordered_course_id', $ordered_course_ids);
 });
 
