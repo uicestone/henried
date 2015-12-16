@@ -8304,3 +8304,7 @@ footer#footer.footer-style-2 {
     width: 300px !important;
   }
 }
+
+.col-sm-6:nth-child(2n+1) {
+  clear: left;
+}
