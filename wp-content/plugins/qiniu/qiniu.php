@@ -18,7 +18,7 @@ require __DIR__ . '/Http/Response.php';
 
 use Qiniu\Auth;
 
-function qiniu_get_real_download_url($path, $expires = 60){
+function qiniu_get_real_download_url($path, $expires = 30){
 	$auth = new Auth(get_option('qiniu_access_key'), get_option('qiniu_secret_key'));
 	return $auth->privateDownloadUrl(get_option('qiniu_host') . trim($path), $expires);
 }

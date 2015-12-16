@@ -6181,6 +6181,14 @@ footer#footer.footer-style-2 {
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
+.learning-section .embed-responsive-item {
+  max-width: 960px;
+  max-height: 540px;
+  margin: auto;
+  right: 0;
+  box-shadow: 5px 5px 20px #888;
+  border: 6px solid white;
+}
 .learn-section {
   background-color: #d4d4d4;
   padding-top: 100px;

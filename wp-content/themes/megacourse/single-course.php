@@ -46,7 +46,7 @@ get_header(); the_post();
 					<?php if($sections[0]->videos[0]){ ?>
 					<div class="video-course-intro">
 						<div class="video embed-responsive embed-responsive-16by9">
-							<iframe src="<?=qiniu_get_real_download_url($sections[0]->videos[0])?>" class="embed-responsive-item"></iframe>
+							<video controls src="<?=qiniu_get_real_download_url($sections[0]->videos[0])?>" class="embed-responsive-item"></video>
 						</div>
 					</div>
 					<?php } ?>

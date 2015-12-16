@@ -194,6 +194,10 @@
             }
         });
 
+        $('video').on('contextmenu', function(){
+            return false;
+        });
+
     }
     /*==============================
         Mobile check
@@ -450,7 +454,7 @@
         SliderHome();
         formCheckoutCal();
         ResizeSliderHome();
-    }).trigger('resize');;
-    
+    }).trigger('resize');
+
 
 })(jQuery);
