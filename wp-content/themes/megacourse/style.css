@@ -8305,6 +8305,6 @@ footer#footer.footer-style-2 {
   }
 }
 
-.col-sm-6:nth-child(2n+1) {
+#mc-section-2 .col-sm-6:nth-child(2n+1) {
   clear: left;
 }
