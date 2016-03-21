@@ -2703,7 +2703,7 @@ footer#footer.footer-style-2 {
 .second-footer .phone,
 .second-footer .address {
   display: inline-block;
-  margin-right: 60px;
+  margin-right: 10px;
   font-size: 14px;
 }
 .second-footer .email .icon,
@@ -2740,7 +2740,7 @@ footer#footer.footer-style-2 {
   position: relative;
   display: inline-block;
   text-align: left;
-  top: 8px;
+  top: 7px;
   margin-bottom: 0;
   /*margin-left: 16px;*/
   /*border-left: 1px solid #7C86D2;*/

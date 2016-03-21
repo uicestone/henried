@@ -66,21 +66,27 @@
 
 			<div class="second-footer">
 				<div class="container">
-					<div class="contact">
-						<div class="email">
-							<i class="icon md-email"></i>
-							<a href="#"><?=get_option('henried_email')?></a>
+					<div class="row">
+						<div class="contact col-sm-6">
+							<?php foreach(json_decode(get_option('henried_sites_contacts')) as $site): ?>
+							<div class="address">
+								<i class="fa fa-map-marker"></i>
+								<span><?=$site->name?>：<?=$site->address?></span>
+							</div>
+							<div class="phone">
+								<i class="fa fa-mobile"></i>
+								<span><?=$site->phone?></span>
+							</div>
+							<?php endforeach; ?>
 						</div>
-						<div class="phone">
-							<i class="fa fa-mobile"></i>
-							<span><?=get_option('henried_phone')?></span>
-						</div>
-						<div class="address">
-							<i class="fa fa-map-marker"></i>
-							<span><?=get_option('henried_address')?></span>
+						<div class="col-sm-6 text-right">
+							<div class="email">
+								<i class="icon md-email"></i>
+								<a href="#"><?=get_option('henried_email')?></a>
+							</div>
+							<div>Copyright © 2015 Henried Finance. All rights reserved.</div>
 						</div>
 					</div>
-					<p class="copyright">Copyright © 2015 Henried Finance. All rights reserved.</p>
 				</div>
 			</div>
 		</footer>
