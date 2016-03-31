@@ -3,8 +3,8 @@ Contributors: bjorsq
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QAQ2WC8UHFMEQ
 Tags: excerpt, editor, TinyMCE, formatting
 Requires at least: 3.3
-Tested up to: 4.0
-Stable tag: 1.3.2
+Tested up to: 4.4
+Stable tag: 1.3.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -75,6 +75,10 @@ Other plugins which enhance the excerpt editor in some way will probably have is
 
 
 == Changelog ==
+
+= 1.3.3 =
+* Incorporated *some* of the suggestions in [this forum post](https://wordpress.org/support/topic/css-to-remove-space) about the padding around the editor
+* Bumped "Tested up to" value to Wordpress 4.4.
 
 = 1.3.2 =
 * Updated Polish translation thanks to [alcoholdenat](https://github.com/alcoholdenat).
