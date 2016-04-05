@@ -3366,6 +3366,9 @@ footer#footer.footer-style-2 {
 .categories-content .content .mc-item {
   margin: 15px 0;
 }
+.categories-content .content .row>div:nth-child(3n+1) {
+  clear: left;
+}
 .sidebar-categories {
   padding-right: 18px;
 }
