@@ -7,9 +7,6 @@ global $title;
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
-		<!-- Google font -->
-		<link href='http://fonts.useso.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.useso.com/css?family=Raleway:300,400,700,900' rel='stylesheet' type='text/css'>
 		<!-- Css -->
 		<link rel="stylesheet" type="text/css" href="<?=get_stylesheet_directory_uri()?>/css/library/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=get_stylesheet_directory_uri()?>/css/library/font-awesome.min.css">
