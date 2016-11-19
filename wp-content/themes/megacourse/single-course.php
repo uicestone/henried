@@ -31,7 +31,7 @@ get_header(); the_post();
 					<!-- CURRENT PROGRESS -->
 					<div class="current-progress">
 						<h4 class="sm black">学习进度</h4>
-						<div class="percent">完成了 <span class="count"><?=count(current_user_learned_sections(get_the_ID())) / count($sections) * 100?>%</span></div>
+						<div class="percent">完成了 <span class="count"><?=round(count(current_user_learned_sections(get_the_ID())) / count($sections) * 100, 1)?>%</span></div>
 						<div class="progressbar">
 							<div class="progress-run"></div>
 						</div>
@@ -142,7 +142,7 @@ get_header(); the_post();
 								<h4 class="tit-section xsm"><?php the_title(); ?></h4>
 								<ul class="section-list">
 									<?php foreach($sections as $index => $section){ ?>
-									<li<?php if(current_user_has_learned(get_the_ID())){ ?> class="o-view"<?php } ?>>
+									<li<?php if(current_user_has_learned(get_the_ID() . '-' . $index)){ ?> class="o-view"<?php } ?>>
 										<div class="count"><span><?=$index + 1?></span></div>
 										<div class="list-body">
 											<i class="icon md-camera"></i>
