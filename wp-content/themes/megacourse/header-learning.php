@@ -32,32 +32,7 @@ global $title;
 				<li class="prev-course"><a href="<?=site_url()?>/learning/?course_id=<?=$_GET['course_id']?>&section_id=<?=$_GET['section_id'] - 1?>"><i class="icon md-angle-left"></i><span class="tooltip">上一章</span></a></li>
 				<li class="next-course"><a href="<?=site_url()?>/learning/?course_id=<?=$_GET['course_id']?>&section_id=<?=$_GET['section_id'] + 1?>"><i class="icon md-angle-right"></i><span class="tooltip">下一章</span></a></li>
 				<li class="back"><a href="<?=get_the_permalink($_GET['course_id'])?>"><i class="icon md-back"></i><span class="tooltip">返回</span></a></li>
-				<!--<li class="outline-learn">
-					<a href="#"><i class="icon md-list"></i></a>
-					<div class="list-item-body outline-learn-body">
-						<div class="section-learn-outline">
-							<h5 class="section-title">Sect 1 : Introduction</h5>
-							<ul class="section-list">
-								<li>
-									<div class="list-body">
-										<a href="#">
-											<h6>Unit 1</h6>
-											<p>Duis vel ullamcorper mauris, eu pretium felis. Duis gravida laoreet velit.</p>
-										</a>
-									</div>
-									<div class="download">
-										<a href="#"><i class="icon md-download-1"></i></a>
-										<div class="download-ct">
-											<span>Reference 12 mb</span>
-										</div>
-									</div>
-									<div class="div-x"><i class="icon md-check-2"></i></div>
-								</li>
-							</ul>
-						</div>
-					</div>-->
-				</li>
-
+				<li class="autoload"><a href="#"><i class="icon md-download-1"></i> <span class="percentage" style="display:none"></span><span class="tooltip">缓存</span></a></li>
 			</ul>
 
 		</div>

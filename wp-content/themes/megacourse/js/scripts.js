@@ -194,10 +194,27 @@
             }
         });
 
-        $('video').on('contextmenu', function(){
-            return false;
-        });
+        $('video')
+            .on('contextmenu', function(){
+                return false;
+            })
+            .on('progress', function() {
+                if(this.duration) {
+                    var percent = (this.buffered.end(0)/this.duration) * 100;
+                    $('.autoload .percentage').text(Math.round(percent) + '%');
+                    if( percent >= 100 && !window.autoloadComplete) {
+                        alert('缓存完成，请不要关闭网页');
+                        window.autoloadComplete = true;
+                    }
+                }
+            });
 
+        $('.autoload').on('click', function() {
+            $('video').get(0).play();
+            $('video').get(0).pause();
+            $(this).find('.percentage').show();
+            alert('缓存已开始，请不要关闭网页，也不要播放或移动进度条');
+        });
     }
     /*==============================
         Mobile check
@@ -455,6 +472,5 @@
         formCheckoutCal();
         ResizeSliderHome();
     }).trigger('resize');
-
 
 })(jQuery);
