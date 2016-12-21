@@ -33,7 +33,7 @@
 				<div class="container">
 
 					<!-- LOGO -->
-					<div class="logo"><a href="<?=site_url()?>">Henried</a></div>
+					<div class="logo"><a href="<?=site_url()?>"><img src="<?=get_stylesheet_directory_uri()?>/images/logo.png"></a></div>
 					<!-- END / LOGO -->
 
 					<!-- NAVIGATION -->
