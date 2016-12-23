@@ -62,6 +62,7 @@ a {
   -ms-transition: all .3s ease;
   -o-transition: all .3s ease;
   transition: all .3s ease;
+  color: #BC0000;
 }
 body {
   line-height: 1.4;
@@ -1333,7 +1334,7 @@ table.mc-table tbody .new .submissions a:before {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(17, 83, 140, 0.6);
+  background-color: rgba(17, 0, 0, 0.6);
   z-index: -2;
 }
 .overlay-color-1 {

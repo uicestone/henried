@@ -58,7 +58,7 @@
 									<?php if(is_user_logged_in()){ ?>
 									<a><?=wp_get_current_user()->display_name?></a>
 									<?php }else{ ?>
-									<a href="<?=site_url()?>/register/" style="border-right:1px #7C86D2 solid; padding-right:5px">注册</a>
+									<a href="<?=site_url()?>/register/" style="border-right:1px #7d3d3d solid; padding-right:5px">注册</a>
 									<a href="<?=site_url()?>/login/">登录</a>
 									<?php } ?>
 								</div>
