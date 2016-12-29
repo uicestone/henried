@@ -152,6 +152,12 @@ function current_user_ordered($course_id){
 	return in_array($course_id, $ordered_course_ids);
 }
 
+function learned_count(){
+    global $wpdb;
+    $count = $wpdb->get_var("SELECT COUNT(*) count FROM `wp_usermeta` WHERE `meta_key` = 'learned_section'");
+    return $count;
+}
+
 /**
  *
  * Synchronize a set of user meta value.
