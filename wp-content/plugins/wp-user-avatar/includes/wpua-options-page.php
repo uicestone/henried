@@ -208,10 +208,10 @@ $wpua_options_page_title = apply_filters('wpua_options_page_title', $wpua_option
     <div id="fc-sidebar">
     <div class="fc-box">
     <h3>WP User Avatar Pro</h3>
-    <p><a target="_blank" href="http://www.flippercode.com/product/wp-user-avatar/?utm_source=wordpress&utm_medium=banner&utm_campaign=wpuseravatar"><img width="500" src="<?php echo WPUA_URL.'images/wp-user-avatar.jpg'; ?>" /></a></p>
+    <p><a target="_blank" href="http://codecanyon.net/item/wp-user-avatar-pro/15638832"><img width="500" src="<?php echo WPUA_URL.'images/wp-user-avatar-banner.png'; ?>" /></a></p>
     <p><em>Introducing awesome features to enhance user experience when they upload own avatar.</em></p>
     <p>Pro features include webcam, custom folder, amazon s3 storage, dropbox storage, cropping and priority support.</p>
-    <p><a class="button button-primary button-large" target="_blank" href="http://www.flippercode.com/product/wp-user-avatar/?utm_source=wordpress&utm_medium=link&utm_campaign=wpuseravatar">Upgrade Now »</a></p>
+    <p><a class="button button-primary button-large" target="_blank" href="http://codecanyon.net/item/wp-user-avatar-pro/15638832">Upgrade Now »</a></p>
   </div>
   <div class="fc-box">
     <h4>Looking for support?</h4>

@@ -200,7 +200,7 @@ class WP_User_Avatar_Shortcode {
       // Show form only for valid user
       if($valid_user) {
         // Save
-        if(isset($_POST['submit']) && $_POST['submit'] && $_POST['action'] == 'update') {
+        if(isset($_POST['submit']) && $_POST['submit'] && $_POST['wpua_action'] == 'update') {
           do_action('wpua_update', $valid_user->ID);
           // Check for errors
           $errors = $this->wpua_edit_user($valid_user->ID);
@@ -230,7 +230,7 @@ class WP_User_Avatar_Shortcode {
   ?>
     <form id="wpua-edit-<?php echo $user->ID; ?>" class="wpua-edit" action="" method="post" enctype="multipart/form-data">
       <?php do_action('wpua_show_profile', $user); ?>
-      <input type="hidden" name="action" value="update" />
+      <input type="hidden" name="wpua_action" value="update" />
       <input type="hidden" name="user_id" id="user_id" value="<?php echo esc_attr($user->ID); ?>" />
       <?php wp_nonce_field('update-user_'.$user->ID); ?>
       <?php submit_button(__('Update Profile','wp-user-avatar')); ?>

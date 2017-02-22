@@ -3,7 +3,7 @@ Contributors: denishua
 Donate link: https://me.alipay.com/denishua
 Tags: WPJAM,CDN,七牛
 Requires at least: 3.0
-Tested up to: 4.4
+Tested up to: 4.7
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -22,6 +22,8 @@ QQ 群：106839672
 
 七牛购买流量9折优惠码：d706b222，在充值界面使用，立刻优惠，详细用法： http://blog.wpjam.com/m/how-to-use-qiniu-coupon/
 
+安装本插件<strong>1.4.5及以上版本</strong>，请先安装并激活<a href="https://wordpress.org/plugins/wpjam-basic/">WPJAM BASIC</a>插件。
+如果是使用<strong>1.4.5以下版本</strong>，<a href="https://wordpress.org/plugins/wpjam-basic/">WPJAM BASIC</a>插件已包含七牛插件，如果启用WPJAM BASIC插件，请先停用插件。
 
 == Installation ==
 
@@ -34,6 +36,10 @@ QQ 群：106839672
 1. 七牛镜像存储设置
 
 == Changelog ==
+
+= 1.4.3.1 =
+
+* 解决与最新版<a href="https://wordpress.org/plugins/wpjam-basic/">WPJAM BASIC</a>插件冲突问题
 
 = 1.4.3 =
 
