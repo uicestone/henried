@@ -146,7 +146,7 @@ get_header(); the_post();
 										<div class="count"><span><?=$index + 1?></span></div>
 										<div class="list-body">
 											<i class="icon md-camera"></i>
-											<p><a href="<?=site_url()?>/learn/?course_id=<?=get_the_ID()?>&section_id=<?=$index?>"><?=$section->title?></a></p>
+											<p><a href="<?=site_url()?>/learning/?course_id=<?=get_the_ID()?>&section_id=<?=$index?>"><?=$section->title?></a></p>
 											<div class="data-lessons">
 												<span><?=$section->duration?></span>
 											</div>
