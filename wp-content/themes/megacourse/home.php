@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <!-- HOME SLIDER -->
-<section class="slide" style="background-image: url('<?=get_stylesheet_directory_uri()?>/images/homeslider/bg.jpg')">
+<section class="slide" style="background-image: url('<?=get_stylesheet_directory_uri()?>/images/homeslider/bg-world-map.jpg')">
 	<div class="container">
 		<div class="slide-cn" id="slide-home">
 			<!-- SLIDE ITEM -->

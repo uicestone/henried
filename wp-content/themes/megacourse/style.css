@@ -2025,7 +2025,7 @@ table.mc-table tbody .new .submissions a:before {
   -ms-transform: translate(0, -50%);
   transform: translate(0, -50%);
   padding: 20px;
-  background: rgba(255,255,255,0.8);
+  /*background: rgba(255,255,255,0.8);*/
   border-radius: 10px;
 }
 
@@ -2035,7 +2035,7 @@ table.mc-table tbody .new .submissions a:before {
 
 .slide .slide-item .text h2 {
   margin: 0;
-  color: #BC0000;
+  color: #e6e6e6;
   font-size: 48px;
   line-height: 66px;
   font-weight: bold;
@@ -2052,12 +2052,12 @@ table.mc-table tbody .new .submissions a:before {
 
 
 .slide .slide-item .text p {
-  font-weight: 300;
+  font-weight: 300 !important;
   margin-top: 5px;
-  color: #444;
+  color: #d2d2d2;
   margin-bottom: 0;
-  font-size: 24px;
-  line-height: 1.5em;
+  font-size: 18px;
+  line-height: 1.8em;
   -moz-opacity: 0;
   -khtml-opacity: 0;
   -webkit-opacity: 0;
