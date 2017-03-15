@@ -77,6 +77,10 @@ add_image_size('course-intro', 450, 258, true);
 
 add_theme_support('post-thumbnails');
 
+if ( ! current_user_can( 'manage_options' ) ) {
+    show_admin_bar( false );
+}
+
 add_action('init', function(){
 	register_post_type('course', array(
 		'label'=>'课程',
