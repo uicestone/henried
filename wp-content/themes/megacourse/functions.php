@@ -22,7 +22,7 @@ add_action('init', function(){
 	wp_register_script('jquery.appear', get_stylesheet_directory_uri() . '/js/library/jquery.appear.min.js', array('jquery'), null, true);
 	wp_register_script('jquery.easing', get_stylesheet_directory_uri() . '/js/library/jquery.easing.min.js', array('jquery'), null, true);
 	wp_register_script('perfect-scrollbar', get_stylesheet_directory_uri() . '/js/library/perfect-scrollbar.min.js', array('jquery'), '0.5.6', true);
-	wp_register_script('scripts', get_stylesheet_directory_uri() . '/js/scripts.js', array('jquery'), '2015-12-17', true);
+	wp_register_script('scripts', get_stylesheet_directory_uri() . '/js/scripts.js', array('jquery'), '2017-03-15', true);
 });
 
 add_action('wp_enqueue_scripts', function(){

@@ -207,7 +207,17 @@
                         window.autoloadComplete = true;
                     }
                 }
+                if(this.currentTime) {
+                    window.localStorage.setItem('video.progress.' + window.location.pathname + window.location.search, this.currentTime);
+                }
             });
+
+        if($('video').length) {
+            var currentTime = window.localStorage.getItem('video.progress.' + window.location.pathname + window.location.search, $('video').currentTime);
+            if(currentTime) {
+                $('video').get(0).currentTime = Number(currentTime);
+            }
+        }
 
         $('.autoload').on('click', function() {
             $('video').get(0).play();
