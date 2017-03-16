@@ -15,7 +15,7 @@ add_action('init', function(){
 	wp_register_style('font-awesome', get_stylesheet_directory_uri() . '/css/library/font-awesome.min.css', array(), '4.2.0');
 	wp_register_style('owl.carousel', get_stylesheet_directory_uri() . '/css/library/owl.carousel.css', array(), '1.18');
 	wp_register_style('md-font', get_stylesheet_directory_uri() . '/css/md-font.css', array());
-	wp_register_style('style', get_stylesheet_directory_uri() . '/style.css', array(), '2017-03-15');
+	wp_register_style('style', get_stylesheet_directory_uri() . '/style.css', array(), '2017-03-16');
 	
 	wp_register_script('bootstrap', get_stylesheet_directory_uri() . '/js/library/bootstrap.min.js', array('jquery'), '3.2.0', true);
 	wp_register_script('jquery.owl.carousel', get_stylesheet_directory_uri() . '/js/library/jquery.owl.carousel.js', array('jquery'), '1.3.2', true);
