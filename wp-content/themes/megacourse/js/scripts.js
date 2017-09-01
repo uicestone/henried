@@ -225,6 +225,18 @@
             $(this).find('.percentage').show();
             alert('缓存已开始，请不要关闭网页，也不要播放或移动进度条');
         });
+
+        $('.playback-rate').on('click', function (e) {
+            var video = $('video').get(0);
+
+            if (video.playbackRate <= 4) {
+                video.playbackRate = video.playbackRate * 1.5;
+            }
+            else {
+                video.playbackRate = 1;
+            }
+            e.preventDefault();
+        });
     }
     /*==============================
         Mobile check
