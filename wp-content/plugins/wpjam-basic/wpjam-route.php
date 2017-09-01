@@ -51,7 +51,7 @@ function wpjam_request($query_vars){
 			}
 		}
 	}
-	
+
 	return $query_vars;
 }
 
@@ -84,9 +84,9 @@ function wpjam_template_include($template){
 			$wpjam_template = STYLESHEETPATH.'/template/'.$module.'/index.php';
 		}
 
-		$wpjam_template		= apply_filters( 'wpjam_template', $wpjam_template, $module, $action );
+        $wpjam_template		= apply_filters( 'wpjam_template', $wpjam_template, $module, $action );
 
-		if(is_file($wpjam_template)){
+        if(is_file($wpjam_template)){
 			return $wpjam_template;
 		}else{
 			wp_die('路由错误！');
@@ -104,7 +104,7 @@ function wpjam_api_posts_where($where, $wp_query){
 		$first_time	= !empty($_GET['first_time'])?get_date_from_gmt(date('Y-m-d H:i:s',(int)$_GET['first_time'])):'';
 		$last_time	= !empty($_GET['last_time'])?get_date_from_gmt(date('Y-m-d H:i:s',(int)$_GET['last_time'])):'';
 
-		if(!$first_time && !$last_time){    //不指定first_time和last_time，默认返回最新的数据，就是客户端第一次加载 
+		if(!$first_time && !$last_time){    //不指定first_time和last_time，默认返回最新的数据，就是客户端第一次加载
 		    //do nothing
 		}elseif($first_time){               //指定first_time，获取大于first_time的最新数据，就是客户端下拉刷新
 		    $where .= " AND ({$wpdb->posts}.post_date > '{$first_time}')";
@@ -127,7 +127,7 @@ function wpjam_api_set_response(&$response){
 		}else{
 			$response['has_more']	= ($wp_query->max_num_pages>1)?1:0;
 
-			$first_post_time = (int)strtotime(get_gmt_from_date($wp_query->posts[0]->post_date)); 
+			$first_post_time = (int)strtotime(get_gmt_from_date($wp_query->posts[0]->post_date));
 			$post = end($wp_query->posts);
 			$last_post_time = (int)strtotime(get_gmt_from_date($post->post_date));
 
@@ -236,3 +236,13 @@ function is_module($module='', $action=''){
  * 解决客户端COOKIE过期后不失效的问题
  */
 //add_action('auth_cookie_expired', 'wp_clear_auth_cookie');
+
+add_action('generate_rewrite_rules', 'wpjam_generate_rewrite_rules');
+function wpjam_generate_rewrite_rules($wp_rewrite){
+
+    $wpjam_rewrite_rules = array();
+    $wpjam_rewrite_rules['api/([^/]+).json?$']					= 'index.php?module=json&action=$matches[1]';
+    $wpjam_rewrite_rules	= apply_filters('wpjam_rewrite_rules', $wpjam_rewrite_rules);
+    $wp_rewrite->rules		= array_merge($wpjam_rewrite_rules, $wp_rewrite->rules);
+
+}

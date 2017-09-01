@@ -1,8 +1,8 @@
 <?php
 // 设置菜单
-add_filter('wpjam_pages', 'wpjam_crons_admin_pages');
+add_filter('wpjam_basic_sub_pages', 'wpjam_crons_admin_pages');
 function wpjam_crons_admin_pages($wpjam_pages){
-	$wpjam_pages['management']['subs']['wpjam-crons']	= array('menu_title'=>'定时作业');
+	$wpjam_pages['wpjam-crons']	= array('menu_title'=>'定时作业');
 	return $wpjam_pages;
 }
 

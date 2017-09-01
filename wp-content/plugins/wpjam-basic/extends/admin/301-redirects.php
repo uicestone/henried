@@ -1,7 +1,7 @@
 <?php
-add_filter('wpjam_pages', 'wpjam_301_redirects_admin_pages');
+add_filter('wpjam_basic_sub_pages', 'wpjam_301_redirects_admin_pages');
 function wpjam_301_redirects_admin_pages($wpjam_pages){
-	$wpjam_pages['management']['subs']['301-redirects'] = array(
+	$wpjam_pages['301-redirects'] = array(
 		'menu_title'	=>'301跳转', 
 		'function'		=>'option',   
 		'page_type'		=>'default'

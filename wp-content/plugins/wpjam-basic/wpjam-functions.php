@@ -213,19 +213,6 @@ function is_bot(){
 	return false;
 }
 
-// 将一个二维数组根据其中一个字段排序
-function wpjam_array_multisort($array, $orderby, $order = SORT_ASC, $sort_flags = SORT_NUMERIC){
-	$refer = $result = array();
-
-	foreach ($array as $key => $value) {
-		$refer[$key] = $value[$orderby];
-	}
-
-	array_multisort($refer, $order, $sort_flags, $array);
-
-	return $array;
-}
-
 // 向关联数组指定的 Key 之前插入数据
 function wpjam_array_push(&$array, $data=null, $key=false){
 	$data	= (array)$data;

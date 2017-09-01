@@ -20,7 +20,7 @@ function wpjam_basic_sections($sections){
 			'disable_trackbacks'	=> array('title'=>'',	'type'=>'checkbox',	'description'=>'<a href="http://blog.wpjam.com/m/bye-bye-trackbacks/">彻底关闭 Trackbacks</a>，和垃圾留言说拜拜。'),
 			'disable_xml_rpc'		=> array('title'=>'',	'type'=>'checkbox',	'description'=>'如果你无需通过 APP 客户端发布日志，建议<a href="http://blog.wpjam.com/m/disable-xml-rpc/">关闭 XML-RPC 功能</a>。'),
 			'disable_rest_api'		=> array('title'=>'',	'type'=>'checkbox',	'description'=>'如果你的博客没有客户端，建议<a href="http://blog.wpjam.com/m/disable-wordpress-rest-api/">屏蔽 REST API 功能</a>。'),
-			'disable_autoembed'		=> array('title'=>'','type'=>'checkbox',	'description'=>'Auto Embeds 基本不支持国内网站，建议<a href="http://blog.wpjam.com/m/disable-auto-embeds-in-wordpress/">禁用 Auto Embeds 功能</a>，加快页面解析速度。'),
+			'disable_autoembed'		=> array('title'=>'',   'type'=>'checkbox',	'description'=>'Auto Embeds 基本不支持国内网站，建议<a href="http://blog.wpjam.com/m/disable-auto-embeds-in-wordpress/">禁用 Auto Embeds 功能</a>，加快页面解析速度。'),
 			'disable_post_embed'	=> array('title'=>'',	'type'=>'checkbox',	'description'=>'<a href="http://blog.wpjam.com/m/diable-wordpress-post-embed/">屏蔽文章 Embed 功能</a>。'),
 			'disable_emoji'			=> array('title'=>'',	'type'=>'checkbox',	'description'=>'WordPress Emoji 的渲染图片都在国外，并且经常无法打开，建议<a href="http://blog.wpjam.com/m/diable-emoji/">屏蔽 Emoji 功能</a>。'),	
 			'disable_auto_update'	=> array('title'=>'',	'type'=>'checkbox',	'description'=>'WordPress 更新服务器在国外，经常无法打开，<a href="http://blog.wpjam.com/m/disable-wordpress-auto-update/">建议关闭 WordPress 后台和自动更新功能</a>！'),	

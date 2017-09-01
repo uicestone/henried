@@ -14,11 +14,11 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 七牛支持传统 CDN 的镜像存储，对于很多 WordPress 站点来说，有了这个功能，就无需将原来的图片上传到七牛的服务器上，只需在 WordPress 站点做些简单的修改，就可以使用七牛的 CDN 服务了，真正一键实现 WordPress 博客静态文件 CDN 加速。
 
-详细介绍： http://blog.wpjam.com/project/wpjam-qiniutek/
+详细介绍： <a href="http://blog.wpjam.com/project/wpjam-qiniutek/">http://blog.wpjam.com/project/wpjam-qiniutek/</a>
 
 使用文档： http://wpjam.com/go/qiniuguide
 
-QQ 群：106839672
+使用上有问题，请加入<a href="https://wx.xiaomiquan.com/mweb/views/joingroup/join_group.html?group_id=4222114248">WordPress小密圈</a >
 
 七牛购买流量9折优惠码：d706b222，在充值界面使用，立刻优惠，详细用法： http://blog.wpjam.com/m/how-to-use-qiniu-coupon/
 

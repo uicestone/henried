@@ -123,7 +123,7 @@ function wpjam_include_extends($admin=false){
 			}
 		}
 	}
-	
+
 	if($wpjam_extends){
 		$wpjam_extend_dir 	= WPJAM_BASIC_PLUGIN_DIR.'extends/';
 		

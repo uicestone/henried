@@ -60,7 +60,7 @@ class IP{
         if (self::$fp === null) {
             self::$ip = new self();
 
-            self::$fp = fopen(__DIR__.'/17monipdb.dat', 'rb');
+            self::$fp = fopen(__DIR__.'/static/17monipdb.dat', 'rb');
             if (self::$fp === false) {
                 throw new Exception('Invalid 17monipdb.dat file!');
             }

@@ -57,7 +57,7 @@ if($wpjam_sitemap === false){
 	}
 
 	$wpjam_sitemap = '<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="'.WPJAM_BASIC_PLUGIN_URL.'/include/sitemap.xsl'.'"?>
+<?xml-stylesheet type="text/xsl" href="'.WPJAM_BASIC_PLUGIN_URL.'/include/static/sitemap.xsl'.'"?>
 <!-- generated-on="'.date('d. F Y').'" -->
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n".$wpjam_sitemap."\n".'</urlset>'."\n";
 	set_transient('wpjam_sitemap',$wpjam_sitemap,60*60*3);

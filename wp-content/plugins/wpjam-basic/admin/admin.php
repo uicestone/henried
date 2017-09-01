@@ -1,21 +1,12 @@
 <?php
 
 include(WPJAM_BASIC_PLUGIN_DIR.'admin/setting.php');		// 设置
-include(WPJAM_BASIC_PLUGIN_DIR.'admin/clear.php');			// 数据清理
 include(WPJAM_BASIC_PLUGIN_DIR.'admin/function-list.php');	// 新增功能
 include(WPJAM_BASIC_PLUGIN_DIR.'admin/lists.php');			// 内置列表
 include(WPJAM_BASIC_PLUGIN_DIR.'admin/stats.php');			// 后台统计基础函数
-include(WPJAM_BASIC_PLUGIN_DIR.'admin/optimize.php');		// 数据库优化
 include(WPJAM_BASIC_PLUGIN_DIR.'admin/users.php');			// 用户
-include(WPJAM_BASIC_PLUGIN_DIR.'admin/custom.php');			// 自定义后台
 include(WPJAM_BASIC_PLUGIN_DIR.'admin/thumbnail.php');		// 缩略图
-include(WPJAM_BASIC_PLUGIN_DIR.'admin/messages.php');		// 站内消息
 include(WPJAM_BASIC_PLUGIN_DIR.'admin/server-status.php');	// 站内消息
-
-if(!function_exists('wpjam_list_table')){
-	include(WPJAM_BASIC_PLUGIN_DIR.'include/wpjam-list-table.php');	// 加载 WPJAM 数据列表展示类
-}
-
 
 include(WPJAM_BASIC_PLUGIN_DIR.'include/topic.php');
 
@@ -29,14 +20,12 @@ function wpjam_basic_admin_pages($wpjam_pages){
 
 	$subs = array();
 
-	$subs['wpjam-basic']	= array('menu_title'=>'基本设置',		'function'=>'option',	);
-	$subs['wpjam-custom']	= array('menu_title'=>'样式定制', 	'function'=>'option',	'option_name'=>'wpjam-basic');
+//	$subs['wpjam-basic']	= array('menu_title'=>'基本设置',	'function'=>'option',	);
 
-	$subs = apply_filters('wpjam_basic_sub_pages', $subs);
+    $subs['wpjam-basic']	= array('menu_title'=>'功能管理', 	'function'=>'option',	'page_type'=>'default', 'option_name'=>'wpjam-extends');
+    $subs = apply_filters('wpjam_basic_sub_pages', $subs);
 
-	$subs['wpjam-extends']	= array('menu_title'=>'扩展管理', 	'function'=>'option',	'page_type'=>'default');
-
-	// if(is_multisite()){
+    // if(is_multisite()){
 	// $list_tabs = array(
 	// 	'shortcodes'	=> array('title'=>'Shortcodes',	'function'=>'wpjam_shortcodes_list'),
 	// 	'constants'		=> array('title'=>'系统常量', 	'function'=>'wpjam_constants_list'),
@@ -45,25 +34,25 @@ function wpjam_basic_admin_pages($wpjam_pages){
 	// );
 	// 	$subs['wpjam-list']		= array('menu_title'=>'内置列表',		'capability'=>$capability,	'function'=>'tab', 'tabs'=>$list_tabs);
 	// 	$subs['wpjam-functions']= array('menu_title'=>'新增的功能',	'capability'=>$capability);
-	// }
+    // }
 
-	$wpjam_pages['wpjam-basic']	= array(
-		'menu_title'	=> 'WPJAM',		
+    if(is_multisite() && is_network_admin()){
+    }else{
+        if(wpjam_basic_get_setting('show_all_setting')){
+            $wpjam_pages['options']['subs']['options.php']	= array('menu_title'=>'所有设置',		'function'=>'');
+        }
+    }
+
+    $wpjam_pages['wpjam-basic']	= array(
+		'menu_title'	=> 'WPJAM',
+		'page_title'	=> '功能管理',
 		'icon'			=> 'dashicons-performance',
 		'function'		=> 'option',
 		'subs'			=> $subs,
-		'position'		=> '80.1'
+		'position'		=> '80.1',
+        'option_name'=>'wpjam-extends'
 	);
 
-	if(is_multisite() && is_network_admin()){
-		$wpjam_pages['settings']['subs']['db-optimize']		= array('menu_title'=>'数据库优化',	'function'=>'wpjam_db_optimize_page', 'capability'=>$capability);
-	}else{
-		if(wpjam_basic_get_setting('show_all_setting')){
-			$wpjam_pages['options']['subs']['options.php']	= array('menu_title'=>'所有设置',		'function'=>'');
-		}
-		$wpjam_pages['management']['subs']['data-clear']	= array('menu_title'=>'数据清理',		'function'=>'wpjam_clear_page');
-		$wpjam_pages['management']['subs']['db-optimize']	= array('menu_title'=>'数据库优化',	'function'=>'wpjam_db_optimize_page', 'capability'=>$capability);
-	}
 
     if (!wpjam_basic_check_domain()) {
         unset($wpjam_pages['wpjam-basic']['subs']);

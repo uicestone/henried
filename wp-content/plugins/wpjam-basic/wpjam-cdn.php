@@ -11,6 +11,12 @@ function wpjam_cdn_ob_cache(){
 
 	$wpjam_google	= apply_filters('wpjam_google', '');
 
+    if(strpos('https://', LOCAL_HOST) !== false){
+        define( 'LOCAL_HOST2', str_replace('https://', 'http://', LOCAL_HOST) );
+    }else{
+        define( 'LOCAL_HOST2', str_replace('http://', 'https://', LOCAL_HOST) );
+    }
+
 	if($wpjam_google == 'useso'){			// 使用360 网站卫士常用前端公共库 CDN 服务
 		add_filter('wpjam_html_replace', 'wpjam_useso_html_replace');
 	}elseif($wpjam_google == 'ustc'){		// 使用中科大镜像服务
@@ -137,11 +143,6 @@ function wpjam_cdn_content_image($matches){
 	$remote_img_url_2x	= apply_filters( 'wpjam_content_image', $remote_img_url, $width, $height, 2);
 
 	$result = str_replace($img_url, $remote_img_url_1x, $matches[0]);
-
-	if(!preg_match('|<img.*?srcset=[\'"](.*?)[\'"].*?>|i', $matches[0], $srcset_matches)){
-		$result = str_replace('src=', 'srcset="'.$remote_img_url_2x.' 2x" src=', $result);
-	}
-	
 	return $result;
 }
 
