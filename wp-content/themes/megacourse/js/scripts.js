@@ -228,13 +228,13 @@
 
         $('.playback-rate').on('click', function (e) {
             var video = $('video').get(0);
-
-            if (video.playbackRate <= 4) {
+            if (video.playbackRate < 2.25) {
                 video.playbackRate = video.playbackRate * 1.5;
             }
             else {
                 video.playbackRate = 1;
             }
+            $(this).find('.rate').text(video.playbackRate > 1 ? 'x' + video.playbackRate : '');
             e.preventDefault();
         });
     }
