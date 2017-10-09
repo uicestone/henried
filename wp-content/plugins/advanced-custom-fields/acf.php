@@ -3,7 +3,7 @@
 Plugin Name: Advanced Custom Fields
 Plugin URI: http://www.advancedcustomfields.com/
 Description: Customise WordPress with powerful, professional and intuitive fields
-Version: 4.4.11
+Version: 4.4.12
 Author: Elliot Condon
 Author URI: http://www.elliotcondon.com/
 License: GPL
@@ -14,11 +14,15 @@ Domain Path: /lang
 
 if( !class_exists('acf') ):
 
-class acf
-{
-	// vars
-	var $settings;
-		
+class acf {
+	
+	/** @var string The plugin version number */
+	var $version = '4.4.12';
+	
+	
+	/** @var array The plugin settings array */
+	var $settings = array();
+	
 	
 	/*
 	*  Constructor
@@ -33,8 +37,8 @@ class acf
 	*  @return	N/A
 	*/
 	
-	function __construct()
-	{
+	function __construct() {
+		
 		// helpers
 		add_filter('acf/helpers/get_path', array($this, 'helpers_get_path'), 1, 1);
 		add_filter('acf/helpers/get_dir', array($this, 'helpers_get_dir'), 1, 1);
@@ -42,11 +46,18 @@ class acf
 		
 		// vars
 		$this->settings = array(
+			
+			// basic
+			'name'				=> __('Advanced Custom Fields', 'acf'),
+			'version'			=> $this->version,
+			
+			// urls
+			'file'				=> __FILE__,
 			'path'				=> apply_filters('acf/helpers/get_path', __FILE__),
 			'dir'				=> apply_filters('acf/helpers/get_dir', __FILE__),
-			'hook'				=> basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ),
-			'version'			=> '4.4.11',
-			'upgrade_version'	=> '3.4.1',
+			'basename'			=> plugin_basename( __FILE__ ),
+			
+			// options
 			'include_3rd_party'	=> false
 		);
 		
@@ -419,7 +430,7 @@ class acf
 		
 		include_once('core/fields/message.php');
 		include_once('core/fields/tab.php');
-
+		
 	}
 	
 	
@@ -469,6 +480,13 @@ class acf
 	*/
 	
 	function include_after_theme() {
+		
+		// early access
+		if( defined('ACF_EARLY_ACCESS') ) {
+			include_once('core/early-access.php');
+		}
+		
+		
 		
 		// bail early if user has defined LITE_MODE as true
 		if( defined('ACF_LITE') && ACF_LITE )

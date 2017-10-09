@@ -3,7 +3,7 @@ Contributors: elliotcondon
 Tags: acf, advanced, custom, field, fields, form, repeater, content
 Requires at least: 3.6.0
 Tested up to: 4.9.0
-Stable tag: 4.4.11
+Stable tag: 4.4.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,6 @@ Use the Advanced Custom Fields plugin to take full control of your WordPress edi
 * Powerful Functions
 * Over 30 Field Types
 * Extensive Documentation
-* Helpful Support
 * Millions of Users
 
 = Links =
@@ -67,6 +66,11 @@ From your WordPress dashboard
 
 
 == Changelog ==
+
+= 4.4.12 =
+* Core: Added Early Access for ACF 5
+* Core: Fixed PHP7 warnings
+* Language: Added Romanian translation - thanks to Corneliu Cîrlan
 
 = 4.4.11 =
 * Core: Improved logic to better delete term meta during 'delete_term' action
