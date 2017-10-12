@@ -1438,11 +1438,11 @@ table.mc-table tbody .new .submissions a:before {
 .navigation .menu li a {
   position: relative;
   display: inline-block;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   color: #fff;
   line-height: 65px;
-  padding: 0 15px;
+  padding: 0 18px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -ms-transition: all 0.3s ease 0s;
