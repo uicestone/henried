@@ -1550,7 +1550,7 @@ table.mc-table tbody .new .submissions a:before {
   left: 12px;
 }
 .navigation .menu .sub-menu li:hover > a {
-  background-color: #0C406F;
+  background-color: #000;
 }
 .navigation .menu .sub-menu li.active a {
   color: #E62828;
