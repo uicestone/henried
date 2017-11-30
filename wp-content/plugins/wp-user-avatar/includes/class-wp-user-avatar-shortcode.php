@@ -57,9 +57,13 @@ class WP_User_Avatar_Shortcode {
     extract(shortcode_atts(array('user' => "", 'size' => '96', 'align' => "", 'link' => "", 'target' => ""), $atts));
     // Find user by ID, login, slug, or e-mail address
     if(!empty($user)) {
-      $user = is_numeric($user) ? get_user_by('id', $user) : get_user_by('login', $user);
-      $user = empty($user) ? get_user_by('slug', $user) : $user;
-      $user = empty($user) ? get_user_by('email', $user) : $user;
+      if( $user == 'current' ) {
+		$user = wp_get_current_user();
+	  }else{
+		  $user = is_numeric($user) ? get_user_by('id', $user) : get_user_by('login', $user);
+		  $user = empty($user) ? get_user_by('slug', $user) : $user;
+		  $user = empty($user) ? get_user_by('email', $user) : $user;
+	  }
     } else {
       // Find author's name if id_or_email is empty
       $author_name = get_query_var('author_name');

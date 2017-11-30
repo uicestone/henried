@@ -3,7 +3,7 @@
 Contributors: flippercode
 Tags: author image, author photo, author avatar, avatar, bbPress, profile avatar, profile image, user avatar, user image, user photo, widget
 Requires at least: 3.6
-Tested up to: 4.7.0
+Tested up to: 4.8.3
 Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -404,6 +404,15 @@ This would output:
 4. After you've chosen a WP User Avatar image, you will see the option to remove it.
 
 == Changelog ==
+
+= 2.0.9 =
+* New Shortcode: Use [avatar user=current] shortcode to show current logged in user avatar.
+
+= 2.0.8 =
+* Fix: Compatible with php 7.
+
+= 2.0.7 =
+* Improvement Fix: Removed languages files to be used from core wordpress language packs.
 
 = 2.0.7 =
 * Improvement Fix: Removed languages files to be used from core wordpress language packs.
