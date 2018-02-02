@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Anti-Spam - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-06 20:35:42+0000\n"
+"PO-Revision-Date: 2017-11-10 03:23:38+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,42 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: zh_CN\n"
 "Project-Id-Version: Plugins - Akismet Anti-Spam - Stable (latest release)\n"
+
+#: class.akismet.php:210
+msgid "Comment discarded."
+msgstr "评论已丢弃。"
+
+#: class.akismet-rest-api.php:132
+msgid "This site's API key is hardcoded and cannot be deleted."
+msgstr "这个站点的API密钥是硬编码的，不能被删除。"
+
+#: class.akismet-rest-api.php:116
+msgid "The value provided is not a valid and registered API key."
+msgstr "提供的键值不是有效且已注册的API密钥。"
+
+#: class.akismet-rest-api.php:110
+msgid "This site's API key is hardcoded and cannot be changed via the API."
+msgstr "本站点的API密钥是硬编码的，不能通过API进行更改。"
+
+#: class.akismet-rest-api.php:71 class.akismet-rest-api.php:80
+msgid "The time period for which to retrieve stats. Options: 60-days, 6-months, all"
+msgstr "检索统计信息的时间段。 选项：60天，6个月，全部"
+
+#: class.akismet-rest-api.php:56
+msgid "If true, show the number of approved comments beside each comment author in the comments list page."
+msgstr "如果为true，则在评论列表页面中显示评论作者旁边已批准评论的数量。"
+
+#: class.akismet-rest-api.php:51
+msgid "If true, Akismet will automatically discard the worst spam automatically rather than putting it in the spam folder."
+msgstr "如果为true，Akismet会自动丢弃最糟糕的垃圾评论，而不是将其放入垃圾评论文件夹。"
+
+#: class.akismet-rest-api.php:27
+msgid "A 12-character Akismet API key. Available at akismet.com/get/"
+msgstr "12个字符的Akismet API密钥。 可从akismet.com/get/获得"
+
+#: class.akismet-admin.php:373
+msgid "(%1$s%)"
+msgstr "（%1$s%）"
 
 #: views/notice.php:49
 msgid "Your site can&#8217;t connect to the Akismet servers."
@@ -31,7 +67,7 @@ msgstr "在此页面上，您可以更新您的Akismet设置并查看垃圾评�
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key."
 msgstr "由千百万人使用，Akismet可能是保护您的站点免受垃圾评论<strong>的世界上最好的方式</strong>。 它会不断地保护您的站点。 使用方式：激活Akismet插件，然后转到Akismet设置页面来设置您的API密钥。"
 
-#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.0.1)  #-#-#-#-#
+#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.0.2)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: class.akismet-admin.php:95 class.akismet-admin.php:98
 msgid "Akismet Anti-Spam"
@@ -101,29 +137,29 @@ msgstr "详细统计资料"
 msgid "Statistics"
 msgstr "统计资料"
 
-#: class.akismet-admin.php:1111
+#: class.akismet-admin.php:1125
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started, just go to <a href=\"admin.php?page=akismet-key-config\">your Akismet Settings page</a> to set up your API key."
 msgstr "由千百万人使用，Akismet可能是保护您的站点免受垃圾评论<strong>的世界上最好的方式</strong>。 它会不断地保护您的站点。 使用方式：激活Akismet插件，然后转到<a href=\"admin.php?page=akismet-key-config\">Akismet设置页面</a>来设置您的API密钥。"
 
-#: class.akismet-admin.php:1108
+#: class.akismet-admin.php:1122
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. Your site is fully configured and being protected, even while you sleep."
 msgstr "由千百万人使用，Akismet可能是保护您的站点免受垃圾评论<strong>的世界上最好的方式</strong>。 您的站点已完全配置并受到不断的保护。"
 
-#: class.akismet-admin.php:1007
+#: class.akismet-admin.php:1021
 msgid "%s comment was caught as spam."
 msgid_plural "%s comments were caught as spam."
 msgstr[0] "已判定%s则评论为垃圾评论。"
 
-#: class.akismet-admin.php:1004
+#: class.akismet-admin.php:1018
 msgid "No comments were caught as spam."
 msgstr "没有评论被判定为垃圾评论。"
 
-#: class.akismet-admin.php:1000
+#: class.akismet-admin.php:1014
 msgid "Akismet checked %s comment."
 msgid_plural "Akismet checked %s comments."
 msgstr[0] "Akismet检查了%s的评论。"
 
-#: class.akismet-admin.php:997
+#: class.akismet-admin.php:1011
 msgid "There were no comments to check. Akismet will only check comments in the Pending queue."
 msgstr "没有评论可供检查。 Akismet 目前仅会检查在 [待审中] 清单的评论。"
 
@@ -216,17 +252,17 @@ msgstr "请更新您的付款信息。"
 msgid "<strong>Almost done</strong> - configure Akismet and say goodbye to spam"
 msgstr "<strong>即将完成</strong>——激活Akismet并向垃圾说再见"
 
-#: class.akismet-admin.php:932
+#: class.akismet-admin.php:946
 msgid "Akismet has saved you %d minute!"
 msgid_plural "Akismet has saved you %d minutes!"
 msgstr[0] "Akismet为您节省了%s分钟！"
 
-#: class.akismet-admin.php:930
+#: class.akismet-admin.php:944
 msgid "Akismet has saved you %d hour!"
 msgid_plural "Akismet has saved you %d hours!"
 msgstr[0] "Akismet为您节省了%s小时！"
 
-#: class.akismet-admin.php:928
+#: class.akismet-admin.php:942
 msgid "Akismet has saved you %s day!"
 msgid_plural "Akismet has saved you %s days!"
 msgstr[0] "Akismet为您节省了%s天！"
@@ -513,7 +549,7 @@ msgstr "历史"
 msgid "View comment history"
 msgstr "查看评论历史"
 
-#: class.akismet-admin.php:818
+#: class.akismet-admin.php:832
 msgid "Please check your <a href=\"%s\">Akismet configuration</a> and contact your web host if problems persist."
 msgstr "请检查您的<a href=\"%s\">Akismet配置</a>，如果问题持续存在，请联系您的主机服务提供商。"
 
@@ -521,7 +557,7 @@ msgstr "请检查您的<a href=\"%s\">Akismet配置</a>，如果问题持续存�
 msgid "%s ago"
 msgstr "%s前"
 
-#: class.akismet-admin.php:925
+#: class.akismet-admin.php:939
 msgid "Cleaning up spam takes time."
 msgstr "清除垃圾评论需要时间。"
 
@@ -586,11 +622,11 @@ msgstr "经过自动重新检查，Akismet认定这是垃圾评论。"
 msgid "Akismet cleared this comment during an automatic retry."
 msgstr "Akismet经自动重试后，认定它不是垃圾评论。"
 
-#: class.akismet.php:1202
+#: class.akismet.php:1208
 msgid "Please <a href=\"%1$s\">upgrade WordPress</a> to a current version, or <a href=\"%2$s\">downgrade to version 2.4 of the Akismet plugin</a>."
 msgstr "请<a href=\"%s\">升级WordPress</a>，或<a href=\"%s\">将Akismet插件降级至2.4版本</a>。"
 
-#: class.akismet.php:1202
+#: class.akismet.php:1208
 msgid "Akismet %s requires WordPress %s or higher."
 msgstr "Akismet %s需要WordPress %s或更高。"
 
