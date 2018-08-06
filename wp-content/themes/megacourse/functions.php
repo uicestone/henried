@@ -140,12 +140,12 @@ add_action('save_post_course_order', function($post_id){
 
 
 function current_user_has_learned($course_section){
-	$learned_sections = get_user_meta(get_current_user_id(), 'learned_section');
+	$learned_sections = get_user_meta(get_current_user_id(), 'learned_section') ?: array();
 	return in_array($course_section, $learned_sections);
 }
 
 function current_user_learned_sections($course_id){
-	$learned_sections = get_user_meta(get_current_user_id(), 'learned_section');
+	$learned_sections = get_user_meta(get_current_user_id(), 'learned_section') ?: array();
 	return array_filter($learned_sections, function($learned_section) use($course_id){
 		return strpos($learned_section, $course_id . '-') === 0;
 	});
