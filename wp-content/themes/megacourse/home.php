@@ -166,10 +166,10 @@
 								<i class="icon md-comment"></i>
 								<?=$course->comments?>
 							</div>
-							<div class="price">
+							<!--<div class="price">
 								¥<?=$course->price?>
 								<span class="price-old">¥<?=$course->price_origin?></span>
-							</div>
+							</div>-->
 						</div>
 					</div>
 					<?php } ?>

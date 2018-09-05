@@ -55,7 +55,7 @@ get_header('learning');
 		<div class="video embed-responsive embed-responsive-16by9">
 			<?php if(!$section->videos[0]){ ?>
 			You have no authority to access this video
-			<?php }elseif(get_post_meta($course->ID, 'price', true) ==  0 || $_GET['section_id'] < 2 || current_user_ordered($course->ID)){ ?>
+			<?php }elseif(get_post_meta($course->ID, 'price', true) ===  0 || $_GET['section_id'] < 1 || current_user_ordered($course->ID)){ ?>
 			<video controls src="<?=qiniu_get_real_download_url($section->videos[0])?>" class="embed-responsive-item" preload="auto"></video>
 			<?php }else{ ?>
 			<h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> 尚未购买该课程</h2>
