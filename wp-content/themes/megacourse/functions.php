@@ -133,6 +133,7 @@ add_action('save_post_course_order', function($post_id){
 	foreach($other_orders as $order)
 	{
 		$ordered_course_ids = array_merge($ordered_course_ids, get_post_meta($order->ID, 'course_id'));
+		$ordered_course_ids = array_merge($ordered_course_ids, get_post_meta($order->ID, 'course_ids', true) ?: array());
 	}
 
 	sync_user_meta($user_id, 'ordered_course_id', $ordered_course_ids);
