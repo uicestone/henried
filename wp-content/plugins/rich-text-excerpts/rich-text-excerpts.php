@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/rich-text-excerpts/
 Description: Adds rich text editing capability for excerpts using wp_editor()
 Author: Peter Edwards <pete@bjorsq.net>
 Author URI: https://github.com/bjorsq/rich-text-excerpts
-Version: 1.3.3
+Version: 1.3.4
 Text Domain: rich-text-excerpts
 License: GPLv3
 
@@ -63,10 +63,11 @@ class Rich_Text_Excerpts {
 		add_filter( 'teeny_mce_plugins', array( __CLASS__, 'teeny_mce_plugins' ), 10, 2 );
 		add_filter( 'teeny_mce_buttons', array( __CLASS__, 'teeny_mce_buttons' ), 10, 2 );
 		/**
-		 * register plugin admin options
+		 * create admin page, register plugin admin options and enqueue scripts/CSS
 		 */
 		add_action( 'admin_menu', array( __CLASS__, 'add_plugin_admin_menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'register_plugin_options' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'add_plugin_scripts_styles' ) );
 
 		 /**
 		  * add a link to the settings page from the plugins page
@@ -259,62 +260,53 @@ class Rich_Text_Excerpts {
 	public static function add_plugin_admin_menu()
 	{
 		/* Plugin Options page */
-		$options_page = add_submenu_page( 'options-general.php', __( 'Rich Text Excerpts', 'rich-text-excerpts' ), __( 'Rich Text Excerpts', 'rich-text-excerpts' ), "manage_options", "rich_text_excerpts_options", array( __CLASS__, "plugin_options_page" ) );
-		/**
-		 * Use the admin_print_scripts action to add scripts.
-		 * Admin script is only needed on plugin admin page, but editor script is needed on all pages
-		 * which include the editor
-		 */
-		add_action( 'admin_print_scripts-' . $options_page, array( __CLASS__, 'plugin_admin_scripts' ) );
-		add_action( 'admin_print_scripts', array( __CLASS__, 'plugin_editor_scripts' ) );
-		/**
-		 * Use the admin_print_styles action to add CSS.
-		 * CSS is needed for the post/page editor only
-		 */
-		add_action( 'admin_print_styles', array( __CLASS__, 'plugin_admin_styles' ) );
+		add_submenu_page( 'options-general.php', __( 'Rich Text Excerpts', 'rich-text-excerpts' ), __( 'Rich Text Excerpts', 'rich-text-excerpts' ), "manage_options", "rich_text_excerpts_options", array( __CLASS__, "plugin_options_page" ) );
 	}
 
 	/**
 	 * add script to admin for plugin options
+	 * called using admin_enqueue_scripts hook
 	 */
-	public static function plugin_admin_scripts()
+	public static function add_plugin_scripts_styles( $hook )
 	{
-		wp_enqueue_script('RichTextExcerptsAdminScript', plugins_url('rich-text-excerpts.js', __FILE__), array('jquery'));
+		/**
+		 * check $hook to queue script for options page
+		 */
+		if ( $hook === 'settings_page_rich_text_excerpts_options' ) {
+			wp_enqueue_script(
+				'RichTextExcerptsAdminScript',
+				plugins_url('rich-text-excerpts.js', __FILE__),
+				array('jquery')
+			);
+		}
+		/**
+		 * check post type to queue script and style for editor
+		 */
+		$screen = get_current_screen();
+		if ( self::post_type_supported( $screen->post_type ) ) {
+			wp_enqueue_script(
+				'RichTextExcerptsEditorScript',
+				plugins_url('rich-text-excerpts-editor.js', __FILE__),
+				array('jquery')
+			);
+			wp_enqueue_style(
+				'RichTextExcerptsAdminCSS',
+				plugins_url('rich-text-excerpts.css', __FILE__)
+			);
+		}
 	}
 	
-	/**
-	 * add script to admin for plugin options
-	 */
-	public static function plugin_editor_scripts()
-	{
-		$screen = get_current_screen();
-		if ( self::post_type_supported( $screen->post_type ) ) {
-			wp_enqueue_script('RichTextExcerptsEditorScript', plugins_url('rich-text-excerpts-editor.js', __FILE__), array('jquery'));
-		}
-	}
-
-	/**
-	 * add css to admin for editor formatting
-	 */
-	public static function plugin_admin_styles()
-	{
-		$screen = get_current_screen();
-		if ( self::post_type_supported( $screen->post_type ) ) {
-			wp_enqueue_style('RichTextExcerptsAdminCSS', plugins_url('rich-text-excerpts.css', __FILE__));
-		}
-	}
-
 	/**
 	 * creates the options page
 	 */
 	public static function plugin_options_page()
 	{
-		printf('<div class="wrap"><div class="icon32" id="icon-options-general"><br /></div><h2>%s</h2>', __('Rich Text Excerpts Options', 'rich-text-excerpts'));
+		printf('<div class="wrap"><h2>%s</h2>', __('Rich Text Excerpts Options', 'rich-text-excerpts'));
 		settings_errors('rich_text_excerpts_options');
 		print('<form method="post" action="options.php" id="rich_text_excerpts_options_form">');
 		settings_fields('rich_text_excerpts_options');
 		do_settings_sections('rte');
-		printf('<p class="submit"><input type="submit" class="button-primary" name="Submit" value="%s" /></p>', __('Save Changes', 'rich-text-excerpts'));
+		submit_button();
 		print('</form></div>');
 	}
 

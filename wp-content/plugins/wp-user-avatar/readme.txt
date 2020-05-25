@@ -1,14 +1,14 @@
-=== WP User Avatar ===
+=== WP User Avatar | User Profile Picture ===
 
-Contributors: flippercode
-Tags: author image, author photo, author avatar, avatar, bbPress, profile avatar, profile image, user avatar, user image, user photo, widget
-Requires at least: 3.6
-Tested up to: 4.8.3
-Stable tag: 2.0.0
+Contributors: properfraction, collizo4sky
+Tags: user profile, avatar, gravatar, author image, author photo, author avatar, bbPress, profile avatar, profile image, user avatar, user image, user photo, widget
+Requires at least: 4.0
+Tested up to: 5.4
+Stable tag: 2.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Use any image from your WordPress Media Library as a custom user avatar. Add your own Default Avatar.
+Use any image from your WordPress Media Library as a custom user avatar or user profile picture. Add your own Default Avatar.
 
 == Description ==
 
@@ -25,35 +25,9 @@ WordPress currently only allows you to use custom avatars that are uploaded thro
 * Allow Contributors and Subscribers to upload their own avatars.
 * Limit upload file size and image dimensions for Contributors and Subscribers.
 
-**Introducing Support Desk**
-
-We're at [FlipperCode](http://www.flippercode.com/), committed to excellent support to make every download worth for the user. Happily announcing [Support Desk](http://www.flippercode.com/forums/) for our valuable users to engaged with multiple support desk person for fast turnout.
-
-**Introducing Pro Version of WP USER AVATAR**
-
-We have developed a [Pro Version](http://www.flippercode.com/product/wp-user-avatar/)  of WP USER AVATAR by getting valuable features request from thousands of users especially about Storage options and how user upload the avatar. Here is a quick highlight on the numerous customizable features offered by the [WP USER AVATAR PRO](http://www.flippercode.com/product/wp-user-avatar/) .
-
-<ul>
-<li>Easy Upload and Capture functionality with crop  avatar options.</li>
-<li>Use Webcam to get Avatar instantly.</li>
-<li>Allow user to upload avatar on Registration Page.</li>
-<li>Easy to adjust avatar dimensions.</li>
-<li>Enable to add or edit avatar while adding existing user to the blog in multi-site network.</li>
-<li>Keep Avatars in Custom Folder instead of Media Manager.</li>
-<li>Keep Avatars on Amazon S3 Storage</li>
-<li>Keep Avatars on Dropbox</li>
-<li>Keep Avatars in Media Manager</li>
-<li>Easy to use Settings to control every functionality.</li>
-<li>Multi-lingual, Multi-Site, BBPRESS and Buddypress Supported.</li>
-</ul>
-
-Innovative Way to Setup User Avatar : 
-[youtube https://www.youtube.com/watch?v=Ee2K7YpsAnM]
-
-
 == Installation ==
 
-Visit [WP User Avatar](http://www.flippercode.com/product/wp-user-avatar/) for more information and documentation.
+Visit [WP User Avatar](http://www.wpuseravatar.com/) for more information and documentation.
 
 1. Download, install, and activate the WP User Avatar plugin.
 2. On your profile edit page, click "Edit Image".
@@ -161,7 +135,7 @@ Returns true if the user has a WP User Avatar image. You must specify the user I
 
 == Frequently Asked Questions ==
 
-Visit [WP User Avatar](http://www.flippercode.com/product/wp-user-avatar/) for more information and documentation.
+Visit [WP User Avatar](http://www.wpuseravatar.com/) for more information and documentation.
 
 = How do I use WP User Avatar? =
 
@@ -207,10 +181,6 @@ Yes!
 = Will WP User Avatar work with BuddyPress? =
 
 No, BuddyPress has its own custom avatar functions and WP User Avatar will override only some of them. It's best to use BuddyPress without WP User Avatar.
-
-= Will WP User Avatar work with WordPress Multisite? =
-
-Yes, however, each site has its own avatar settings. If you set a WP User Avatar image on one site, you have to set it again for different sites in your network.
 
 = How can I see which users have an avatar? =
 
@@ -291,11 +261,6 @@ Outputs:
 * <code>get_wp_user_avatar_src</code>: retrieves just the image URL
 * <code>has_wp_user_avatar</code>: checks if the user has a WP User Avatar image
 * [See example usage here](http://wordpress.org/extend/plugins/wp-user-avatar/installation/)
-
-= There's a call for donations in the WP User Avatar settings. How can I remove it? =
-I've spent countless hours developing this plugin for free. If you're able to give a donation I'd appreciate it, but it's by no means a requirement. You can remove the message by adding this to the <code>functions.php</code> file of your theme:
-
-`remove_action('wpua_donation_message', 'wpua_do_donation_message');`
 
 == Advanced Settings ==
 
@@ -404,6 +369,54 @@ This would output:
 4. After you've chosen a WP User Avatar image, you will see the option to remove it.
 
 == Changelog ==
+
+= 2.2.6 =
+* Improve compatibility with latest WordPress version.
+
+= 2.2.5 =
+* Fix: Missing translation strings added.
+
+= 2.2.4 =
+* Fix: Warning Resolved on Avatar images.
+
+= 2.2.3 =
+* Fix: Broken Avatar in buddypress resolved.
+
+= 2.2.2 =
+* Fix: Broken avatars on comments section.
+
+= 2.2.1 =
+* Fix: get_avatar_url filter is defined.
+
+= 2.2.0 =
+* Fix: Fatel Error "Cannot use string offset as an array" resolved in PHP7.2.
+
+= 2.1.9 =
+* New: New filter 'wpua_default_alt_tag' added to modify default image alt tag And warning error resolved on stagging environment.
+
+= 2.1.8 =
+* Fix: Language Files are updated and warning error resolved on stagging environment.
+
+= 2.1.7 =
+* Fix: Default ALT tag added.
+
+= 2.1.6 =
+* Fix: Removed ads from the setting page.
+
+= 2.1.5 =
+* Fix: Translation bug resolved in class-wp-user-avatar-admin file in PHP 7.
+
+= 2.1.4 =
+* Fix: Remove Ads from dashboard and all other pages.
+
+= 2.1.3 =
+* Fix: Better Styling
+
+= 2.1.2 =
+* Fix: Tested up to 4.9.7
+
+= 2.1.1 =
+* Fix: Insecure content over https issue is fixed.
 
 = 2.0.9 =
 * New Shortcode: Use [avatar user=current] shortcode to show current logged in user avatar.

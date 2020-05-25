@@ -172,24 +172,6 @@ function wpua_do_after_avatar_admin() {
 add_action('wpua_after_avatar_admin', 'wpua_do_after_avatar_admin');
 
 /**
- * Filter for the inevitable complaints about the donation message :(
- * @since 1.6.6
- * @uses do_action()
- */
-function wpua_donation_message() {
-  do_action('wpua_donation_message');
-}
-
-/**
- * Donation message
- * @since 1.6.6
- */
-function wpua_do_donation_message() { ?>
- <?php 
-}
-//add_action('wpua_donation_message', 'wpua_do_donation_message');
-
-/**
  * Register widget
  * @since 1.9.4
  * @uses register_widget()
