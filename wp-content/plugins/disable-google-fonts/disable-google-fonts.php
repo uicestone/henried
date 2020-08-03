@@ -3,7 +3,7 @@
 /**
  * The Disable Google Fonts Plugin
  *
- * Disable enqueuing of Open Sans and other fonts used by WordPress from Google.
+ * Disable enqueuing of fonts from Google used by WordPress core, default themes, Gutenberg, and many more
  *
  * @package Disable_Google_Fonts
  * @subpackage Main
@@ -11,11 +11,11 @@
 
 /**
  * Plugin Name: Disable Google Fonts
- * Plugin URI:  http://blog.milandinic.com/wordpress/plugins/disable-google-fonts/
- * Description: Disable enqueuing of Open Sans and other fonts used by WordPress from Google.
+ * Plugin URI:  https://milandinic.com/wordpress/plugins/disable-google-fonts/
+ * Description: Disable enqueuing of fonts from Google used by WordPress core, default themes, Gutenberg, and many more.
  * Author:      Milan Dinić
- * Author URI:  http://blog.milandinic.com/
- * Version:     1.3
+ * Author URI:  https://milandinic.com/
+ * Version:     2.0
  * Text Domain: disable-google-fonts
  * Domain Path: /languages/
  * License:     GPL
@@ -27,13 +27,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Disable_Google_Fonts {
 	/**
 	 * Hook actions and filters.
-	 * 
+	 *
 	 * @since 1.0
 	 * @access public
 	 */
 	public function __construct() {
-		add_filter( 'gettext_with_context', array( $this, 'disable_open_sans'             ), 888, 4 );
-		add_action( 'after_setup_theme',    array( $this, 'register_theme_fonts_disabler' ), 1      );
+		add_filter( 'gettext_with_context', array( $this, 'disable_google_fonts' ), 888, 4 );
 	}
 
 	/**
@@ -51,6 +50,125 @@ class Disable_Google_Fonts {
 		_deprecated_function( __METHOD__, '1.3' );
 
 		return $links;
+	}
+
+	/**
+	 * Force 'off' as a result of font toggler string translation.
+	 *
+	 * @since 2.0
+	 * @access public
+	 *
+	 * @param  string $translations Translated text.
+	 * @param  string $text         Text to translate.
+	 * @param  string $context      Context information for the translators.
+	 * @param  string $domain       Text domain. Unique identifier for retrieving translated strings.
+	 * @return string $translations Translated text.
+	 */
+	public function disable_google_fonts( $translations, $text, $context, $domain ) {
+		switch ( $text ) {
+			case 'on':
+				// Pass for most cases.
+				if ( $this->is_ending_with_font_toggler( $context ) || in_array( $context, $this->get_font_toggler_variants() ) ) {
+					$translations = 'off';
+				}
+				break;
+			case 'Noto Serif:400,400i,700,700i':
+				if ( 'Google Font Name and Variants' === $context ) {
+					$translations = 'off';
+				}
+				break;
+		}
+
+		return $translations;
+	}
+
+	/**
+	 * Check if text is ending with variation of 'font(s):( )on or off'.
+	 *
+	 * For most strings that are used as font togglers, context is ending
+	 * with this text. This method checks if that is the case.
+	 *
+	 * @since 2.0
+	 * @access public
+	 *
+	 * @param string $text Text to check.
+	 * @return bool Whether text is ending with phrase or not.
+	 */
+	public function is_ending_with_font_toggler( $text ) {
+		if ( preg_match( '/font[s]?:\s?on or off$/i', $text ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Get context variants that cannot be detected with string font toggler checker.
+	 *
+	 * @since 2.0
+	 *
+	 * @return array
+	 */
+	public function get_font_toggler_variants() {
+		return array(
+			'arimo:on or off',
+			'Assistant:on or off',
+			'Atma: on or off',
+			'Crimson Text: on or off',
+			'Dancing Script: on or off',
+			'Droid sans: on or off',
+			'Google font: on',
+			'Google Font for body text: on or off',
+			'Google Font for heading text: on or off',
+			'Google Font for menu text: on or off',
+			'Google fonts: "on" or "off"',
+			'Great Vibes:on or off',
+			'greatvibes:on or off',
+			'Hind: on or off',
+			'Indie Flower: on or off',
+			'Josefin Sans: on or off',
+			'Lato: on or off',
+			'Lato:on or off',
+			'Lato : on or off',
+			'Lobster:on or off',
+			'Lora: on or off',
+			'Merriweather: on or off',
+			'Merriweather:on or off',
+			'montserrat:on or off',
+			'Muli: on or off',
+			'Nunito Sans: on or off',
+			'Open Sans',
+			'Open Sans:on or off',
+			'Open Sans: on or off',
+			'opensans:on or off',
+			'Open Sans : on or off',
+			'Oswald:on or off',
+			'oswald:on or off',
+			'Oxygen: on or off',
+			'Pacifico: on or off',
+			'Pacifico:on or off',
+			'pacifico:on or off',
+			'Poppins: on or off',
+			'playball:on or off',
+			'Playfair Display: on or off',
+			'Product Sans: on or off',
+			'pt_sans:on or off',
+			'Raleway: on or off',
+			'Roboto',
+			'Roboto: on or off',
+			'roboto:on or off',
+			'Roboto:on or off',
+			'Roboto : on or off',
+			'Roboto Condensed',
+			'Roboto Condensed:on or off',
+			'roboto_condensed:on or off',
+			'robotocondensed:on or off',
+			'Roboto Slab:on or off',
+			'Sail:on or off',
+			'Scada:on or off',
+			'scada:on or off',
+			'Shadows Into Light: on or off',
+		);
 	}
 
 	/**
