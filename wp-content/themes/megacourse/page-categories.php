@@ -24,8 +24,8 @@
 		</div>
 		<div class="page-view">
 			查看方式
-			<span class="page-view-info view-grid active" title="平铺"><i class="icon md-ico-2"></i></span>
-			<span class="page-view-info view-list" title="列表"><i class="icon md-ico-1"></i></span>
+			<span class="page-view-info view-grid" title="平铺"><i class="icon md-ico-2"></i></span>
+			<span class="page-view-info view-list active" title="列表"><i class="icon md-ico-1"></i></span>
 			<!--<div class="mc-select">
 				<select class="select" name="" id="all-categories">
 					<option value="">All level</option>
@@ -43,7 +43,7 @@
 		<div class="row">
 
 			<div class="col-md-9 col-md-push-3">
-				<div class="content grid">
+				<div class="content list">
 					<div class="row">
 						<!-- ITEM -->
 						<?php
