@@ -80,7 +80,7 @@
 
 				<div class="col-md-7">
 					<div class="image">
-						<img src="<?=get_stylesheet_directory_uri()?>/images/accounting-body.jpg" alt="">
+						<img src="<?=get_stylesheet_directory_uri()?>/images/acca-structure.jpg" alt="">
 					</div>
 				</div>
 
