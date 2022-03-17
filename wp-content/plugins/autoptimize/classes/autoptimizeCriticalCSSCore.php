@@ -25,6 +25,7 @@ class autoptimizeCriticalCSSCore {
         global $ao_css_defer;
         global $ao_ccss_deferjquery;
         global $ao_ccss_key;
+        global $ao_ccss_unloadccss;
 
         // add all filters to do CCSS if key present.
         if ( $ao_css_defer && isset( $ao_ccss_key ) && ! empty( $ao_ccss_key ) ) {
@@ -35,9 +36,18 @@ class autoptimizeCriticalCSSCore {
             // Add the action to enqueue jobs for CriticalCSS cron.
             add_action( 'autoptimize_action_css_hash', array( 'autoptimizeCriticalCSSEnqueue', 'ao_ccss_enqueue' ), 10, 1 );
 
-            // conditionally add the filter to defer jquery and others.
-            if ( $ao_ccss_deferjquery ) {
+            // conditionally add the filter to defer jquery and others but only if not done so in autoptimizeScripts.
+            $_native_defer = false;
+            if ( 'on' === autoptimizeOptionWrapper::get_option( 'autoptimize_js_defer_not_aggregate' ) && 'on' === autoptimizeOptionWrapper::get_option( 'autoptimize_js_defer_inline' ) ) {
+                $_native_defer = true;
+            }
+            if ( $ao_ccss_deferjquery && ! $_native_defer ) {
                 add_filter( 'autoptimize_html_after_minify', array( $this, 'ao_ccss_defer_jquery' ), 11, 1 );
+            }
+
+            // conditionally add filter to unload the CCSS.
+            if ( $ao_ccss_unloadccss ) {
+                add_filter( 'autoptimize_html_after_minify', array( $this, 'ao_ccss_unloadccss' ), 12, 1 );
             }
 
             // Order paths by length, as longest ones have greater priority in the rules.
@@ -53,6 +63,9 @@ class autoptimizeCriticalCSSCore {
 
             // Extend conditional tags on plugin initalization.
             add_action( apply_filters( 'autoptimize_filter_ccss_extend_types_hook', 'init' ), array( $this, 'ao_ccss_extend_types' ) );
+
+            // When autoptimize cache is cleared, also clear transient cache for page templates.
+            add_action( 'autoptimize_action_cachepurged', array( 'autoptimizeCriticalCSSCore', 'ao_ccss_clear_page_tpl_cache' ), 10, 0 );
         }
     }
 
@@ -65,7 +78,9 @@ class autoptimizeCriticalCSSCore {
         global $ao_ccss_loggedin;
         global $ao_ccss_debug;
         global $ao_ccss_keyst;
+
         $no_ccss = '';
+        $ao_ccss_additional = autoptimizeStyles::sanitize_css( $ao_ccss_additional );
 
         // Only if keystatus is OK and option to add CCSS for logged on users is on or user is not logged in.
         if ( ( $ao_ccss_keyst && 2 == $ao_ccss_keyst ) && ( $ao_ccss_loggedin || ! is_user_logged_in() ) ) {
@@ -74,7 +89,7 @@ class autoptimizeCriticalCSSCore {
             if ( ! empty( $ao_ccss_rules['paths'] ) ) {
                 foreach ( $ao_ccss_rules['paths'] as $path => $rule ) {
                     // explicit match OR partial match if MANUAL rule.
-                    if ( $req_path == $path || urldecode( $req_path ) == $path || ( false == $rule['hash'] && false != $rule['file'] && strpos( $req_path, str_replace( site_url(), '', $path ) ) !== false ) ) {
+                    if ( $req_path == $path || urldecode( $req_path ) == $path || ( apply_filters( 'autoptimize_filter_ccss_core_path_partial_match', true ) && false == $rule['hash'] && false != $rule['file'] && strpos( $req_path, str_replace( site_url(), '', $path ) ) !== false ) ) {
                         if ( file_exists( AO_CCSS_DIR . $rule['file'] ) ) {
                             $_ccss_contents = file_get_contents( AO_CCSS_DIR . $rule['file'] );
                             if ( 'none' != $_ccss_contents ) {
@@ -161,21 +176,36 @@ class autoptimizeCriticalCSSCore {
     }
 
     public function ao_ccss_defer_jquery( $in ) {
-        // try to defer all JS (main goal being jquery.js as AO by default does not aggregate that).
+        global $ao_ccss_loggedin;
+        // defer all linked and inline JS.
         if ( ( ! is_user_logged_in() || $ao_ccss_loggedin ) && preg_match_all( '#<script.*>(.*)</script>#Usmi', $in, $matches, PREG_SET_ORDER ) ) {
             foreach ( $matches as $match ) {
-                if ( ( ! preg_match( '/<script.* type\s?=.*>/', $match[0] ) || preg_match( '/type\s*=\s*[\'"]?(?:text|application)\/(?:javascript|ecmascript)[\'"]?/i', $match[0] ) ) && '' !== $match[1] && ( false !== strpos( $match[1], 'jQuery' ) || false !== strpos( $match[1], '$' ) ) ) {
-                    // inline js that requires jquery, wrap deferring JS around it to defer it.
-                    $new_match = 'var aoDeferInlineJQuery=function(){' . $match[1] . '}; if (document.readyState === "loading") {document.addEventListener("DOMContentLoaded", aoDeferInlineJQuery);} else {aoDeferInlineJQuery();}';
-                    $in        = str_replace( $match[1], $new_match, $in );
-                } elseif ( '' === $match[1] && false !== strpos( $match[0], 'src=' ) && false === strpos( $match[0], 'defer' ) ) {
-                    // linked non-aggregated JS, defer it.
+                if ( str_replace( apply_filters( 'autoptimize_filter_ccss_core_defer_exclude', array( 'data-noptimize="1"', 'data-cfasync="false"', 'data-pagespeed-no-defer' ) ), '', $match[0] ) !== $match[0] ) {
+                    // do not touch JS with noptimize/ cfasync/ pagespeed-no-defer flags.
+                    continue;
+                } elseif ( '' !== $match[1] && ( ! preg_match( '/<script.* type\s?=.*>/', $match[0] ) || preg_match( '/type\s*=\s*[\'"]?(?:text|application)\/(?:javascript|ecmascript)[\'"]?/i', $match[0] ) ) ) {
+                    // base64-encode and defer all inline JS.
+                    $base64_js = '<script defer src="data:text/javascript;base64,' . base64_encode( $match[1] ) . '"></script>';
+                    $in        = str_replace( $match[0], $base64_js, $in );
+                } elseif ( str_replace( array( ' defer', ' async' ), '', $match[0] ) === $match[0] ) {
+                    // and defer linked JS unless already deferred or asynced.
                     $new_match = str_replace( '<script ', '<script defer ', $match[0] );
                     $in        = str_replace( $match[0], $new_match, $in );
                 }
             }
         }
         return $in;
+    }
+
+    public function ao_ccss_unloadccss( $html_in ) {
+        // set media attrib of inline CCSS to none at onLoad to avoid it impacting full CSS (rarely needed).
+        $_unloadccss_js = apply_filters( 'autoptimize_filter_ccss_core_unloadccss_js', '<script>window.addEventListener("load", function(event) {var el = document.getElementById("aoatfcss"); if(el) el.media = "none";})</script>' );
+
+        if ( false !== strpos( $html_in, $_unloadccss_js . '</body>' ) ) {
+            return $html_in;
+        }
+
+        return str_replace( '</body>', $_unloadccss_js . '</body>', $html_in );
     }
 
     public function ao_ccss_extend_types() {
@@ -203,7 +233,12 @@ class autoptimizeCriticalCSSCore {
         }
 
         // Templates.
-        $templates = wp_get_theme()->get_page_templates();
+        // Transient cache to avoid frequent disk reads.
+        $templates = get_transient( 'autoptimize_ccss_page_templates' );
+        if ( ! $templates ) {
+            $templates = wp_get_theme()->get_page_templates();
+            set_transient( 'autoptimize_ccss_page_templates', $templates, HOUR_IN_SECONDS );
+        }
         foreach ( $templates as $tplfile => $tplname ) {
             array_unshift( $ao_ccss_types, 'template_' . $tplfile );
         }
@@ -529,17 +564,17 @@ class autoptimizeCriticalCSSCore {
         // Perform basic exploit avoidance and CSS validation.
         if ( ! empty( $ccss ) ) {
             // Try to avoid code injection.
-            $blacklist = array( '#!/', 'function(', '<script', '<?php' );
-            foreach ( $blacklist as $blacklisted ) {
-                if ( strpos( $ccss, $blacklisted ) !== false ) {
-                    autoptimizeCriticalCSSCore::ao_ccss_log( 'Critical CSS received contained blacklisted content.', 2 );
+            $blocklist = array( '#!/', 'function(', '<script', '<?php' );
+            foreach ( $blocklist as $blocklisted ) {
+                if ( strpos( $ccss, $blocklisted ) !== false ) {
+                    autoptimizeCriticalCSSCore::ao_ccss_log( 'Critical CSS received contained blocklisted content.', 2 );
                     return false;
                 }
             }
 
             // Check for most basics CSS structures.
-            $pinklist = array( '{', '}', ':' );
-            foreach ( $pinklist as $needed ) {
+            $needlist = array( '{', '}', ':' );
+            foreach ( $needlist as $needed ) {
                 if ( false === strpos( $ccss, $needed ) && 'none' !== $ccss ) {
                     autoptimizeCriticalCSSCore::ao_ccss_log( 'Critical CSS received did not seem to contain real CSS.', 2 );
                     return false;
@@ -589,4 +624,10 @@ class autoptimizeCriticalCSSCore {
             error_log( $message, 3, AO_CCSS_LOG );
         }
     }
+
+    public static function ao_ccss_clear_page_tpl_cache() {
+        // Clears transient cache for page templates.
+        delete_transient( 'autoptimize_ccss_page_templates' );
+    }
+
 }

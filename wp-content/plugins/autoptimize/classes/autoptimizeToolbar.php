@@ -17,13 +17,18 @@ class autoptimizeToolbar
         }
 
         // Load admin toolbar feature once WordPress, all plugins, and the theme are fully loaded and instantiated.
-        add_action( 'wp_loaded', array( $this, 'load_toolbar' ) );
+        if ( is_admin() ) {
+            add_action( 'wp_loaded', array( $this, 'load_toolbar' ) );
+        } else {
+            // to avoid AMP complaining about the AMP conditional being checked too early.
+            add_action( 'wp', array( $this, 'load_toolbar' ) );
+        }
     }
 
     public function load_toolbar()
     {
         // Check permissions and that toolbar is not hidden via filter.
-        if ( current_user_can( 'manage_options' ) && apply_filters( 'autoptimize_filter_toolbar_show', true ) ) {
+        if ( current_user_can( 'manage_options' ) && apply_filters( 'autoptimize_filter_toolbar_show', true ) && ! autoptimizeMain::is_amp_markup('') ) {
 
             // Create a handler for the AJAX toolbar requests.
             add_action( 'wp_ajax_autoptimize_delete_cache', array( $this, 'delete_cache' ) );
@@ -74,9 +79,10 @@ class autoptimizeToolbar
 
         // Create or add new items into the Admin Toolbar.
         // Main "Autoptimize" node.
+        $_my_name = apply_filters( 'autoptimize_filter_settings_is_pro', false ) ? __( 'Autoptimize Pro', 'autoptimize' ) : __( 'Autoptimize', 'autoptimize' );
         $wp_admin_bar->add_node( array(
             'id'    => 'autoptimize',
-            'title' => '<span class="ab-icon"></span><span class="ab-label">' . __( 'Autoptimize', 'autoptimize' ) . '</span>',
+            'title' => '<span class="ab-icon"></span><span class="ab-label">' . $_my_name . '</span>',
             'href'  => admin_url( 'options-general.php?page=autoptimize' ),
             'meta'  => array( 'class' => 'bullet-' . $color ),
         ));
@@ -84,7 +90,7 @@ class autoptimizeToolbar
         // "Cache Info" node.
         $wp_admin_bar->add_node( array(
             'id'     => 'autoptimize-cache-info',
-            'title'  => '<p>' . __( 'Cache Info', 'autoptimize' ) . '</p>' .
+            'title'  => '<p>' . __( 'CSS/ JS Cache Info', 'autoptimize' ) . '</p>' .
                         '<div class="autoptimize-radial-bar" percentage="' . $percentage . '">' .
                         '<div class="autoptimize-circle">' .
                         '<div class="mask full"><div class="fill bg-' . $color . '"></div></div>' .
@@ -103,7 +109,7 @@ class autoptimizeToolbar
         // "Delete Cache" node.
         $wp_admin_bar->add_node( array(
             'id'     => 'autoptimize-delete-cache',
-            'title'  => __( 'Delete Cache', 'autoptimize' ),
+            'title'  => __( 'Clear CSS/ JS Cache', 'autoptimize' ),
             'parent' => 'autoptimize',
         ));
     }

@@ -60,12 +60,11 @@ class autoptimizeMain
         add_action( 'autoptimize_setup_done', array( $this, 'version_upgrades_check' ) );
         add_action( 'autoptimize_setup_done', array( $this, 'check_cache_and_run' ) );
         add_action( 'autoptimize_setup_done', array( $this, 'maybe_run_ao_extra' ), 15 );
-        add_action( 'autoptimize_setup_done', array( $this, 'maybe_run_partners_tab' ), 20 );
+        add_action( 'autoptimize_setup_done', array( $this, 'maybe_run_admin_only_trinkets' ), 20 );
         add_action( 'autoptimize_setup_done', array( $this, 'maybe_run_criticalcss' ), 11 );
         add_action( 'autoptimize_setup_done', array( $this, 'maybe_run_notfound_fallback' ), 10 );
 
         add_action( 'init', array( $this, 'load_textdomain' ) );
-        add_action( 'admin_init', array( 'PAnD', 'init' ) );
 
         if ( is_multisite() && is_admin() ) {
             // Only if multisite and if in admin we want to check if we need to save options on network level.
@@ -187,6 +186,10 @@ class autoptimizeMain
                 if ( class_exists( 'Jetpack' ) && apply_filters( 'autoptimize_filter_main_disable_jetpack_cdn', true ) && ( $conf->get( 'autoptimize_js' ) || $conf->get( 'autoptimize_css' ) ) ) {
                     add_filter( 'jetpack_force_disable_site_accelerator', '__return_true' );
                 }
+
+                // Add "no cache found" notice.
+                add_action( 'admin_notices', 'autoptimizeMain::notice_nopagecache', 99 );
+                add_action( 'admin_notices', 'autoptimizeMain::notice_potential_conflict', 99 );
             }
         } else {
             add_action( 'admin_notices', 'autoptimizeMain::notice_cache_unavailable' );
@@ -206,11 +209,12 @@ class autoptimizeMain
         }
     }
 
-    public function maybe_run_partners_tab()
+    public function maybe_run_admin_only_trinkets()
     {
-        // Loads partners tab code if in admin (and not in admin-ajax.php)!
+        // Loads partners tab and exit survey code if in admin (and not in admin-ajax.php)!
         if ( autoptimizeConfig::is_admin_and_not_ajax() ) {
             new autoptimizePartners();
+            new autoptimizeExitSurvey();
         }
     }
 
@@ -367,6 +371,11 @@ class autoptimizeMain
                 $ao_noptimize = true;
             }
 
+            // If page/ post check post_meta to see if optimize is off.
+            if ( false === autoptimizeConfig::get_post_meta_ao_settings( 'ao_post_optimize' ) ) {
+                $ao_noptimize = true;
+            }
+
             // And finally allows blocking of autoptimization on your own terms regardless of above decisions.
             $ao_noptimize = (bool) apply_filters( 'autoptimize_filter_noptimize', $ao_noptimize );
 
@@ -431,14 +440,29 @@ class autoptimizeMain
      */
     public static function is_amp_markup( $content )
     {
-        // Short-circuit when a function is available to determine whether the response is (or will be) an AMP page.
-        if ( function_exists( 'is_amp_endpoint' ) ) {
-            return is_amp_endpoint();
+        // Short-circuit if the page is already AMP from the start.
+        if (
+            preg_match(
+                sprintf(
+                    '#^(?:<!.*?>|\s+)*+<html(?=\s)[^>]*?\s(%1$s|%2$s|%3$s)(\s|=|>)#is',
+                    'amp',
+                    "\xE2\x9A\xA1", // From \AmpProject\Attribute::AMP_EMOJI.
+                    "\xE2\x9A\xA1\xEF\xB8\x8F" // From \AmpProject\Attribute::AMP_EMOJI_ALT, per https://github.com/ampproject/amphtml/issues/25990.
+                ),
+                $content
+            )
+        ) {
+            return true;
         }
 
-        $is_amp_markup = preg_match( '/<html[^>]*(?:amp|⚡)/i', $content );
+        // Or else short-circuit if the AMP plugin will be processing the output to be an AMP page.
+        if ( function_exists( 'amp_is_request' ) ) {
+            return amp_is_request(); // For AMP plugin v2.0+.
+        } elseif ( function_exists( 'is_amp_endpoint' ) ) {
+            return is_amp_endpoint(); // For older/other AMP plugins (still supported in 2.0 as an alias).
+        }
 
-        return (bool) $is_amp_markup;
+        return false;
     }
 
     /**
@@ -472,14 +496,16 @@ class autoptimizeMain
 
         $classoptions = array(
             'autoptimizeScripts' => array(
-                'aggregate'       => $conf->get( 'autoptimize_js_aggregate' ),
-                'justhead'        => $conf->get( 'autoptimize_js_justhead' ),
-                'forcehead'       => $conf->get( 'autoptimize_js_forcehead' ),
-                'trycatch'        => $conf->get( 'autoptimize_js_trycatch' ),
-                'js_exclude'      => $conf->get( 'autoptimize_js_exclude' ),
-                'cdn_url'         => $conf->get( 'autoptimize_cdn_url' ),
-                'include_inline'  => $conf->get( 'autoptimize_js_include_inline' ),
-                'minify_excluded' => $conf->get( 'autoptimize_minify_excluded' ),
+                'aggregate'           => $conf->get( 'autoptimize_js_aggregate' ),
+                'defer_not_aggregate' => $conf->get( 'autoptimize_js_defer_not_aggregate' ),
+                'defer_inline'        => $conf->get( 'autoptimize_js_defer_inline' ),
+                'justhead'            => $conf->get( 'autoptimize_js_justhead' ),
+                'forcehead'           => $conf->get( 'autoptimize_js_forcehead' ),
+                'trycatch'            => $conf->get( 'autoptimize_js_trycatch' ),
+                'js_exclude'          => $conf->get( 'autoptimize_js_exclude' ),
+                'cdn_url'             => $conf->get( 'autoptimize_cdn_url' ),
+                'include_inline'      => $conf->get( 'autoptimize_js_include_inline' ),
+                'minify_excluded'     => $conf->get( 'autoptimize_minify_excluded' ),
             ),
             'autoptimizeStyles'  => array(
                 'aggregate'       => $conf->get( 'autoptimize_css_aggregate' ),
@@ -549,8 +575,11 @@ class autoptimizeMain
             'autoptimize_html',
             'autoptimize_html_keepcomments',
             'autoptimize_enable_site_config',
+            'autoptimize_enable_meta_ao_settings',
             'autoptimize_js',
             'autoptimize_js_aggregate',
+            'autoptimize_js_defer_not_aggregate',
+            'autoptimize_js_defer_inline',
             'autoptimize_js_exclude',
             'autoptimize_js_forcehead',
             'autoptimize_js_justhead',
@@ -576,6 +605,7 @@ class autoptimizeMain
             'autoptimize_ccss_viewport',
             'autoptimize_ccss_finclude',
             'autoptimize_ccss_rlimit',
+            'autoptimize_ccss_rtimelimit',
             'autoptimize_ccss_noptimize',
             'autoptimize_ccss_debug',
             'autoptimize_ccss_key',
@@ -585,6 +615,7 @@ class autoptimizeMain
             'autoptimize_ccss_forcepath',
             'autoptimize_ccss_deferjquery',
             'autoptimize_ccss_domain',
+            'autoptimize_ccss_unloadccss',
         );
 
         if ( ! is_multisite() ) {
@@ -610,8 +641,14 @@ class autoptimizeMain
         $ao_ccss_dir = WP_CONTENT_DIR . '/uploads/ao_ccss/';
         if ( file_exists( $ao_ccss_dir ) && is_dir( $ao_ccss_dir ) ) {
             // fixme: should check for subdirs when in multisite and remove contents of those as well.
-            array_map( 'unlink', glob( AO_CCSS_DIR . '*.{css,html,json,log,zip,lock}', GLOB_BRACE ) );
-            rmdir( AO_CCSS_DIR );
+            array_map( 'unlink', glob( $ao_ccss_dir . '*.{css,html,json,log,zip,lock}', GLOB_BRACE ) );
+            rmdir( $ao_ccss_dir );
+        }
+
+        // Remove 404-handler (although that should have been removed in clearall already).
+        $_fallback_php = trailingslashit( WP_CONTENT_DIR ) . 'autoptimize_404_handler.php';
+        if ( file_exists( $_fallback_php ) ) {
+            unlink( $_fallback_php );
         }
     }
 
@@ -652,7 +689,7 @@ class autoptimizeMain
     public static function notice_installed()
     {
         echo '<div class="updated"><p>';
-        _e( 'Thank you for installing and activating Autoptimize. Please configure it under "Settings" -> "Autoptimize" to start improving your site\'s performance.', 'autoptimize' );
+        printf( __( 'Thank you for installing and activating Autoptimize. Please configure it under %sSettings -> Autoptimize%s to start improving your site\'s performance.', 'autoptimize' ), '<a href="options-general.php?page=autoptimize">', '</a>' );
         echo '</p></div>';
     }
 
@@ -666,16 +703,60 @@ class autoptimizeMain
     public static function notice_plug_imgopt()
     {
         // Translators: the URL added points to the Autopmize Extra settings.
-        $_ao_imgopt_plug_notice      = sprintf( __( 'Did you know Autoptimize includes on-the-fly image optimization (with support for WebP) and CDN via ShortPixel? Check out the %1$sAutoptimize Image settings%2$s to activate this option.', 'autoptimize' ), '<a href="options-general.php?page=autoptimize_imgopt">', '</a>' );
+        $_ao_imgopt_plug_notice      = sprintf( __( 'Did you know Autoptimize includes on-the-fly image optimization (with support for WebP and AVIF) and CDN via ShortPixel? Check out the %1$sAutoptimize Image settings%2$s to activate this option.', 'autoptimize' ), '<a href="options-general.php?page=autoptimize_imgopt">', '</a>' );
         $_ao_imgopt_plug_notice      = apply_filters( 'autoptimize_filter_main_imgopt_plug_notice', $_ao_imgopt_plug_notice );
         $_ao_imgopt_launch_ok        = autoptimizeImages::launch_ok_wrapper();
         $_ao_imgopt_plug_dismissible = 'ao-img-opt-plug-123';
         $_ao_imgopt_active           = autoptimizeImages::imgopt_active();
+        $_is_ao_settings_page        = autoptimizeUtils::is_ao_settings();
 
-        if ( current_user_can( 'manage_options' ) && '' !== $_ao_imgopt_plug_notice && ! $_ao_imgopt_active && $_ao_imgopt_launch_ok && PAnD::is_admin_notice_active( $_ao_imgopt_plug_dismissible ) ) {
+        if ( current_user_can( 'manage_options' ) && $_is_ao_settings_page && '' !== $_ao_imgopt_plug_notice && ! $_ao_imgopt_active && $_ao_imgopt_launch_ok && PAnD::is_admin_notice_active( $_ao_imgopt_plug_dismissible ) ) {
             echo '<div class="notice notice-info is-dismissible" data-dismissible="' . $_ao_imgopt_plug_dismissible . '"><p>';
             echo $_ao_imgopt_plug_notice;
             echo '</p></div>';
+        }
+    }
+
+    public static function notice_nopagecache()
+    {
+        /*
+         * Autoptimize does not do page caching (yet) but not everyone knows, so below logic tries to find out if page caching is available and if not show a notice on the AO Settings pages.
+         *
+         * uses helper function in autoptimizeUtils.php
+         */
+        $_ao_nopagecache_notice      = __( 'It looks like your site might not have <strong>page caching</strong> which is a <strong>must-have for performance</strong>. If you are sure you have a page cache, you can close this notice, but when in doubt check with your host if they offer this or install a page caching plugin like for example', 'autoptimize' );
+        $_ao_pagecache_install_url   = network_admin_url() . 'plugin-install.php?tab=search&type=term&s=';
+        $_ao_nopagecache_notice     .= ' <a href="' . $_ao_pagecache_install_url . 'wp+super+cache' . '">WP Super Cache</a>, <a href="' . $_ao_pagecache_install_url . 'keycdn+cache+enabler' . '">KeyCDN Cache Enabler</a>, ...';
+        $_ao_nopagecache_dismissible = 'ao-nopagecache-forever'; // the notice is only shown once and will not re-appear when dismissed.
+        $_is_ao_settings_page        = autoptimizeUtils::is_ao_settings();
+
+        if ( current_user_can( 'manage_options' ) && $_is_ao_settings_page && PAnD::is_admin_notice_active( $_ao_nopagecache_dismissible ) && true === apply_filters( 'autoptimize_filter_main_show_pagecache_notice', true ) ) {
+            if ( false === autoptimizeUtils::find_pagecache() ) {
+                echo '<div class="notice notice-info is-dismissible" data-dismissible="' . $_ao_nopagecache_dismissible . '"><p>';
+                echo $_ao_nopagecache_notice;
+                echo '</p></div>';
+            }
+        }
+    }
+
+    public static function notice_potential_conflict()
+    {
+        /*
+         * Using other plugins to do CSS/ JS optimization can cause unexpected and hard to troubleshoot issues, warn users who seem to be in that situation.
+         */
+        // Translators: the sentence will be finished with the name of the offending plugin and a final stop.
+        $_ao_potential_conflict_notice      = __( 'It looks like you have <strong>another plugin also doing CSS and/ or JS optimization</strong>, which can result in hard to troubleshoot <strong>conflicts</strong>. For this reason it is recommended to disable this functionality in', 'autoptimize' ) . ' ';
+        $_ao_potential_conflict_dismissible = 'ao-potential-conflict-forever'; // the notice is only shown once and will not re-appear when dismissed.
+        $_is_ao_settings_page               = autoptimizeUtils::is_ao_settings();
+
+        if ( current_user_can( 'manage_options' ) && $_is_ao_settings_page && PAnD::is_admin_notice_active( $_ao_potential_conflict_dismissible ) && true === apply_filters( 'autoptimize_filter_main_show_potential_conclict_notice', true ) ) {
+            $_potential_conflicts = autoptimizeUtils::find_potential_conflicts();
+            if ( false !== $_potential_conflicts ) {
+                $_ao_potential_conflict_notice .= '<strong>' . $_potential_conflicts . '</strong>.';
+                echo '<div class="notice notice-info is-dismissible" data-dismissible="' . $_ao_potential_conflict_dismissible . '"><p>';
+                echo $_ao_potential_conflict_notice;
+                echo '</p></div>';
+            }
         }
     }
 }

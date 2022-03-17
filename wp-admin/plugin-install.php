@@ -6,7 +6,7 @@
  * @subpackage Administration
  */
 // TODO: Route this page via a specific iframe handler instead of the do_action below.
-if ( ! defined( 'IFRAME_REQUEST' ) && isset( $_GET['tab'] ) && ( 'plugin-information' == $_GET['tab'] ) ) {
+if ( ! defined( 'IFRAME_REQUEST' ) && isset( $_GET['tab'] ) && ( 'plugin-information' === $_GET['tab'] ) ) {
 	define( 'IFRAME_REQUEST', true );
 }
 
@@ -21,7 +21,7 @@ if ( ! current_user_can( 'install_plugins' ) ) {
 
 if ( is_multisite() && ! is_network_admin() ) {
 	wp_redirect( network_admin_url( 'plugin-install.php' ) );
-	exit();
+	exit;
 }
 
 $wp_list_table = _get_list_table( 'WP_Plugin_Install_List_Table' );
@@ -47,6 +47,7 @@ if ( $pagenum > $total_pages && $total_pages > 0 ) {
 	exit;
 }
 
+// Used in the HTML title tag.
 $title       = __( 'Add Plugins' );
 $parent_file = 'plugins.php';
 
@@ -62,8 +63,19 @@ wp_enqueue_script( 'updates' );
 /**
  * Fires before each tab on the Install Plugins screen is loaded.
  *
- * The dynamic portion of the action hook, `$tab`, allows for targeting
- * individual tabs, for instance 'install_plugins_pre_plugin-information'.
+ * The dynamic portion of the hook name, `$tab`, allows for targeting
+ * individual tabs.
+ *
+ * Possible hook names include:
+ *
+ *  - `install_plugins_pre_beta`
+ *  - `install_plugins_pre_favorites`
+ *  - `install_plugins_pre_featured`
+ *  - `install_plugins_pre_plugin-information`
+ *  - `install_plugins_pre_popular`
+ *  - `install_plugins_pre_recommended`
+ *  - `install_plugins_pre_search`
+ *  - `install_plugins_pre_upload`
  *
  * @since 2.7.0
  */
@@ -158,14 +170,24 @@ if ( 'upload' !== $tab ) {
 	</div>
 	<?php
 	$wp_list_table->views();
-	echo '<br class="clear" />';
 }
 
 /**
  * Fires after the plugins list table in each tab of the Install Plugins screen.
  *
- * The dynamic portion of the action hook, `$tab`, allows for targeting
- * individual tabs, for instance 'install_plugins_plugin-information'.
+ * The dynamic portion of the hook name, `$tab`, allows for targeting
+ * individual tabs.
+ *
+ * Possible hook names include:
+ *
+ *  - `install_plugins_beta`
+ *  - `install_plugins_favorites`
+ *  - `install_plugins_featured`
+ *  - `install_plugins_plugin-information`
+ *  - `install_plugins_popular`
+ *  - `install_plugins_recommended`
+ *  - `install_plugins_search`
+ *  - `install_plugins_upload`
  *
  * @since 2.7.0
  *

@@ -27,6 +27,8 @@ class autoptimizeCriticalCSSSettingsAjax {
         add_action( 'wp_ajax_rm_critcss_all', array( $this, 'critcss_rm_all_callback' ) );
         add_action( 'wp_ajax_ao_ccss_export', array( $this, 'ao_ccss_export_callback' ) );
         add_action( 'wp_ajax_ao_ccss_import', array( $this, 'ao_ccss_import_callback' ) );
+        add_action( 'wp_ajax_ao_ccss_queuerunner', array( $this, 'ao_ccss_queuerunner_callback' ) );
+        add_action( 'wp_ajax_ao_ccss_saverules', array( $this, 'ao_ccss_saverules_callback' ) );
     }
 
     public function critcss_fetch_callback() {
@@ -218,7 +220,7 @@ class autoptimizeCriticalCSSSettingsAjax {
         $settings['additional'] = get_option( 'autoptimize_ccss_additional' );
         $settings['viewport']   = get_option( 'autoptimize_ccss_viewport' );
         $settings['finclude']   = get_option( 'autoptimize_ccss_finclude' );
-        $settings['rlimit']     = get_option( 'autoptimize_ccss_rlimit' );
+        $settings['rtimelimit'] = get_option( 'autoptimize_ccss_rtimelimit' );
         $settings['noptimize']  = get_option( 'autoptimize_ccss_noptimize' );
         $settings['debug']      = get_option( 'autoptimize_ccss_debug' );
         $settings['key']        = get_option( 'autoptimize_ccss_key' );
@@ -281,22 +283,36 @@ class autoptimizeCriticalCSSSettingsAjax {
         $error = false;
 
         // Process an uploaded file with no errors.
-        if ( ! $_FILES['file']['error'] ) {
-            // Save file to the cache directory.
-            $zipfile = AO_CCSS_DIR . $_FILES['file']['name'];
+        if ( current_user_can( 'manage_options' ) && ! $_FILES['file']['error'] && $_FILES['file']['size'] < 500001 && strpos( $_FILES['file']['name'], '.zip' ) === strlen( $_FILES['file']['name'] ) - 4 ) {
+            // create tmp dir with hard guess name in AO_CCSS_DIR.
+            $_secret_dir     = wp_hash( uniqid( md5( AUTOPTIMIZE_CACHE_URL ), true ) );
+            $_import_tmp_dir = trailingslashit( AO_CCSS_DIR . $_secret_dir );
+            mkdir( $_import_tmp_dir );
+
+            // Save file to that tmp directory but give it our own name to prevent directory traversal risks when using original name.
+            $zipfile = $_import_tmp_dir . uniqid( 'import_settings-', true ) . '.zip';
             move_uploaded_file( $_FILES['file']['tmp_name'], $zipfile );
 
-            // Extract archive.
+            // Extract archive in the tmp directory.
             $zip = new ZipArchive;
             if ( $zip->open( $zipfile ) === true ) {
-                $zip->extractTo( AO_CCSS_DIR );
+                // loop through all files in the zipfile.
+                for ($i = 0; $i < $zip->numFiles; $i++) {
+                    // but only extract known good files.
+                    if ( preg_match('/^settings\.json$|^ccss_[a-z0-9]{32}\.css$/', $zip->getNameIndex( $i ) ) > 0 ) {
+                        $zip->extractTo( AO_CCSS_DIR, $zip->getNameIndex( $i ) );
+                    }
+                }
                 $zip->close();
             } else {
-                $error = 'extracting';
+                $error = 'could not extract';
             }
+            
+            // and remove temp. dir with all contents (the import-zipfile).
+            $this->rrmdir( $_import_tmp_dir );
 
             if ( ! $error ) {
-                // Archive extraction ok, continue settings importing
+                // Archive extraction ok, continue importing settings from AO_CCSS_DIR.
                 // Settings file.
                 $importfile = AO_CCSS_DIR . 'settings.json';
 
@@ -309,7 +325,7 @@ class autoptimizeCriticalCSSSettingsAjax {
                     update_option( 'autoptimize_ccss_additional', $settings['additional'] );
                     update_option( 'autoptimize_ccss_viewport', $settings['viewport'] );
                     update_option( 'autoptimize_ccss_finclude', $settings['finclude'] );
-                    update_option( 'autoptimize_ccss_rlimit', $settings['rlimit'] );
+                    update_option( 'autoptimize_ccss_rtimelimit', $settings['rtimelimit'] );
                     update_option( 'autoptimize_ccss_noptimize', $settings['noptimize'] );
                     update_option( 'autoptimize_ccss_debug', $settings['debug'] );
                     update_option( 'autoptimize_ccss_key', $settings['key'] );
@@ -318,6 +334,8 @@ class autoptimizeCriticalCSSSettingsAjax {
                     $error = 'settings file does not exist';
                 }
             }
+        } else {
+            $error = 'file could not be saved';
         }
 
         // Prepare response.
@@ -327,6 +345,82 @@ class autoptimizeCriticalCSSSettingsAjax {
         } else {
             $response['code'] = '200';
             $response['msg']  = 'Settings imported successfully';
+        }
+
+        // Dispatch respose.
+        echo json_encode( $response );
+
+        // Close ajax request.
+        wp_die();
+    }
+    
+    public function ao_ccss_queuerunner_callback() {
+        check_ajax_referer( 'ao_ccss_queuerunner_nonce', 'ao_ccss_queuerunner_nonce' );
+
+        // Process an uploaded file with no errors.
+        if ( current_user_can( 'manage_options' ) ) {
+            if ( ! file_exists( AO_CCSS_LOCK ) ) {
+                $ccss_cron = new autoptimizeCriticalCSSCron();
+                $ccss_cron->ao_ccss_queue_control();
+                $response['code'] = '200';
+                $response['msg']  = 'Queue processing done';
+            } else {
+                $response['code'] = '302';
+                $response['msg']  = 'Lock file found';
+            }
+        } else {
+            $response['code'] = '500';
+            $response['msg']  = 'Not allowed';                        
+        }
+
+        // Dispatch respose.
+        echo json_encode( $response );
+
+        // Close ajax request.
+        wp_die();
+    }
+
+    public function ao_ccss_saverules_callback() {
+        check_ajax_referer( 'ao_ccss_saverules_nonce', 'ao_ccss_saverules_nonce' );
+
+        // save rules over AJAX, too many users forget to press "save changes".
+        if ( current_user_can( 'manage_options' ) ) {
+            if ( array_key_exists( 'critcssrules', $_POST ) ) {
+                $rules = stripslashes( $_POST['critcssrules'] ); // ugly, but seems correct as per https://developer.wordpress.org/reference/functions/stripslashes_deep/#comment-1045
+                if ( ! empty( $rules ) ) {
+                    $_unsafe_rules_array = json_decode( wp_strip_all_tags( $rules ), true );
+                    if ( ! empty( $_unsafe_rules_array ) && is_array( $_unsafe_rules_array ) ) {
+                        $_safe_rules_array = array();
+                        if ( array_key_exists( 'paths', $_unsafe_rules_array ) ) {
+                            $_safe_rules_array['paths'] = $_unsafe_rules_array['paths'];
+                        }
+                        if ( array_key_exists( 'types', $_unsafe_rules_array ) ) {
+                            $_safe_rules_array['types'] = $_unsafe_rules_array['types'];
+                        }
+                        $_safe_rules = json_encode( $_safe_rules_array, JSON_FORCE_OBJECT );
+                        if ( ! empty( $_safe_rules ) ) {
+                            update_option( 'autoptimize_ccss_rules', $_safe_rules );
+                            $response['code'] = '200';
+                            $response['msg']  = 'Rules saved';
+                        } else {
+                            $_error = 'Could not auto-save rules (safe rules empty)';
+                        }
+                    } else {
+                        $_error = 'Could not auto-save rules (rules could not be json_decoded)';
+                    }
+                } else {
+                    $_error = 'Could not auto-save rules (rules empty)';
+                }
+            } else {
+                $_error = 'Could not auto-save rules (rules not in $_POST)';
+            }
+        } else {
+            $_error = 'Not allowed';
+        }
+
+        if ( ! isset( $response ) && $_error ) {
+            $response['code'] = '500';
+            $response['msg']  = $_error;
         }
 
         // Dispatch respose.
@@ -348,5 +442,17 @@ class autoptimizeCriticalCSSSettingsAjax {
         } else {
             return true;
         }
+    }
+    
+    public function rrmdir( $path ) {
+        // recursively remove a directory as found on
+        // https://andy-carter.com/blog/recursively-remove-a-directory-in-php.
+        $files = glob($path . '/*');
+        foreach ( $files as $file ) {
+            is_dir( $file ) ? $this->rrmdir( $file ) : unlink( $file );
+        }
+        rmdir( $path );
+
+        return;
     }
 }
