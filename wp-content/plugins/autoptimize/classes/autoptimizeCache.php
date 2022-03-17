@@ -95,6 +95,11 @@ class autoptimizeCache
      */
     public function cache( $data, $mime )
     {
+        // readonly FS explicitly OK'ed by developer, so just pretend all is OK.
+        if ( defined( 'AUTOPTIMIZE_CACHE_READONLY' ) ) {
+            return true;
+        }
+
         // off by default; check if cachedirs exist every time before caching
         //
         // to be activated for users that experience these ugly errors;
@@ -119,7 +124,7 @@ class autoptimizeCache
             if ( self::do_fallback() && strpos( $this->filename, '_snippet_' ) === false && strpos( $this->filename, '_single_' ) === false ) {
                 $_extension     = pathinfo( $this->filename, PATHINFO_EXTENSION );
                 $_fallback_file = AUTOPTIMIZE_CACHEFILE_PREFIX . 'fallback.' . $_extension;
-                if ( ! file_exists( $this->cachedir . $_extension . '/' . $_fallback_file ) ) {
+                if ( ( 'css' === $_extension || 'js' === $_extension ) && ! file_exists( $this->cachedir . $_extension . '/' . $_fallback_file ) ) {
                     file_put_contents( $this->cachedir . $_extension . '/' . $_fallback_file, $data );
                 }
             }
@@ -529,6 +534,11 @@ class autoptimizeCache
      */
     public static function cacheavail()
     {
+        // readonly FS explicitly OK'ed by dev, let's assume the cache dirs are there!
+        if ( defined( 'AUTOPTIMIZE_CACHE_READONLY' ) ) {
+            return true;
+        }
+
         if ( false === autoptimizeCache::check_and_create_dirs() ) {
             return false;
         }
@@ -622,10 +632,13 @@ class autoptimizeCache
         $_fallback_php      = trailingslashit( WP_CONTENT_DIR ) . $_fallback_filename;
         $_fallback_status   = true;
 
-        if ( ! file_exists( $_fallback_php ) ) {
+        if ( ! file_exists( $_fallback_php ) && is_writable( WP_CONTENT_DIR ) ) {
             $_fallback_php_contents = file_get_contents( AUTOPTIMIZE_PLUGIN_DIR . 'config/' . $_fallback_filename );
             $_fallback_php_contents = str_replace( '<?php exit;', '<?php', $_fallback_php_contents );
             $_fallback_php_contents = str_replace( '<!--ao-cache-dir-->', AUTOPTIMIZE_CACHE_DIR, $_fallback_php_contents );
+            if ( is_multisite() ) {
+                $_fallback_php_contents = str_replace( '$multisite = false;', '$multisite = true;', $_fallback_php_contents );
+            }
             if ( apply_filters( 'autoptimize_filter_cache_fallback_log_errors', false ) ) {
                 $_fallback_php_contents = str_replace( '// error_log', 'error_log', $_fallback_php_contents );
             }
@@ -647,7 +660,7 @@ class autoptimizeCache
         static $_do_fallback = null;
 
         if ( null === $_do_fallback ) {
-            $_do_fallback = (bool) apply_filters( 'autoptimize_filter_cache_do_fallback', autoptimizeOptionWrapper::get_option( 'autoptimize_cache_fallback', '' ) );
+            $_do_fallback = (bool) apply_filters( 'autoptimize_filter_cache_do_fallback', autoptimizeOptionWrapper::get_option( 'autoptimize_cache_fallback', '1' ) );
         }
 
         return $_do_fallback;
@@ -668,6 +681,11 @@ class autoptimizeCache
             // set fallback path.
             $js_or_css     = pathinfo( $original_request, PATHINFO_EXTENSION );
             $fallback_path = AUTOPTIMIZE_CACHE_DIR . $js_or_css . '/autoptimize_fallback.' . $js_or_css;
+
+            // prepare for Shakeeb's Unused CSS files to be 404-handled as well.
+            if ( strpos( $original_request, 'uucss/uucss-' ) !== false ) {
+                $original_request = preg_replace( '/uucss\/uucss-[a-z0-9]{32}-/', 'css/', $original_request  );
+            }
 
             // set fallback URL.
             $fallback_target = preg_replace( '/(.*)_(?:[a-z0-9]{32})\.(js|css)$/', '${1}_fallback.${2}', $original_request );
@@ -756,6 +774,10 @@ class autoptimizeCache
             w3tc_pgcache_flush();
         } elseif ( function_exists( 'wp_fast_cache_bulk_delete_all' ) ) {
             wp_fast_cache_bulk_delete_all();
+        } elseif ( function_exists( 'rapidcache_clear_cache' ) ) {
+            rapidcache_clear_cache();
+        } elseif ( class_exists( 'Swift_Performance_Cache' ) ) {
+            Swift_Performance_Cache::clear_all_cache();
         } elseif ( class_exists( 'WpFastestCache' ) ) {
             $wpfc = new WpFastestCache();
             $wpfc->deleteCache();
@@ -808,6 +830,9 @@ class autoptimizeCache
                 prune_super_cache( $cache_path . 'supercache/', true );
                 prune_super_cache( $cache_path, true );
             }
+        } elseif ( class_exists( 'NginxCache' ) ) {
+            $nginx_cache = new NginxCache();
+            $nginx_cache->purge_zone_once();
         }
     }
     // @codingStandardsIgnoreEnd

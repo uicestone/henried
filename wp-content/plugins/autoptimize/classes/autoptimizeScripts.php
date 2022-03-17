@@ -58,7 +58,12 @@ class autoptimizeScripts extends autoptimizeBase
         'nonce',
         'post_id',
         'data-noptimize',
+        'data-cfasync',
+        'data-pagespeed-no-defer',
         'logHuman',
+        'amp-mobile-version-switcher',
+        'data-rocketlazyloadscript',
+        'rocket-browser-checker-js-after',
     );
 
     /**
@@ -107,6 +112,20 @@ class autoptimizeScripts extends autoptimizeBase
      * @var bool
      */
     private $aggregate = true;
+
+    /**
+     * Setting; if not aggregated, should we defer?
+     *
+     * @var bool
+     */
+    private $defer_not_aggregate = false;
+    
+    /**
+     * Setting; defer inline JS?
+     *
+     * @var bool
+     */
+    private $defer_inline = false;
 
     /**
      * Setting; try/catch wrapping or not.
@@ -165,11 +184,11 @@ class autoptimizeScripts extends autoptimizeBase
     private $md5hash = '';
 
     /**
-     * Setting (filter); whitelist of to be aggregated JS.
+     * Setting (filter); allowlist of to be aggregated JS.
      *
      * @var string
      */
-    private $whitelist = '';
+    private $allowlist = '';
 
     /**
      * Setting (filter); holds JS that should be removed.
@@ -200,15 +219,25 @@ class autoptimizeScripts extends autoptimizeBase
      */
     public function read( $options )
     {
-        $noptimize_js = apply_filters( 'autoptimize_filter_js_noptimize', false, $this->content );
+        $noptimize_js = false;
+        
+        // If page/ post check post_meta to see if optimize is off.
+        if ( false === autoptimizeConfig::get_post_meta_ao_settings( 'ao_post_js_optimize' ) ) {
+            $noptimize_js = true;
+        }
+
+        // And a filter to enforce JS noptimize.
+        $noptimize_js = apply_filters( 'autoptimize_filter_js_noptimize', $noptimize_js, $this->content );
+        
+        // And finally bail if noptimize_js is true.
         if ( $noptimize_js ) {
             return false;
         }
 
         // only optimize known good JS?
-        $whitelist_js = apply_filters( 'autoptimize_filter_js_whitelist', '', $this->content );
-        if ( ! empty( $whitelist_js ) ) {
-            $this->whitelist = array_filter( array_map( 'trim', explode( ',', $whitelist_js ) ) );
+        $allowlist_js = apply_filters( 'autoptimize_filter_js_allowlist', '', $this->content );
+        if ( ! empty( $allowlist_js ) ) {
+            $this->allowlist = array_filter( array_map( 'trim', explode( ',', $allowlist_js ) ) );
         }
 
         // is there JS we should simply remove?
@@ -231,6 +260,16 @@ class autoptimizeScripts extends autoptimizeBase
         // Returning true for "dontaggregate" turns off aggregation.
         if ( $this->aggregate && apply_filters( 'autoptimize_filter_js_dontaggregate', false ) ) {
             $this->aggregate = false;
+        }
+        
+        // Defer when not aggregating.
+        if ( false === $this->aggregate && apply_filters( 'autoptimize_filter_js_defer_not_aggregate', $options['defer_not_aggregate'] ) ) {
+            $this->defer_not_aggregate = true;
+        }
+        
+        // Defer inline JS?
+        if ( ( true === $this->defer_not_aggregate && apply_filters( 'autoptimize_js_filter_defer_inline', $options['defer_inline'] ) ) || apply_filters( 'autoptimize_js_filter_force_defer_inline', false ) ) {
+            $this->defer_inline = true;
         }
 
         // include inline?
@@ -301,7 +340,7 @@ class autoptimizeScripts extends autoptimizeBase
         // Get script files.
         if ( preg_match_all( '#<script.*</script>#Usmi', $this->content, $matches ) ) {
             foreach ( $matches[0] as $tag ) {
-                // only consider script aggregation for types whitelisted in should_aggregate-function.
+                // only consider script aggregation for types allowlisted in should_aggregate-function.
                 $should_aggregate = $this->should_aggregate( $tag );
                 if ( ! $should_aggregate ) {
                     $tag = '';
@@ -335,6 +374,11 @@ class autoptimizeScripts extends autoptimizeBase
                             }
                         }
 
+                        // not aggregating but deferring?
+                        if ( $this->defer_not_aggregate && false === $this->aggregate && ( str_replace( $this->dontmove, '', $path ) === $path || ( apply_filters( 'autoptimize_filter_js_defer_external', true ) && str_replace( $this->dontmove, '', $url ) === $url ) ) && strpos( $new_tag, ' defer' ) === false && strpos( $new_tag, ' async' ) === false ) {
+                            $new_tag = str_replace( '<script ', '<script defer ', $new_tag );
+                        }
+
                         // Should we minify the non-aggregated script?
                         // -> if aggregate is on and exclude minify is on
                         // -> if aggregate is off and the file is not in dontmove.
@@ -345,11 +389,17 @@ class autoptimizeScripts extends autoptimizeBase
                                 if ( ! empty( $minified_url ) ) {
                                     // Replace original URL with minified URL from cache.
                                     $new_tag = str_replace( $url, $minified_url, $new_tag );
-                                } else {
-                                    // Remove the original script tag, because cache content is empty.
+                                } elseif ( apply_filters( 'autoptimize_filter_ccsjs_remove_empty_minified_url', false ) ) {
+                                    // Remove the original script tag, because cache content is empty but only if filter
+                                    // is trued because $minified_url is also false if original JS is minified already.
                                     $new_tag = '';
                                 }
                             }
+                        }
+
+                        // Check if we still need to CDN (esp. for already minified resources).
+                        if ( ! empty( $this->cdn_url ) || has_filter( 'autoptimize_filter_base_replace_cdn' ) ) {
+                            $new_tag = str_replace( $url, $this->url_replace_cdn( $url ), $new_tag );
                         }
 
                         if ( $this->ismovable( $new_tag ) ) {
@@ -384,16 +434,25 @@ class autoptimizeScripts extends autoptimizeBase
                         $code            = preg_replace( '/(?:^\\s*<!--\\s*|\\s*(?:\\/\\/)?\\s*-->\\s*$)/', '', $code );
                         $this->scripts[] = 'INLINE;' . $code;
                     } else {
-                        // Can we move this?
-                        $autoptimize_js_moveable = apply_filters( 'autoptimize_js_moveable', '', $tag );
-                        if ( $this->ismovable( $tag ) || '' !== $autoptimize_js_moveable ) {
-                            if ( $this->movetolast( $tag ) || 'last' === $autoptimize_js_moveable ) {
-                                $this->move['last'][] = $tag;
+                        if ( false === $this->defer_inline ) {
+                            // Can we move this?
+                            $autoptimize_js_moveable = apply_filters( 'autoptimize_js_moveable', '', $tag );
+                            if ( $this->ismovable( $tag ) || '' !== $autoptimize_js_moveable ) {
+                                if ( $this->movetolast( $tag ) || 'last' === $autoptimize_js_moveable ) {
+                                    $this->move['last'][] = $tag;
+                                } else {
+                                    $this->move['first'][] = $tag;
+                                }
                             } else {
-                                $this->move['first'][] = $tag;
+                                $tag = '';
                             }
+                        } elseif ( str_replace( $this->dontmove, '', $tag ) === $tag ) {
+                            // defer inline JS by base64 encoding it.
+                            preg_match( '#<script.*>(.*)</script>#Usmi', $tag, $match );
+                            $new_tag       = '<script defer src="data:text/javascript;base64,' . base64_encode( $match[1] ) . '"></script>';
+                            $this->content = str_replace( $tag, $new_tag, $this->content );
+                            $tag           = '';
                         } else {
-                            // We shouldn't touch this.
                             $tag = '';
                         }
                     }
@@ -427,7 +486,7 @@ class autoptimizeScripts extends autoptimizeBase
      * @param string $tag Script node & child(ren).
      * @return bool
      */
-    public function should_aggregate( $tag )
+    public static function should_aggregate( $tag )
     {
         if ( empty( $tag ) ) {
             return false;
@@ -601,7 +660,7 @@ class autoptimizeScripts extends autoptimizeBase
     }
 
     /**
-     * Checks against the white- and blacklists.
+     * Checks against the allow- and blocklists.
      *
      * @param string $tag JS tag.
      */
@@ -611,13 +670,13 @@ class autoptimizeScripts extends autoptimizeBase
             return false;
         }
 
-        if ( ! empty( $this->whitelist ) ) {
-            foreach ( $this->whitelist as $match ) {
+        if ( ! empty( $this->allowlist ) ) {
+            foreach ( $this->allowlist as $match ) {
                 if ( false !== strpos( $tag, $match ) ) {
                     return true;
                 }
             }
-            // No match with whitelist.
+            // No match with allowlist.
             return false;
         } else {
             foreach ( $this->domove as $match ) {
@@ -644,9 +703,9 @@ class autoptimizeScripts extends autoptimizeBase
     }
 
     /**
-     * Checks agains the blacklist.
+     * Checks agains the blocklist.
      *
-     * @param string $tag tag to check for blacklist (exclusions).
+     * @param string $tag tag to check for blocklist (exclusions).
      */
     private function ismovable( $tag )
     {
@@ -755,6 +814,9 @@ class autoptimizeScripts extends autoptimizeBase
             if ( empty( $contents ) ) {
                 return false;
             }
+
+            // Filter contents of excluded minified CSS.
+            $contents = apply_filters( 'autoptimize_filter_js_single_after_minify', $contents );
 
             // Store in cache.
             $cache->cache( $contents, 'text/javascript' );

@@ -82,7 +82,13 @@ class autoptimizeHTML extends autoptimizeBase
             $options['xhtml'] = true;
         }
 
-        $tmp_content = Minify_HTML::minify( $this->content, $options );
+        // Optionally (filter-based, GUI later) minify inline JS & CSS.
+        if ( apply_filters( 'autoptimize_html_minify_inline_js_css', false ) ) {
+            $options['jsMinifier']  = 'JSMin::minify';
+            $options['cssMinifier'] = 'autoptimizeCSSmin::minify';
+        }
+
+        $tmp_content = AO_Minify_HTML::minify( $this->content, $options );
         if ( ! empty( $tmp_content ) ) {
             $this->content = $tmp_content;
             unset( $tmp_content );
