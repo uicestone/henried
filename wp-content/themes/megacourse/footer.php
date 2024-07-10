@@ -84,7 +84,7 @@
 								<i class="icon md-email"></i>
 								<a href="#"><?=get_option('henried_email')?></a>
 							</div>
-							<div>Copyright © 2015-<?=date('Y')?> Henried Finance. All rights reserved.</div>
+							<div>Copyright © 2015-<?=date('Y')?> Henried Finance. All rights reserved. <a target="_blank" href="https://beian.miit.gov.cn/">沪ICP备16031835-1</a></div>
 						</div>
 					</div>
 				</div>
